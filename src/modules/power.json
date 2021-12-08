@@ -1,0 +1,405 @@
+{
+    "openrpc": "1.2.4",
+    "info": {
+        "title": "Power",
+        "description": "A module for managing device power settings.",
+        "version": "0.0.0"
+    },
+    "methods": [
+        {
+            "name": "state",
+            "summary": "Get the current power state. This function is **synchronous**.",
+            "tags": [
+                {
+                    "name": "synchronous"
+                },
+                {
+                    "name": "exclude-from-sdk"
+                }
+            ],
+            "params": [],
+            "result": {
+                "name": "state",
+                "summary": "the current power state.",
+                "schema": {
+                    "$ref": "https://meta.comcast.com/firebolt/config/power#/definitions/PowerState"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": "active"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "onActive",
+            "tags": [
+                {
+                    "name": "event"
+                }
+            ],
+            "summary": "Listen to the active event",
+            "params": [
+                {
+                    "name": "listen",
+                    "required": true,
+                    "summary": "whether to listen, or stop listening",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "result": {
+                "name": "value",
+                "schema": {
+                    "oneOf": [
+                        {
+                            "const": null
+                        },
+                        {
+                            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+                        }
+                    ]
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                        {
+                            "name": "listen",
+                            "value": true
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "onStandby",
+            "tags": [
+                {
+                    "name": "event"
+                }
+            ],
+            "summary": "Listen to the standby event",
+            "params": [
+                {
+                    "name": "listen",
+                    "required": true,
+                    "summary": "whether to listen, or stop listening",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "result": {
+                "name": "value",
+                "schema": {
+                    "oneOf": [
+                        {
+                            "const": null
+                        },
+                        {
+                            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+                        }
+                    ]
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                        {
+                            "name": "listen",
+                            "value": true
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "onStandbyPending",
+            "tags": [
+                {
+                    "name": "event"
+                }
+            ],
+            "summary": "Listen to an event that gives warning for pending standby operations so that UX concerns may be handled. This event will fire with enough time for simple user interactions to take place before going into standby.",
+            "params": [
+                {
+                    "name": "listen",
+                    "required": true,
+                    "summary": "whether to listen, or stop listening",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "result": {
+                "name": "value",
+                "schema": {
+                    "oneOf": [
+                        {
+                            "const": null
+                        },
+                        {
+                            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+                        }
+                    ]
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                        {
+                            "name": "listen",
+                            "value": true
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "onSuspended",
+            "tags": [
+                {
+                    "name": "event"
+                }
+            ],
+            "summary": "Listen to the suspended event",
+            "params": [
+                {
+                    "name": "listen",
+                    "required": true,
+                    "summary": "whether to listen, or stop listening",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "result": {
+                "name": "value",
+                "schema": {
+                    "oneOf": [
+                        {
+                            "const": null
+                        },
+                        {
+                            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+                        }
+                    ]
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                        {
+                            "name": "listen",
+                            "value": true
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "setStandbyWhenIdle",
+            "summary": "Set whether or not this device is set to go to standby when it's idle, e.g. for enabling a 'Store Mode'.",
+            "params": [
+                {
+                    "name": "standbyWhenIdle",
+                    "required": true,
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "result": {
+                "name": "success",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "success",
+                        "value": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "setStandbyTimer",
+            "summary": "Set a standby timer that will put the device to standby, regardless of various idle states.",
+            "params": [
+                {
+                    "name": "duration",
+                    "summary": "Standby timer in milliseconds.",
+                    "required": true,
+                    "schema": {
+                        "type": "integer"
+                    }
+                }
+            ],
+            "result": {
+                "name": "success",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                        {
+                            "name": "duration",
+                            "value": 3600000
+                        }
+                    ],
+                    "result": {
+                        "name": "success",
+                        "value": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "setSuspendedExceptions",
+            "summary": "Set a list of features that should remain active during hiberation.",
+            "params": [
+                {
+                    "name": "exceptions",
+                    "summary": "Hibernation exceptions",
+                    "required": true,
+                    "schema": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "minProperties": 1,
+                        "patternProperties": {
+                            ".*?": {
+                                "type": "boolean"
+                            }
+                        },
+                        "propertyNames": {
+                            "type": "string",
+                            "enum": [
+                                "network"
+                            ]
+                        }
+                    }
+                }
+            ],
+            "result": {
+                "name": "success",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                        {
+                            "name": "exceptions",
+                            "value": {
+                                "network": true
+                            }
+                        }
+                    ],
+                    "result": {
+                        "name": "success",
+                        "value": true
+                    }
+                }
+            ]
+        },
+        {
+            "name": "startDeviceUpdate",
+            "summary": "Notify the platform that a device is doing a system-critical update.",
+            "params": [],
+            "result": {
+                "name": "result",
+                "schema": {
+                    "const": null
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "stopDeviceUpdate",
+            "summary": "Notify the platform that a device is no longer doing a system-critical update.",
+            "params": [],
+            "result": {
+                "name": "result",
+                "schema": {
+                    "const": null
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "finished",
+            "summary": "Notify the platform that the app is done preparing for standby",
+            "params": [],
+            "result": {
+                "name": "results",
+                "schema": {
+                    "const": null
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": null
+                    }
+                }
+            ]
+        }
+    ]
+}

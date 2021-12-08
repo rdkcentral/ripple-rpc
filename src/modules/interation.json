@@ -1,0 +1,73 @@
+{
+    "openrpc": "1.2.4",
+    "info": {
+        "title": "Interaction",
+        "description": "A module for pushing external interaction heartbeats to the OS.",
+        "version": "0.0.0"
+    },
+    "methods": [
+        {
+            "name": "policy",
+            "summary": "Read the interaction policy for the device.",
+            "params": [
+            ],
+            "result": {
+                "name": "policy",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "notificationFrequency": {
+                            "type": "integer",
+                            "description": "how often the app should notify the OS of Interactions (ms)"
+                        }
+                    }
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "policy",
+                        "value": {
+                            "notificationFrequency": 5000
+                        }
+                    }
+                }
+            ]            
+        },
+        {
+            "name": "action",
+            "summary": "Notify the OS of some class of interaction.",
+            "params": [
+                {
+                    "name": "type",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "enum": [
+                            "direct",
+                            "inferred"
+                        ]
+                    }                    
+                }
+            ],
+            "result": {
+                "name": "success",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "success",
+                        "value": true
+                    }
+                }
+            ]
+        }
+    ]
+}
