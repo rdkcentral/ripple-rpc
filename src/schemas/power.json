@@ -29,8 +29,7 @@
                     "additionalProperties": false,
                     "required": [
                         "networkEnabledDuringSuspended",
-                        "suspendedTimer",
-                        "standbyTimerWarningTime"
+                        "suspendedTimer"
                     ],
                     "properties": {
                         "networkEnabledDuringSuspended": {
@@ -42,11 +41,6 @@
                             "description": "The duration, starting from when the device goes to standby, after which the device will go into suspended if it is not awoken first.",
                             "type": "integer",
                             "default": 900000
-                        },
-                        "standbyTimerWarningTime": {
-                            "description": "How much time, in ms, before a user-set standby timer takes effect, that a warning event be fired, e.g. to enable a UI to present a prompt to cancel.",
-                            "type": "integer",
-                            "default": 300000
                         }
                     }
                 },
@@ -78,7 +72,6 @@
             "examples": [
                 {
                     "defaults": {
-                        "standbyTimerWarningTime": 5000,
                         "networkEnabledDuringSuspended": false,
                         "suspendedTimer": 1000
                     },
@@ -97,26 +90,11 @@
                                 },
                                 {
                                     "deviceKey": "power"
-                                },
-                                {
-                                    "userIdle": true
-                                },
-                                {
-                                    "decoderIdle": true
-                                },
-                                {
-                                    "standbyTimerEnded": true
-                                },
-                                {
-                                    "hdmiCec": "standby"
                                 }
                             ]
                         },
                         "standbyToSuspended": {
                             "conditions": [
-                                {
-                                    "suspendedTimerEnded": true
-                                }
                             ]
                         },
                         "suspendedToStandby": {
@@ -166,34 +144,6 @@
                         "power",
                         "*"
                     ]
-                },
-                "hdmiCec": {
-                    "description": "Requires that an HDMI-CEC message has been recieved to activate this policy",
-                    "type": "string",
-                    "enum": [
-                        "standby",
-                        "wake"
-                    ]
-                },
-                "standbyTimerEnded": {
-                    "description": "Requires that the standby timer has concluded, and will put the device to standby, to activate this policy",
-                    "type": "boolean"
-                },
-                "suspendedTimerEnded": {
-                    "description": "Requires that the suspended timer has concluded, and will put the suspend the device, to activate this policy",
-                    "type": "boolean"
-                },
-                "userIdle": {
-                    "type": "boolean",
-                    "description": "Requires that there has been no user interaction for a set period of time"
-                },
-                "decoderIdle": {
-                    "type": "boolean",
-                    "description": "Requires that there has been no decoder activity for a set period of time"
-                },
-                "systemIdle": {
-                    "type": "boolean",
-                    "description": "Requires that the system is not performing any critical, uninteruptible tasks, e.g. software updates"
                 },
                 "externalDevicesIdle": {
                     "type": "boolean",

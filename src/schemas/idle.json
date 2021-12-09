@@ -49,17 +49,7 @@
                     "propertyNames": {
                         "type": "string",
                         "enum": [
-                            "remoteKey",
-                            "deviceKey",
-                            "remotePickup",
-                            "hdmiCec",
-                            "dial",
-                            "softRemote",
                             "developerTools",
-                            "motionDetection",
-                            "voiceInteraction",
-                            "decoderActivity",
-                            "externalDeviceUpdate",
                             "appDetectedInteractivity"
                         ]
                     }
