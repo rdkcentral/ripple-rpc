@@ -2,7 +2,7 @@
     "openrpc": "1.2.4",
     "info": {
         "title": "Power",
-        "description": "A module for managing device power settings.",
+        "description": "A module for managing device power state and settings.",
         "version": "0.0.0"
     },
     "methods": [
@@ -22,7 +22,7 @@
                 "name": "state",
                 "summary": "the current power state.",
                 "schema": {
-                    "$ref": "https://meta.comcast.com/firebolt/config/power#/definitions/PowerState"
+                    "$ref": "#/components/schemas/PowerState"
                 }
             },
             "examples": [
@@ -37,13 +37,62 @@
             ]
         },
         {
+            "name": "onPowerOn",
+            "tags": [
+                {
+                    "name": "event"
+                }
+            ],
+            "summary": "Listen for when the device is powered up.",
+            "params": [
+                {
+                    "name": "listen",
+                    "required": true,
+                    "summary": "whether to listen, or stop listening",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "result": {
+                "name": "value",
+                "schema": {
+                    "oneOf": [
+                        {
+                            "const": null
+                        },
+                        {
+                            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+                        }
+                    ]
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                        {
+                            "name": "listen",
+                            "value": true
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": {
+                            "reason": "powerOn"
+                        }
+                    }
+                }
+            ]            
+        },
+        {
             "name": "onActive",
             "tags": [
                 {
                     "name": "event"
                 }
             ],
-            "summary": "Listen to the active event",
+            "summary": "Listen for when the device is put into the active power state.",
             "params": [
                 {
                     "name": "listen",
@@ -59,7 +108,7 @@
                 "schema": {
                     "oneOf": [
                         {
-                            "const": null
+                            "$ref": "#/components/schemas/ActiveEvent"
                         },
                         {
                             "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
@@ -78,19 +127,21 @@
                     ],
                     "result": {
                         "name": "Default Result",
-                        "value": null
+                        "value": {
+                            "reason": "powerOn"
+                        }
                     }
                 }
             ]
         },
         {
-            "name": "onStandby",
+            "name": "onActiveStandby",
             "tags": [
                 {
                     "name": "event"
                 }
             ],
-            "summary": "Listen to the standby event",
+            "summary": "Listen for when the device is moved from active to active-standby.",
             "params": [
                 {
                     "name": "listen",
@@ -106,38 +157,23 @@
                 "schema": {
                     "oneOf": [
                         {
-                            "const": null
+                            "$ref": "#/components/schemas/StandbyEvent"
                         },
                         {
                             "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
-                        }
+                        }                        
                     ]
                 }
-            },
-            "examples": [
-                {
-                    "name": "Default Example",
-                    "params": [
-                        {
-                            "name": "listen",
-                            "value": true
-                        }
-                    ],
-                    "result": {
-                        "name": "Default Result",
-                        "value": null
-                    }
-                }
-            ]
+            }
         },
         {
-            "name": "onStandbyPending",
+            "name": "onResumedFromSuspended",
             "tags": [
                 {
                     "name": "event"
                 }
             ],
-            "summary": "Listen to an event that gives warning for pending standby operations so that UX concerns may be handled. This event will fire with enough time for simple user interactions to take place before going into standby.",
+            "summary": "Listen for when the device is woken from a suspended state.",
             "params": [
                 {
                     "name": "listen",
@@ -153,38 +189,55 @@
                 "schema": {
                     "oneOf": [
                         {
-                            "const": null
+                            "$ref": "#/components/schemas/ResumeEvent"
                         },
                         {
                             "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
                         }
                     ]
                 }
-            },
-            "examples": [
-                {
-                    "name": "Default Example",
-                    "params": [
-                        {
-                            "name": "listen",
-                            "value": true
-                        }
-                    ],
-                    "result": {
-                        "name": "Default Result",
-                        "value": null
-                    }
-                }
-            ]
+            }
         },
         {
-            "name": "onSuspended",
+            "name": "onSuspendPending",
             "tags": [
                 {
                     "name": "event"
                 }
             ],
-            "summary": "Listen to the suspended event",
+            "summary": "Listen for when the device will be suspended from the active-standby state. CPU excution will cease shortly after this event.",
+            "params": [
+                {
+                    "name": "listen",
+                    "required": true,
+                    "summary": "whether to listen, or stop listening",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "result": {
+                "name": "value",
+                "schema": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/components/schemas/SuspendEvent"
+                        },
+                        {
+                            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "onInactivity",
+            "tags": [
+                {
+                    "name": "event"
+                }
+            ],
+            "summary": "Listen for when the device has become idle, and will be moved from active, to active-standby. This will fire with enough time to prompt the user to cancel.",
             "params": [
                 {
                     "name": "listen",
@@ -207,30 +260,46 @@
                         }
                     ]
                 }
-            },
-            "examples": [
-                {
-                    "name": "Default Example",
-                    "params": [
-                        {
-                            "name": "listen",
-                            "value": true
-                        }
-                    ],
-                    "result": {
-                        "name": "Default Result",
-                        "value": null
-                    }
-                }
-            ]
+            }
         },
         {
-            "name": "setStandbyWhenIdle",
-            "summary": "Set whether or not this device is set to go to standby when it's idle, e.g. for enabling a 'Store Mode'.",
+            "name": "onInactivityCancelled",
+            "tags": [
+                {
+                    "name": "event"
+                }
+            ],
+            "summary": "Listen for when the something happens to invalidate the previous inactivity state.",
             "params": [
                 {
-                    "name": "standbyWhenIdle",
+                    "name": "listen",
                     "required": true,
+                    "summary": "whether to listen, or stop listening",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "result": {
+                "name": "value",
+                "schema": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/components/schemas/InactivityCancelledEvent"
+                        },
+                        {
+                            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+                        }
+                    ]
+                }
+            }
+        },
+        {
+            "name": "autoStandby",
+            "summary": "Set whether or not this device is set to go to active-standby when it's idle, e.g. for enabling a 'Store Mode'.",
+            "params": [
+                {
+                    "name": "auto",
                     "schema": {
                         "type": "boolean"
                     }
@@ -244,25 +313,50 @@
             },
             "examples": [
                 {
-                    "name": "Default Example",
-                    "params": [],
+                    "name": "Turn on auto-standby",
+                    "params": [
+                        {
+                            "name": "auto",
+                            "value": true
+                        }
+                    ],
                     "result": {
                         "name": "success",
                         "value": true
                     }
-                }
+                },
+                {
+                    "name": "Turn off auto-standby",
+                    "params": [
+                        {
+                            "name": "auto",
+                            "value": false
+                        }
+                    ],
+                    "result": {
+                        "name": "success",
+                        "value": true
+                    }
+                },
+                {
+                    "name": "Check value of auto-standby",
+                    "params": [
+                    ],
+                    "result": {
+                        "name": "autoStandby",
+                        "value": true
+                    }
+                }                
             ]
         },
         {
-            "name": "setStandbyTimer",
-            "summary": "Set a standby timer that will put the device to standby, regardless of various idle states.",
+            "name": "networkEnabledWhileSuspended",
+            "summary": "Set whether or not the network will remain enabled when the device is suspended.",
             "params": [
                 {
-                    "name": "duration",
-                    "summary": "Standby timer in milliseconds.",
-                    "required": true,
+                    "name": "enabled",
                     "schema": {
-                        "type": "integer"
+                        "type": "boolean"
                     }
                 }
             ],
@@ -274,43 +368,50 @@
             },
             "examples": [
                 {
-                    "name": "Default Example",
+                    "name": "Turn on network during suspended",
                     "params": [
                         {
-                            "name": "duration",
-                            "value": 3600000
+                            "name": "enabled",
+                            "value": true
                         }
                     ],
                     "result": {
                         "name": "success",
                         "value": true
                     }
-                }
+                },
+                {
+                    "name": "Turn off network during suspended",
+                    "params": [
+                        {
+                            "name": "enabled",
+                            "value": false
+                        }
+                    ],
+                    "result": {
+                        "name": "success",
+                        "value": true
+                    }
+                },
+                {
+                    "name": "Check value of network during suspended",
+                    "params": [
+                    ],
+                    "result": {
+                        "name": "enabled",
+                        "value": true
+                    }
+                }                
             ]
         },
         {
-            "name": "setSuspendedExceptions",
-            "summary": "Set a list of features that should remain active during hiberation.",
+            "name": "motionEnabledWhileSuspended",
+            "summary": "Set whether or not motion-detection will remain enabled when the device is suspended.",
             "params": [
                 {
-                    "name": "exceptions",
-                    "summary": "Hibernation exceptions",
-                    "required": true,
+                    "name": "enabled",
                     "schema": {
-                        "type": "object",
-                        "additionalProperties": false,
-                        "minProperties": 1,
-                        "patternProperties": {
-                            ".*?": {
-                                "type": "boolean"
-                            }
-                        },
-                        "propertyNames": {
-                            "type": "string",
-                            "enum": [
-                                "network"
-                            ]
-                        }
+                        "type": "boolean"
                     }
                 }
             ],
@@ -322,84 +423,166 @@
             },
             "examples": [
                 {
-                    "name": "Default Example",
+                    "name": "Turn on motion-detection during suspended",
                     "params": [
                         {
-                            "name": "exceptions",
-                            "value": {
-                                "network": true
-                            }
+                            "name": "enabled",
+                            "value": true
                         }
                     ],
                     "result": {
                         "name": "success",
                         "value": true
                     }
-                }
+                },
+                {
+                    "name": "Turn off motion-detection during suspended",
+                    "params": [
+                        {
+                            "name": "enabled",
+                            "value": false
+                        }
+                    ],
+                    "result": {
+                        "name": "success",
+                        "value": true
+                    }
+                },
+                {
+                    "name": "Check value of motion-detection during suspended",
+                    "params": [
+                    ],
+                    "result": {
+                        "name": "enabled",
+                        "value": true
+                    }
+                }                
             ]
-        },
+        },        
         {
-            "name": "startDeviceUpdate",
-            "summary": "Notify the platform that a device is doing a system-critical update.",
+            "name": "sleep",
+            "summary": "Request that the device transition to the active-standby state, presumably from the active state.",
             "params": [],
             "result": {
-                "name": "result",
+                "name": "success",
                 "schema": {
-                    "const": null
+                    "type": "boolean"
                 }
             },
             "examples": [
                 {
-                    "name": "Default Example",
+                    "name": "Request the device to sleep",
                     "params": [],
                     "result": {
-                        "name": "Default Result",
-                        "value": null
+                        "name": "success",
+                        "value": true
                     }
                 }
-            ]
-        },
-        {
-            "name": "stopDeviceUpdate",
-            "summary": "Notify the platform that a device is no longer doing a system-critical update.",
-            "params": [],
-            "result": {
-                "name": "result",
-                "schema": {
-                    "const": null
-                }
-            },
-            "examples": [
-                {
-                    "name": "Default Example",
-                    "params": [],
-                    "result": {
-                        "name": "Default Result",
-                        "value": null
-                    }
-                }
-            ]
-        },
-        {
-            "name": "finished",
-            "summary": "Notify the platform that the app is done preparing for standby",
-            "params": [],
-            "result": {
-                "name": "results",
-                "schema": {
-                    "const": null
-                }
-            },
-            "examples": [
-                {
-                    "name": "Default Example",
-                    "params": [],
-                    "result": {
-                        "name": "Default Result",
-                        "value": null
-                    }
-                }
-            ]
+            ]            
         }
-    ]
+    ],
+    "components": {
+        "schemas": {
+            "PowerState": {
+                "title": "PowerState",
+                "type": "string",
+                "description": "Device power states. Note that 'suspended' is not included, because it's impossible for app code to be running during that state.",
+                "enum": [
+                    "active",
+                    "activeStandby"
+                ]
+            },
+            "ActiveEvent": {
+                "title": "ActiveEvent",
+                "type": "object",
+                "required": [ "reason" ],
+                "properties": {
+                    "reason": {
+                        "type": "string",
+                        "enum": [
+                            "firstPowerOn",
+                            "powerOn",
+                            "rcu",
+                            "frontPanel",
+                            "hdmiCec",
+                            "dial",
+                            "motion",
+                            "farFieldVoice"
+                        ]
+                    }
+                }          
+            },
+            "StandbyEvent": {
+                "title": "StandbyEvent",
+                "type": "object",
+                "required": [ "reason" ],
+                "properties": {
+                    "reason": {
+                        "type": "string",
+                        "enum": [
+                            "inactivity",
+                            "rcu",
+                            "frontPanel",
+                            "hdmiCec",
+                            "dial",
+                            "farFieldVoice",
+                            "ux"
+                        ]
+                    }
+                }
+            },
+            "ResumeEvent": {
+                "title": "ResumeEvent",
+                "type": "object",
+                "required": [ "reason" ],
+                "properties": {
+                    "reason": {
+                        "type": "string",
+                        "enum": [
+                            "system",
+                            "rcu",
+                            "frontPanel",
+                            "hdmiCec",
+                            "dial",
+                            "motion",
+                            "farFieldVoice"
+                        ]
+                    }
+                }
+            },
+            "SuspendEvent": {
+                "title": "SuspendEvent",
+                "type": "object",
+                "required": [ "reason" ],
+                "properties": {
+                    "reason": {
+                        "type": "string",
+                        "enum": [
+                            "powerOn",
+                            "rcu",
+                            "frontPanel"
+                        ]
+                    }
+                }
+            },
+            "InactivityCancelledEvent": {
+                "title": "InactivityCancelledEvent",
+                "type": "object",
+                "required": [ "reason" ],
+                "properties": {
+                    "reason": {
+                        "type": "string",
+                        "enum": [
+                            "rcu",
+                            "frontPanel",
+                            "farFieldVoice",
+                            "dial",
+                            "hdmiCec",
+                            "motion"
+                        ]
+                    }
+                }
+            }
+        }
+    }
 }
