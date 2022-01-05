@@ -62,7 +62,7 @@
                     "interactionIdleWarningTime": 1000,
                     "decoderIdleWarningTime": 1000,
                     "enabledInteractivitySources": {
-                        "dial": false
+                        "developerTools": false
                     }
                 }
             ]
