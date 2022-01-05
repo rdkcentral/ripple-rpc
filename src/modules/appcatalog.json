@@ -1,0 +1,337 @@
+{
+  "openrpc": "1.2.4",
+  "info": {
+    "title": "AppCatalog",
+    "description": "A module for querying what apps are in the catalog for this device",
+    "version": "0.0.0"
+  },
+  "methods": [
+    {
+      "name": "getCatalog",
+      "summary": "Get the full catalog or specify pagination",
+      "params": [
+        {
+          "name": "request",
+          "summary": "The request parameters for getting the catalog",
+          "schema": {
+            "$ref": "#/components/schemas/AppCatalogRequest"
+          },
+          "required": true
+        }
+      ],
+      "result": {
+        "name": "catalog",
+        "summary": "The catalog",
+        "schema": {
+          "$ref": "#/components/schemas/AppCatalog"
+        }
+      },
+      "examples": [
+        {
+          "name": "Get entire catalog",
+          "params": [
+            {
+              "name": "request",
+              "value": {
+                "includeApps": true
+              }
+            }
+          ],
+          "result": {
+            "name": "Default Result",
+            "value": {
+              "version": "0.1",
+              "updated": "2021-04-23T18:25:43.511Z",
+              "apps": [
+                {
+                  "appKey": "app-1",
+                  "appSoftwareVersion": "1.0",
+                  "added": "2021-04-23T18:25:43.511Z",
+                  "updated": "2021-04-23T18:25:43.511Z",
+                  "cloud": true,
+                  "location": "https://app-1.com",
+                  "title": "Application 1",
+                  "iconUrl": "https://app-1.com/icon.png"
+                },
+                {
+                  "appKey": "app-2",
+                  "appSoftwareVersion": "1.0",
+                  "added": "2021-04-23T18:25:43.511Z",
+                  "updated": "2021-04-23T18:25:43.511Z",
+                  "cloud": true,
+                  "location": "https://app-2.com",
+                  "title": "Application 2",
+                  "iconUrl": "https://app-2.com/icon.png"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get partial catalog",
+          "params": [
+            {
+              "name": "request",
+              "value": {
+                "appRange": {
+                  "start": 1,
+                  "count": 1
+                }
+              }
+            }
+          ],
+          "result": {
+            "name": "Default Result",
+            "value": {
+              "version": "0.1",
+              "updated": "2021-04-23T18:25:43.511Z",
+              "apps": [
+                {
+                  "appKey": "app-2",
+                  "appSoftwareVersion": "1.0",
+                  "added": "2021-04-23T18:25:43.511Z",
+                  "updated": "2021-04-23T18:25:43.511Z",
+                  "cloud": true,
+                  "location": "https://app-2.com",
+                  "title": "Application 2",
+                  "iconUrl": "https://app-2.com/icon.png"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get catalog metadata",
+          "params": [
+            {
+              "name": "request",
+              "value": {
+                "includeApps": false
+              }
+            }
+          ],
+          "result": {
+            "name": "Default Result",
+            "value": {
+              "version": "0.1",
+              "updated": "2021-04-23T18:25:43.511Z"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "getApp",
+      "summary": "Get a single app from the catalog",
+      "params": [
+        {
+          "name": "appId",
+          "summary": "The id of the app to get from the catalog",
+          "schema": {
+            "type": "string"
+          },
+          "required": true
+        }
+      ],
+      "result": {
+        "name": "catalogItem",
+        "summary": "The item in the catalog representing the app",
+        "schema": {
+          "$ref": "#/components/schemas/AppCatalogItemQueryResult"
+        }
+      },
+      "examples": [
+        {
+          "name": "Get entire catalog",
+          "params": [
+            {
+              "name": "appId",
+              "value": "app-1"
+            }
+          ],
+          "result": {
+            "name": "Default Result",
+            "value": {
+              "found": true,
+              "onDevice": true,
+              "entry": {
+                "appKey": "app-1",
+                "appSoftwareVersion": "1.0",
+                "added": "2021-04-23T18:25:43.511Z",
+                "updated": "2021-04-23T18:25:43.511Z",
+                "cloud": true,
+                "location": "https://app-1.com",
+                "title": "Application 1",
+                "iconUrl": "https://app-1.com/icon.png"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "update",
+      "summary": "Updates the device to use the given catalog",
+      "params": [
+        {
+          "name": "request",
+          "summary": "The request to update the catalog",
+          "schema": {
+            "$ref": "#/components/schemas/UpdateAppCatalogRequest"
+          },
+          "required": true
+        }
+      ],
+      "result": {
+        "name": "result",
+        "summary": "The result of the update",
+        "schema": {
+          "type": "object"
+        }
+      },
+      "examples": [
+        {
+          "name": "Update the catalog to a new uri",
+          "params": [
+            {
+              "name": "catalogUri",
+              "value": "https://firebolt-tests.thor.comcast.com/catalogs/main-catalog.json"
+            }
+          ],
+          "result": {
+            "name": "Default Result",
+            "value": {
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "components": {
+    "schemas": {
+      "AppCatalogRequest": {
+        "title": "AppCatalogRequest",
+        "type": "object",
+        "description": "Parameters to customize how an app catalog is returned",
+        "properties": {
+          "includeApps": {
+            "type": "boolean"
+          },
+          "appRange": {
+            "$ref": "#/components/schemas/Pagination"
+          }
+        }
+      },
+      "AppCatalog": {
+        "title": "AppCatalog",
+        "type": "object",
+        "description": "Object representing a list of apps",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "apps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AppCatalogItem"
+            }
+          }
+        }
+      },
+      "AppCatalogItem": {
+        "title": "AppCatalogItem",
+        "type": "object",
+        "description": "Object representing a single app in a catalog",
+        "properties": {
+          "appKey": {
+            "type": "string"
+          },
+          "appSoftwareVersion": {
+            "type": "string"
+          },
+          "appReleaseKey": {
+            "type": "string"
+          },
+          "added": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "cloud": {
+            "type": "boolean"
+          },
+          "location": {
+            "type": "string"
+          },
+          "catalogHidden": {
+            "type": "boolean"
+          },
+          "contentRating": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "iconUri": {
+            "type": "string"
+          }
+        }
+      },
+      "AppCatalogItemQueryResult": {
+        "title": "AppCatalogItemQueryResult",
+        "type": "object",
+        "description": "Result of querying the app catalog for a single app",
+        "properties": {
+          "found": {
+            "type": "boolean"
+          },
+          "entry": {
+            "$ref": "#/components/schemas/AppCatalogItem"
+          },
+          "appReleaseKey": {
+            "type": "string"
+          },
+          "onDevice": {
+            "type": "boolean"
+          }
+        }
+      },
+      "UpdateAppCatalogRequest": {
+        "title": "UpdateAppCatalogRequest",
+        "type": "object",
+        "description": "A request to update a catalog",
+        "properties": {
+          "catalogUri": {
+            "type": "string"
+          },
+          "allowIncremental": {
+            "type": "boolean"
+          },
+          "catalog": {
+            "$ref": "#/components/schemas/AppCatalog"
+          }
+        }
+      },
+      "Pagination": {
+        "title": "Pagination",
+        "type": "object",
+        "description": "Pagination parameters",
+        "properties": {
+          "start": {
+            "type": "number"
+          },
+          "count": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}
