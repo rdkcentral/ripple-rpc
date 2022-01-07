@@ -194,8 +194,10 @@
           "name": "Update the catalog to a new uri",
           "params": [
             {
-              "name": "catalogUri",
-              "value": "https://firebolt-tests.thor.comcast.com/catalogs/main-catalog.json"
+              "name": "request",
+              "value": {
+                "catalogUri": "https://firebolt-tests.thor.comcast.com/catalogs/main-catalog.json"
+              }
             }
           ],
           "result": {
