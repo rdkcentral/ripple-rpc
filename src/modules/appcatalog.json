@@ -7,7 +7,7 @@
   },
   "methods": [
     {
-      "name": "getCatalog",
+      "name": "catalog",
       "summary": "Get the full catalog or specify pagination",
       "params": [
         {
@@ -121,7 +121,7 @@
       ]
     },
     {
-      "name": "getApp",
+      "name": "app",
       "summary": "Get a single app from the catalog",
       "params": [
         {
