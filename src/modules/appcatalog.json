@@ -137,7 +137,7 @@
         "name": "catalogItem",
         "summary": "The item in the catalog representing the app",
         "schema": {
-          "$ref": "#/components/schemas/AppCatalogItemQueryResult"
+          "$ref": "#/components/schemas/AppCatalogItem"
         }
       },
       "examples": [
@@ -284,19 +284,6 @@
           },
           "title": {
             "type": "string"
-          }
-        }
-      },
-      "AppCatalogItemQueryResult": {
-        "title": "AppCatalogItemQueryResult",
-        "type": "object",
-        "description": "Result of querying the app catalog for a single app",
-        "properties": {
-          "entry": {
-            "$ref": "#/components/schemas/AppCatalogItem"
-          },
-          "onDevice": {
-            "type": "boolean"
           }
         }
       },
