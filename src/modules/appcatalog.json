@@ -7,8 +7,8 @@
   },
   "methods": [
     {
-      "name": "catalog",
-      "summary": "Get the full catalog or specify pagination",
+      "name": "apps",
+      "summary": "Get apps in the catalog, can use pagination",
       "params": [
         {
           "name": "request",
@@ -20,28 +20,26 @@
         }
       ],
       "result": {
-        "name": "catalog",
-        "summary": "The catalog",
+        "name": "apps",
+        "summary": "The list of apps in the catalog",
         "schema": {
-          "$ref": "#/components/schemas/AppCatalog"
+          "$ref": "#/components/schemas/AppCatalogAppsPage"
         }
       },
       "examples": [
         {
-          "name": "Get entire catalog",
+          "name": "Get first page of catalog",
           "params": [
             {
               "name": "request",
               "value": {
-                "includeApps": true
               }
             }
           ],
           "result": {
             "name": "Default Result",
             "value": {
-              "version": "0.1",
-              "updated": "2021-04-23T18:25:43.511Z",
+              "nextPageToken": "abc",
               "apps": [
                 {
                   "appKey": "app-1",
@@ -50,8 +48,7 @@
                   "updated": "2021-04-23T18:25:43.511Z",
                   "cloud": true,
                   "location": "https://app-1.com",
-                  "title": "Application 1",
-                  "iconUrl": "https://app-1.com/icon.png"
+                  "title": "Application 1"
                 },
                 {
                   "appKey": "app-2",
@@ -60,31 +57,26 @@
                   "updated": "2021-04-23T18:25:43.511Z",
                   "cloud": true,
                   "location": "https://app-2.com",
-                  "title": "Application 2",
-                  "iconUrl": "https://app-2.com/icon.png"
+                  "title": "Application 2"
                 }
               ]
             }
           }
         },
         {
-          "name": "Get partial catalog",
+          "name": "Get subsequent page of catalog",
           "params": [
             {
               "name": "request",
               "value": {
-                "appRange": {
-                  "start": 1,
-                  "count": 1
-                }
+                "pageToken": "abc"
               }
             }
           ],
           "result": {
             "name": "Default Result",
             "value": {
-              "version": "0.1",
-              "updated": "2021-04-23T18:25:43.511Z",
+              "nextPageToken": "def",
               "apps": [
                 {
                   "appKey": "app-2",
@@ -93,22 +85,30 @@
                   "updated": "2021-04-23T18:25:43.511Z",
                   "cloud": true,
                   "location": "https://app-2.com",
-                  "title": "Application 2",
-                  "iconUrl": "https://app-2.com/icon.png"
+                  "title": "Application 2"
                 }
               ]
             }
           }
-        },
+        }
+      ]
+    },
+    {
+      "name": "metadata",
+      "summary": "Get the metadata for this catalog",
+      "params": [
+      ],
+      "result": {
+        "name": "catalog",
+        "summary": "The catalog",
+        "schema": {
+          "$ref": "#/components/schemas/AppCatalogMetadata"
+        }
+      },
+      "examples": [
         {
           "name": "Get catalog metadata",
           "params": [
-            {
-              "name": "request",
-              "value": {
-                "includeApps": false
-              }
-            }
           ],
           "result": {
             "name": "Default Result",
@@ -216,18 +216,15 @@
         "type": "object",
         "description": "Parameters to customize how an app catalog is returned",
         "properties": {
-          "includeApps": {
-            "type": "boolean"
-          },
-          "appRange": {
-            "$ref": "#/components/schemas/Pagination"
+          "pageToken": {
+            "type": "string"
           }
         }
       },
-      "AppCatalog": {
-        "title": "AppCatalog",
+      "AppCatalogMetadata": {
+        "title": "AppCatalogMetadata",
         "type": "object",
-        "description": "Object representing a list of apps",
+        "description": "The metadata for a catalog",
         "properties": {
           "version": {
             "type": "string"
@@ -235,12 +232,22 @@
           "updated": {
             "type": "string",
             "format": "date-time"
-          },
+          }
+        }
+      },
+      "AppCatalogAppsPage": {
+        "title": "AppCatalogAppsPage",
+        "type": "object",
+        "description": "The list of apps",
+        "properties": {
           "apps": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/AppCatalogItem"
             }
+          },
+          "nextPageToken": {
+            "type": "string"
           }
         }
       },
@@ -275,13 +282,7 @@
           "catalogHidden": {
             "type": "boolean"
           },
-          "contentRating": {
-            "type": "string"
-          },
           "title": {
-            "type": "string"
-          },
-          "iconUri": {
             "type": "string"
           }
         }
@@ -291,14 +292,8 @@
         "type": "object",
         "description": "Result of querying the app catalog for a single app",
         "properties": {
-          "found": {
-            "type": "boolean"
-          },
           "entry": {
             "$ref": "#/components/schemas/AppCatalogItem"
-          },
-          "appReleaseKey": {
-            "type": "string"
           },
           "onDevice": {
             "type": "boolean"
@@ -315,22 +310,6 @@
           },
           "allowIncremental": {
             "type": "boolean"
-          },
-          "catalog": {
-            "$ref": "#/components/schemas/AppCatalog"
-          }
-        }
-      },
-      "Pagination": {
-        "title": "Pagination",
-        "type": "object",
-        "description": "Pagination parameters",
-        "properties": {
-          "start": {
-            "type": "number"
-          },
-          "count": {
-            "type": "number"
           }
         }
       }
