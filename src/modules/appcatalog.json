@@ -142,7 +142,7 @@
       },
       "examples": [
         {
-          "name": "Get entire catalog",
+          "name": "Get app-1's catalog item",
           "params": [
             {
               "name": "appId",
