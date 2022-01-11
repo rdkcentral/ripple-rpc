@@ -168,45 +168,6 @@
           }
         }
       ]
-    },
-    {
-      "name": "update",
-      "summary": "Updates the device to use the given catalog",
-      "params": [
-        {
-          "name": "request",
-          "summary": "The request to update the catalog",
-          "schema": {
-            "$ref": "#/components/schemas/UpdateAppCatalogRequest"
-          },
-          "required": true
-        }
-      ],
-      "result": {
-        "name": "result",
-        "summary": "The result of the update",
-        "schema": {
-          "type": "object"
-        }
-      },
-      "examples": [
-        {
-          "name": "Update the catalog to a new uri",
-          "params": [
-            {
-              "name": "request",
-              "value": {
-                "catalogUri": "https://firebolt-tests.thor.comcast.com/catalogs/main-catalog.json"
-              }
-            }
-          ],
-          "result": {
-            "name": "Default Result",
-            "value": {
-            }
-          }
-        }
-      ]
     }
   ],
   "components": {
@@ -284,19 +245,6 @@
           },
           "title": {
             "type": "string"
-          }
-        }
-      },
-      "UpdateAppCatalogRequest": {
-        "title": "UpdateAppCatalogRequest",
-        "type": "object",
-        "description": "A request to update a catalog",
-        "properties": {
-          "catalogUri": {
-            "type": "string"
-          },
-          "allowIncremental": {
-            "type": "boolean"
           }
         }
       }
