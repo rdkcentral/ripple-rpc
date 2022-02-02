@@ -79,7 +79,8 @@
                     "result": {
                         "name": "Default Result",
                         "value": {
-                            "reason": "powerOn"
+                            "event": "Power.onPowerOn",
+                            "listening": true
                         }
                     }
                 }
@@ -128,7 +129,8 @@
                     "result": {
                         "name": "Default Result",
                         "value": {
-                            "reason": "powerOn"
+                            "event": "Power.onActive",
+                            "listening": true
                         }
                     }
                 }
