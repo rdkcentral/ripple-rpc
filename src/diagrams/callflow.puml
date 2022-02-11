@@ -107,14 +107,14 @@ group Hibernate to Sleep/On, e.g. network or key press
     
     alt if wake reason matches policy
         power -> rdk: setPowerState(LIGHT_SLEEP) // needed?
-        power -> manage: unsuspend-cleanup TBD...
+        power -> manage: unsuspend-cleanup
         power -> rdk: setPowerState(ON)
         power -> manage: 'wake' event
         manage -> ui: 'wake' event
         ui -> ui: show power on overlay
     else else
         power -> rdk: setPowerState(LIGHT_SLEEP) // needed?
-        power -> manage: unsuspend-cleanup TBD...
+        power -> manage: unsuspend-cleanup
     end
 end
 
