@@ -1,6 +1,6 @@
 {
   "name": "@firebolt-js/manage-sdk",
-  "version": "0.1.0-alpha.2",
+  "version": "0.1.0-alpha.3",
   "description": "The Firebolt JS Manage SDK",
   "main": "./dist/firebolt-manage.js",
   "scripts": {
