@@ -56,7 +56,7 @@
               "correlationId": "abc",
               "request": {
                 "capability": "xrn:firebolt:capability:localization::postalcode",
-                "requester": {
+                "requestor": {
                   "id": "ReferenceApp",
                   "name": "Firebolt Reference App"
                 }
@@ -141,8 +141,8 @@
   ],
   "components": {
     "schemas": {
-      "ChallengeRequester": {
-        "title": "ChallengeRequester",
+      "ChallengeRequestor": {
+        "title": "ChallengeRequestor",
         "type": "object",
         "required": [
           "id",
@@ -164,16 +164,16 @@
         "type": "object",
         "required": [
           "capability",
-          "requester"
+          "requestor"
         ],
         "properties": {
           "capability": {
             "type": "string",
             "description": "The capability that is being requested by the user to approve"
           },
-          "requester": {
+          "requestor": {
             "description": "The identity of which app is requesting access to this capability",
-            "$ref": "#/components/schemas/ChallengeRequester"
+            "$ref": "#/components/schemas/ChallengeRequestor"
           }
         }
       },
