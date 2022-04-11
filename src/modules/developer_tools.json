@@ -1,0 +1,232 @@
+{
+    "openrpc": "1.2.4",
+    "info": {
+        "title": "DeveloperTools",
+        "description": "A module for supporting off-device developer tools.",
+        "version": "0.0.0"
+    },
+    "methods": [
+        {
+            "name": "requestToolScan",
+            "summary": "Begins a scan of the network, looking for hosts with web sockets listening on the 'standard tools port number'",
+            "tags": [],
+            "params": [],
+            "result": {
+                "name": "result",
+                "schema": {
+                    "const": null
+                }
+            },
+            "examples": [
+                {
+                    "name": "Begin a scan for tools on the network",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "pairTool",
+            "summary": "Connect Firebolt as a web socket client to the web socket that corresponds to the given developer tool UUID",
+            "tags": [],
+            "params": [
+                {
+                    "name": "toolUuid",
+                    "summary": "The UUID of the DeveloperTool to which to connect",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                }
+            ],
+            "result": {
+                "name": "result",
+                "schema": {
+                    "const": null
+                }
+            },
+            "examples": [
+                {
+                    "name": "Connect Firebolt to a DeveloperTool's web socket",
+                    "params": [
+                        {
+                            "name": "toolUuid",
+                            "value": "ff6340fb-8576-494c-97c6-e60e9a4eeba9"
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "unpairTool",
+            "summary": "Disconnect Firebolt as a web socket client from the web socket that corresponds to the given developer tool UUID",
+            "tags": [],
+            "params": [
+                {
+                    "name": "toolUuid",
+                    "summary": "The UUID of the DeveloperTool from which to disconnect",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                }
+            ],
+            "result": {
+                "name": "result",
+                "schema": {
+                    "const": null
+                }
+            },
+            "examples": [
+                {
+                    "name": "Disconnect Firebolt from a DeveloperTool's web socket",
+                    "params": [
+                        {
+                            "name": "toolUuid",
+                            "value": "ff6340fb-8576-494c-97c6-e60e9a4eeba9"
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "onToolFound",
+            "tags": [
+                {
+                    "name": "event"
+                }
+            ],
+            "summary": "Listen to the toolFound event",
+            "params": [
+                {
+                    "name": "listen",
+                    "required": true,
+                    "summary": "whether to listen, or stop listening",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "result": {
+                "name": "value",
+                "schema": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/components/schemas/DeveloperTool"
+                        },
+                        {
+                            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+                        }
+                    ]
+               }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                        {
+                            "name": "listen",
+                            "value": true
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": {
+                            "uuid": "ff6340fb-8576-494c-97c6-e60e9a4eeba9",
+                            "websocketUrl": "ws://192.168.1.121",
+                            "name": "sideloader-f3413041-7f5a-4db3-ba08-95e769e81484"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "onToolScanFinished ",
+            "tags": [
+                {
+                    "name": "event"
+                }
+            ],
+            "summary": "Listen to the toolScanFinished event",
+            "params": [
+                {
+                    "name": "listen",
+                    "required": true,
+                    "summary": "whether to listen, or stop listening",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "result": {
+                "name": "value",
+                "schema": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/components/schemas/DeveloperTool"
+                        },
+                        {
+                            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+                        }
+                    ]
+               }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                        {
+                            "name": "listen",
+                            "value": true
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": null
+                    }
+                }
+            ]
+        }
+    ],
+    "components": {
+        "schemas": {
+            "DeveloperTool": {
+                "type": "object",
+                "required": [
+                    "uuid",
+                    "websocketUrl",
+                    "name"
+                ],
+                "properties": {
+                    "uuid": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "The UUID that uniquely identifies this instance of a developer tool"
+                    },
+                    "websocketUrl": {
+                        "type": "string",
+                        "format": "uri",
+                        "description": "The web socket address on which the developer tool is listening"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Developer-visible 'friendly name' for the developer tool (including a base name and some kind of unique identifier)"
+                    }
+                }
+            }
+        }
+    }
+}
