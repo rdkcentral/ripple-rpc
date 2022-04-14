@@ -1,0 +1,151 @@
+{
+    "openrpc": "1.2.4",
+    "info": {
+      "title": "Remote",
+      "description": "A module for managing Remote keys, paring and programming.",
+      "version": "0.0.0"
+    },
+    "methods": [
+      {
+        "name": "state",
+        "summary": "Read-only property method for the remote control state. This is a getter for the state or a way to subscribe to changes to the state.",
+        "params": [],
+        "result": {
+          "name": "remoteList",
+          "summary": "Contains a list of remotes controls paired to the device.",
+          "schema": {
+            "$ref": "#/components/schemas/RemoteControlState"
+          }
+        },
+        "examples": [
+          {
+            "name": "Remote State Example",
+            "params": [],
+            "result": {
+              "remoteList": [
+                {
+                  "model": "PR2",
+                  "batteryPercentage": "70"
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "name": "startPairing",
+        "summary": "Setup the device to allow Remote control to be paired on the next keypress.",
+        "params": [],
+        "result": {
+          "name": "remotePairState",
+          "summary": "The state of currently paired remote",
+          "schema": {
+            "$ref": "#/components/schemas/RemotePairState"
+          }
+        },
+        "examples": [
+          {
+            "name": "Remote State Examples",
+            "params": [],
+            "result": {
+              "pairingState": "pairingRemote"
+            }
+          }
+        ]
+      },
+      {
+        "name": "onRemotePairing",
+        "tags": [
+          {
+            "name": "event"
+          }
+        ],
+        "summary": "Listen for events when the remote control is pairing.",
+        "params": [
+          {
+            "name": "listen",
+            "required": true,
+            "summary": "whether to listen, or stop listening",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        ],
+        "result": {
+          "name": "remotePairState",
+          "summary": "The state of currently paired remote",
+          "schema": {
+            "$ref": "#/components/schemas/RemotePairState"
+          }
+        },
+        "examples": [
+          {
+              "name": "Default Example",
+              "params": [
+                  {
+                      "name": "listen",
+                      "value": true
+                  }
+              ],
+              "result": {
+                  "name": "Default Result",
+                  "value": {
+                      "event": "Remote.onRemotePairing",
+                      "remotePairState": "pairingComplete"
+                  }
+              }
+          }
+      ] 
+      }
+    ],
+    "components": {
+      "schemas": {
+        "RemoteControlState": {
+          "title": "RemoteList",
+          "type": "array",
+          "description": "Contains a list of remotes paired to the device.",
+          "items": {
+            "$ref": "#/components/schema/RemoteState"
+          }
+        },
+        "RemoteState": {
+          "title": "RemoteState",
+          "type": "object",
+          "description": "The type of keyboard to show to the user",
+          "minProperties": 2,
+          "additionalProperties": false,
+          "required": ["model", "batteryPercentage"],
+          "properties": {
+            "model": {
+              "type": "string",
+              "description": "Model could be PR1, PR2 and other BLE models. It could also be XR11, XR15, XR16 and XR19 for X1 Stbs.",
+              "enum": ["PR1", "PR2", "XR11", "XR15", "XR16", "XR19"]
+            },
+            "batteryPercentage": {
+              "description": "Battery percentage value of the selected remote.",
+              "type": "integer",
+              "default": 0
+            }
+          }
+        },
+        "RemotePairState": {
+          "title": "RemotePairState",
+          "type": "object",
+          "description": "Contains the status for the current remote pairing state",
+          "minProperties": 1,
+          "additionalProperties": false,
+          "required": ["pairingState"],
+          "properties": {
+            "pairingState": "string",
+            "enum": [
+              "pairingRemote",
+              "waitingForKeypress",
+              "notStarted",
+              "pairingComplete"
+            ]
+          }
+        }
+      }
+    }
+  }
+  
