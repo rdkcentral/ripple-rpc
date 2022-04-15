@@ -147,7 +147,8 @@
           "enum": [
             "pairingRemote",
             "notStarted",
-            "pairingComplete"
+            "pairingComplete",
+            "pairingFailed"
           ]
         }
       }
