@@ -7,8 +7,8 @@
   },
   "methods": [
     {
-      "name": "state",
-      "summary": "Read-only property method for the remote control state. This is a getter for the state or a way to subscribe to changes to the state.",
+      "name": "getRemoteList",
+      "summary": "Provides a list of remotes controls paired to the device.",
       "params": [],
       "result": {
         "name": "remoteList",
