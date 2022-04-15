@@ -19,15 +19,18 @@
       },
       "examples": [
         {
-          "name": "Remote State Example",
+          "name": "Remote List Example",
           "params": [],
           "result": {
-            "remoteList": [
-              {
-                "model": "PR2",
-                "batteryPercentage": "70"
-              }
-            ]
+            "name": "Remote List example",
+            "value": {
+              "list": [
+                {
+                  "model": "PR2",
+                  "batteryPercentage": 70
+                }
+              ]
+            }
           }
         }
       ]
@@ -37,10 +40,10 @@
       "summary": "Setup the device to allow Remote control to be paired on the next keypress.",
       "params": [],
       "result": {
-        "name": "remotePairState",
+        "name": "startPairingResult",
         "summary": "The state of currently paired remote",
         "schema": {
-          "$ref": "#/components/schemas/RemotePairState"
+          "$ref": "#/components/schemas/StartPairingResult"
         }
       },
       "examples": [
@@ -48,7 +51,10 @@
           "name": "Remote State Examples",
           "params": [],
           "result": {
-            "pairingState": "pairingRemote"
+            "name": "Remote State Example",
+            "value": {
+              "startPairingResult": true
+            }
           }
         }
       ]
@@ -72,19 +78,17 @@
         }
       ],
       "result": {
-        "name": "remotePairState",
+        "name": "pairingResult",
         "summary": "The state of currently paired remote",
         "schema": {
-          "schema": {
-            "oneOf": [
-              {
-                "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
-              },
-              {
-                "$ref": "#/components/schemas/RemotePairState"
-              }
-            ]
-          }
+          "oneOf": [
+            {
+              "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+            },
+            {
+              "$ref": "#/components/schemas/RemotePairResult"
+            }
+          ]
         }
       },
       "examples": [
@@ -99,7 +103,7 @@
           "result": {
             "name": "event",
             "value": {
-              "remotePairState": "pairingComplete"
+              "pairingResult": true
             }
           }
         }
@@ -110,10 +114,18 @@
     "schemas": {
       "RemoteControlState": {
         "title": "RemoteList",
-        "type": "array",
+        "type": "object",
         "description": "Contains a list of remotes paired to the device.",
-        "items": {
-          "$ref": "#/components/schema/RemoteState"
+        "minProperties": 1,
+        "additionalProperties": false,
+        "required": ["list"],
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RemoteState"
+            }
+          }
         }
       },
       "RemoteState": {
@@ -135,21 +147,30 @@
           }
         }
       },
-      "RemotePairState": {
-        "title": "RemotePairState",
+      "StartPairingResult": {
+        "title": "StartPairingResult",
+        "type": "object",
+        "minProperties": 1,
+        "additionalProperties": false,
+        "required": ["startPairingResult"],
+        "properties": {
+          "startPairingResult": {
+            "type": "boolean"
+          }
+        },
+        "description": "Contains the status for the start remote pairing result transaction."
+      },
+      "RemotePairResult": {
+        "title": "RemotePairResult",
         "type": "object",
         "description": "Contains the status for the current remote pairing state",
         "minProperties": 1,
         "additionalProperties": false,
-        "required": ["pairingState"],
+        "required": ["pairingResult"],
         "properties": {
-          "pairingState": "string",
-          "enum": [
-            "pairingRemote",
-            "notStarted",
-            "pairingComplete",
-            "pairingFailed"
-          ]
+          "pairingResult": {
+            "type": "boolean"
+          }
         }
       }
     }
