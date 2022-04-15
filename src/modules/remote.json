@@ -7,7 +7,7 @@
   },
   "methods": [
     {
-      "name": "getRemoteList",
+      "name": "list",
       "summary": "Provides a list of remotes controls paired to the device.",
       "params": [],
       "result": {
