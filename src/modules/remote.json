@@ -146,7 +146,6 @@
           "pairingState": "string",
           "enum": [
             "pairingRemote",
-            "waitingForKeypress",
             "notStarted",
             "pairingComplete"
           ]
