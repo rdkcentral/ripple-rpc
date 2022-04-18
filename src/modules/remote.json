@@ -8,11 +8,11 @@
   "methods": [
     {
       "name": "list",
-      "summary": "Provides a list of remotes controls paired to the device.",
+      "summary": "Provides a list of remote controls paired to the device.",
       "params": [],
       "result": {
         "name": "remoteList",
-        "summary": "Contains a list of remotes controls paired to the device.",
+        "summary": "Contains a list of remote controls paired to the device.",
         "schema": {
           "$ref": "#/components/schemas/RemoteControlState"
         }
