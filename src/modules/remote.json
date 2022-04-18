@@ -43,18 +43,16 @@
         "name": "startPairingResult",
         "summary": "The state of currently paired remote",
         "schema": {
-          "$ref": "#/components/schemas/StartPairingResult"
+          "const": null
         }
       },
       "examples": [
         {
-          "name": "Remote State Examples",
+          "name": "Remote Pairing Success Example",
           "params": [],
           "result": {
             "name": "Remote State Example",
-            "value": {
-              "startPairingResult": true
-            }
+            "value": null
           }
         }
       ]
@@ -93,7 +91,7 @@
       },
       "examples": [
         {
-          "name": "Default Example",
+          "name": "Pairing Success Example event",
           "params": [
             {
               "name": "listen",
@@ -103,7 +101,22 @@
           "result": {
             "name": "event",
             "value": {
-              "pairingResult": true
+              "result": true
+            }
+          }
+        },
+        {
+          "name": "Pairing Fail Example event",
+          "params": [
+            {
+              "name": "listen",
+              "value": true
+            }
+          ],
+          "result": {
+            "name": "event",
+            "value": {
+              "result": false
             }
           }
         }
@@ -131,10 +144,7 @@
       "RemoteState": {
         "title": "RemoteState",
         "type": "object",
-        "description": "The type of keyboard to show to the user",
-        "minProperties": 2,
-        "additionalProperties": false,
-        "required": ["model", "batteryPercentage"],
+        "description": "The state of the remote paired to the device.",
         "properties": {
           "model": {
             "type": "string",
@@ -143,32 +153,18 @@
           "batteryPercentage": {
             "description": "Battery percentage value of the selected remote.",
             "type": "integer",
-            "default": 0
+            "default": 0,
+            "minimum": 0,
+            "maximum": 100
           }
         }
-      },
-      "StartPairingResult": {
-        "title": "StartPairingResult",
-        "type": "object",
-        "minProperties": 1,
-        "additionalProperties": false,
-        "required": ["startPairingResult"],
-        "properties": {
-          "startPairingResult": {
-            "type": "boolean"
-          }
-        },
-        "description": "Contains the status for the start remote pairing result transaction."
       },
       "RemotePairResult": {
         "title": "RemotePairResult",
         "type": "object",
         "description": "Contains the status for the current remote pairing state",
-        "minProperties": 1,
-        "additionalProperties": false,
-        "required": ["pairingResult"],
         "properties": {
-          "pairingResult": {
+          "result": {
             "type": "boolean"
           }
         }
