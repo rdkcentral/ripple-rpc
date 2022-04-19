@@ -58,7 +58,7 @@
       ]
     },
     {
-      "name": "onRemotePairing",
+      "name": "onPairing",
       "tags": [
         {
           "name": "event"
