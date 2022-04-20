@@ -1,0 +1,156 @@
+{
+  "openrpc": "1.2.4",
+  "info": {
+    "title": "Accessory",
+    "description": "A module for assisting pairing and managing Firebolt compatible accessories.",
+    "version": "0.0.0"
+  },
+  "components": {
+    "schema": {
+      "AccessoryList": {
+        "title": "AccessoryList",
+        "type": "object",
+        "description": "Contains a list of Accessories paired to the device.",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schema/AccessoryInfo"
+            }
+          }
+        }
+      },
+      "AccessoryInfo": {
+        "title": "AccessoryInfo",
+        "description": "Properties of a paired accessory.",
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Name of the manufacturer of the accessory",
+            "enum": ["remote", "speaker"]
+          },
+          "make": {
+            "type": "string",
+            "description": "Name of the manufacturer of the accessory"
+          },
+          "model": {
+            "type": "string",
+            "description": "Model name of the accessory"
+          },
+          "connectivity": {
+            "type": "string",
+            "description": "Mechanism through which the accessory is connected to the device. Eg Bluetooth, ZRC, RF4Ce"
+          }
+        }
+      }
+    }
+  },
+  "methods": [
+    {
+      "name": "pair",
+      "summary": "Pair an accessory with the device.",
+      "params": [
+        {
+          "name": "type",
+          "summary": "Defines the type of device being paired",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "timeoutSecs",
+          "summary": "Defines the timeout in seconds. If the threshold for timeout is passed without a result it will throw an error.",
+          "schema": {
+            "type": "integer"
+          }
+        }
+      ],
+      "result": {
+        "name": "pairedAccessory",
+        "summary": "The state of last paired accessory",
+        "schema": {
+          "$ref": "#/components/schema/AccessoryInfo"
+        }
+      },
+      "examples": [
+        {
+          "name": "Remote Pairing BLE Success Example",
+          "params": [],
+          "result": {
+            "name": "Remote State Example",
+            "value": {
+              "type": "remote",
+              "make": "UEI",
+              "model": "PR1",
+              "connectivity": "Bluetooth"
+            }
+          }
+        },
+        {
+          "name": "Blue tooth speaker Pairing Success Example",
+          "params": [],
+          "result": {
+            "name": "Remote State Example",
+            "value": {
+              "type": "speaker",
+              "make": "Sonos",
+              "model": "V120",
+              "connectivity": "Bluetooth"
+            }
+          }
+        },
+        {
+            "name": "Remote Pairing RF4CE Success Example",
+            "params": [],
+            "result": {
+              "name": "Remote State Example",
+              "value": {
+                "type": "remote",
+                "make": "UEI",
+                "model": "15",
+                "connectivity": "RF"
+              }
+            }
+          }
+      ]
+    },
+    {
+      "name": "list",
+      "summary": "Provides a list of Accesories paired to the device.",
+      "params": [],
+      "result": {
+        "name": "list",
+        "summary": "Contains a list of Accesories paired to the device.",
+        "schema": {
+          "$ref": "#/components/schema/AccessoryList"
+        }
+      },
+      "examples": [
+        {
+          "name": "Accessory List Example",
+          "params": [],
+          "result": {
+            "name": "Accessory List example",
+            "value": {
+              "list": [
+                {
+                  "type": "remote",
+                  "make": "uei",
+                  "model": "PR1",
+                  "connectivity": "Bluetooth"
+                },
+                {
+                  "type": "speaker",
+                  "make": "Sonos",
+                  "model": "V120",
+                  "connectivity": "Bluetooth"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
