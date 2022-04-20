@@ -59,7 +59,7 @@
           }
         },
         {
-          "name": "timeoutSecs",
+          "name": "timeoutInSecs",
           "summary": "Defines the timeout in seconds. If the threshold for timeout is passed without a result it will throw an error.",
           "schema": {
             "type": "integer"
@@ -76,7 +76,16 @@
       "examples": [
         {
           "name": "Remote Pairing BLE Success Example",
-          "params": [],
+          "params": [
+            {
+              "name": "type",
+              "value": "remote"
+            },
+            {
+              "name": "timeoutInSecs",
+              "value": 180
+            }
+          ],
           "result": {
             "name": "Remote State Example",
             "value": {
@@ -89,7 +98,16 @@
         },
         {
           "name": "Blue tooth speaker Pairing Success Example",
-          "params": [],
+          "params": [
+            {
+              "name": "type",
+              "value": "speaker"
+            },
+            {
+              "name": "timeoutInSecs",
+              "value": 180
+            }
+          ],
           "result": {
             "name": "Remote State Example",
             "value": {
@@ -101,18 +119,27 @@
           }
         },
         {
-            "name": "Remote Pairing RF4CE Success Example",
-            "params": [],
-            "result": {
-              "name": "Remote State Example",
-              "value": {
-                "type": "remote",
-                "make": "UEI",
-                "model": "15",
-                "connectivity": "RF"
-              }
+          "name": "Remote Pairing RF4CE Success Example",
+          "params": [
+            {
+              "name": "type",
+              "value": "remote"
+            },
+            {
+              "name": "timeoutInSecs",
+              "value": 180
+            }
+          ],
+          "result": {
+            "name": "Remote State Example",
+            "value": {
+              "type": "remote",
+              "make": "UEI",
+              "model": "15",
+              "connectivity": "RF"
             }
           }
+        }
       ]
     },
     {
