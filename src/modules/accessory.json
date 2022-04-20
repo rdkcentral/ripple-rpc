@@ -27,7 +27,7 @@
         "properties": {
           "type": {
             "type": "string",
-            "description": "Name of the manufacturer of the accessory",
+            "description": "Type of accessory",
             "enum": ["remote", "speaker"]
           },
           "make": {
