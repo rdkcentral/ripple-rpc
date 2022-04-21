@@ -82,7 +82,7 @@
       },
       "examples": [
         {
-          "name": "Bluetooth Remote successful pairing example",
+          "name": "Pair a Bluetooth Remote",
           "params": [
             {
               "name": "type",
@@ -108,7 +108,7 @@
           }
         },
         {
-          "name": "Bluetooth speaker successful pairing example",
+          "name": "Pair a Bluetooth Speaker",
           "params": [
             {
               "name": "type",
@@ -134,7 +134,7 @@
           }
         },
         {
-          "name": "RF Remote successful pairing example",
+          "name": "Pair a RF Remote",
           "params": [
             {
               "name": "type",
