@@ -59,6 +59,13 @@
           }
         },
         {
+            "name": "connectivity",
+            "summary": "Defines the mechanism by which accessory will connect to the device.",
+            "schema": {
+              "type": "string"
+            }
+        },
+        {
           "name": "timeoutInSecs",
           "summary": "Defines the timeout in seconds. If the threshold for timeout is passed without a result it will throw an error.",
           "schema": {
@@ -75,11 +82,15 @@
       },
       "examples": [
         {
-          "name": "Remote Pairing BLE Success Example",
+          "name": "Bluetooth Remote successful pairing example",
           "params": [
             {
               "name": "type",
               "value": "remote"
+            },
+            {
+              "name": "connectivity",
+              "value": "bluetooth"
             },
             {
               "name": "timeoutInSecs",
@@ -87,7 +98,7 @@
             }
           ],
           "result": {
-            "name": "Remote State Example",
+            "name": "Bluetooth Remote successful pairing example",
             "value": {
               "type": "remote",
               "make": "UEI",
@@ -97,11 +108,15 @@
           }
         },
         {
-          "name": "Blue tooth speaker Pairing Success Example",
+          "name": "Bluetooth speaker successful pairing example",
           "params": [
             {
               "name": "type",
               "value": "speaker"
+            },
+            {
+                "name": "connectivity",
+                "value": "bluetooth"
             },
             {
               "name": "timeoutInSecs",
@@ -109,7 +124,7 @@
             }
           ],
           "result": {
-            "name": "Remote State Example",
+            "name": "Bluetooth Speaker successful pairing example",
             "value": {
               "type": "speaker",
               "make": "Sonos",
@@ -119,11 +134,15 @@
           }
         },
         {
-          "name": "Remote Pairing RF4CE Success Example",
+          "name": "RF Remote successful pairing example",
           "params": [
             {
               "name": "type",
               "value": "remote"
+            },
+            {
+                "name": "connectivity",
+                "value": "rf"
             },
             {
               "name": "timeoutInSecs",
@@ -131,7 +150,7 @@
             }
           ],
           "result": {
-            "name": "Remote State Example",
+            "name": "RF Remote successful pairing example",
             "value": {
               "type": "remote",
               "make": "UEI",
