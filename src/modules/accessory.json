@@ -103,7 +103,7 @@
               "type": "remote",
               "make": "UEI",
               "model": "PR1",
-              "connectivity": "Bluetooth"
+              "connectivity": "bluetooth"
             }
           }
         },
@@ -129,7 +129,7 @@
               "type": "speaker",
               "make": "Sonos",
               "model": "V120",
-              "connectivity": "Bluetooth"
+              "connectivity": "bluetooth"
             }
           }
         },
@@ -155,7 +155,7 @@
               "type": "remote",
               "make": "UEI",
               "model": "15",
-              "connectivity": "RF"
+              "connectivity": "rf"
             }
           }
         }
@@ -184,13 +184,13 @@
                   "type": "remote",
                   "make": "uei",
                   "model": "PR1",
-                  "connectivity": "Bluetooth"
+                  "connectivity": "bluetooth"
                 },
                 {
                   "type": "speaker",
                   "make": "Sonos",
                   "model": "V120",
-                  "connectivity": "Bluetooth"
+                  "connectivity": "bluetooth"
                 }
               ]
             }
