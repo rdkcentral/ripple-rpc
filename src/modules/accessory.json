@@ -28,7 +28,7 @@
           "type": {
             "type": "string",
             "description": "Type of accessory",
-            "enum": ["remote", "speaker"]
+            "enum": ["remote", "speaker", "other"]
           },
           "make": {
             "type": "string",
@@ -38,7 +38,7 @@
             "type": "string",
             "description": "Model name of the accessory"
           },
-          "connectivity": {
+          "protocol": {
             "type": "string",
             "description": "Mechanism through which the accessory is connected to the device. Eg Bluetooth, ZRC, RF4Ce"
           }
@@ -59,14 +59,14 @@
           }
         },
         {
-            "name": "connectivity",
-            "summary": "Defines the mechanism by which accessory will connect to the device.",
-            "schema": {
-              "type": "string"
-            }
+          "name": "protocol",
+          "summary": "Defines the mechanism by which accessory will connect to the device.",
+          "schema": {
+            "type": "string"
+          }
         },
         {
-          "name": "timeoutInSecs",
+          "name": "timeout",
           "summary": "Defines the timeout in seconds. If the threshold for timeout is passed without a result it will throw an error.",
           "schema": {
             "type": "integer"
@@ -89,11 +89,11 @@
               "value": "remote"
             },
             {
-              "name": "connectivity",
+              "name": "protocol",
               "value": "bluetooth"
             },
             {
-              "name": "timeoutInSecs",
+              "name": "timeout",
               "value": 180
             }
           ],
@@ -103,7 +103,7 @@
               "type": "remote",
               "make": "UEI",
               "model": "PR1",
-              "connectivity": "bluetooth"
+              "protocol": "bluetooth"
             }
           }
         },
@@ -115,11 +115,11 @@
               "value": "speaker"
             },
             {
-                "name": "connectivity",
-                "value": "bluetooth"
+              "name": "protocol",
+              "value": "bluetooth"
             },
             {
-              "name": "timeoutInSecs",
+              "name": "timeout",
               "value": 180
             }
           ],
@@ -129,7 +129,7 @@
               "type": "speaker",
               "make": "Sonos",
               "model": "V120",
-              "connectivity": "bluetooth"
+              "protocol": "bluetooth"
             }
           }
         },
@@ -141,11 +141,11 @@
               "value": "remote"
             },
             {
-                "name": "connectivity",
-                "value": "rf"
+              "name": "protocol",
+              "value": "rf"
             },
             {
-              "name": "timeoutInSecs",
+              "name": "timeout",
               "value": 180
             }
           ],
@@ -155,7 +155,7 @@
               "type": "remote",
               "make": "UEI",
               "model": "15",
-              "connectivity": "rf"
+              "protocol": "rf"
             }
           }
         }
@@ -164,7 +164,22 @@
     {
       "name": "list",
       "summary": "Provides a list of Accesories paired to the device.",
-      "params": [],
+      "params": [
+        {
+          "name": "type",
+          "summary": "Defines the type of device being paired",
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "protocol",
+          "summary": "Defines the mechanism by which accessory will connect to the device.",
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
       "result": {
         "name": "list",
         "summary": "Contains a list of Accesories paired to the device.",
@@ -174,8 +189,18 @@
       },
       "examples": [
         {
-          "name": "Accessory List Example",
-          "params": [],
+          "name": "List all Accessories.",
+          "params": [
+              {
+                  "name": "type",
+                  "value": "all"
+              },
+              {
+                  "name": "protocol",
+                  "value": "all"
+              }
+
+          ],
           "result": {
             "name": "Accessory List example",
             "value": {
@@ -184,18 +209,132 @@
                   "type": "remote",
                   "make": "uei",
                   "model": "PR1",
-                  "connectivity": "bluetooth"
+                  "protocol": "bluetooth"
                 },
                 {
                   "type": "speaker",
                   "make": "Sonos",
                   "model": "V120",
-                  "connectivity": "bluetooth"
+                  "protocol": "bluetooth"
                 }
               ]
             }
           }
-        }
+        },
+        {
+            "name": "List Bluetooth accessories",
+            "params": [
+                {
+                    "name": "type",
+                    "value": "all"
+                },
+                {
+                    "name": "protocol",
+                    "value": "bluetooth"
+                }
+  
+            ],
+            "result": {
+              "name": "Accessory List example",
+              "value": {
+                "list": [
+                  {
+                    "type": "remote",
+                    "make": "uei",
+                    "model": "PR1",
+                    "protocol": "bluetooth"
+                  },
+                  {
+                    "type": "speaker",
+                    "make": "Sonos",
+                    "model": "V120",
+                    "protocol": "bluetooth"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "List only Bluetooth Remotes",
+            "params": [
+                {
+                    "name": "type",
+                    "value": "remote"
+                },
+                {
+                    "name": "protocol",
+                    "value": "bluetooth"
+                }
+  
+            ],
+            "result": {
+              "name": "Accessory List example",
+              "value": {
+                "list": [
+                  {
+                    "type": "remote",
+                    "make": "uei",
+                    "model": "PR1",
+                    "protocol": "bluetooth"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "List only Bluetooth Speakers",
+            "params": [
+                {
+                    "name": "type",
+                    "value": "speaker"
+                },
+                {
+                    "name": "protocol",
+                    "value": "bluetooth"
+                }
+  
+            ],
+            "result": {
+              "name": "Accessory List example",
+              "value": {
+                "list": [
+                  {
+                    "type": "remote",
+                    "make": "uei",
+                    "model": "PR1",
+                    "protocol": "bluetooth"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "List only RF Remote",
+            "params": [
+                {
+                    "name": "type",
+                    "value": "remote"
+                },
+                {
+                    "name": "protocol",
+                    "value": "rf"
+                }
+  
+            ],
+            "result": {
+              "name": "Accessory List example",
+              "value": {
+                "list": [
+                  {
+                    "type": "remote",
+                    "make": "uei",
+                    "model": "PR1",
+                    "protocol": "bluetooth"
+                  }
+                ]
+              }
+            }
+          }
       ]
     }
   ]
