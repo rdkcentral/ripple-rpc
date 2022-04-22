@@ -191,15 +191,14 @@
         {
           "name": "List all Accessories.",
           "params": [
-              {
-                  "name": "type",
-                  "value": "all"
-              },
-              {
-                  "name": "protocol",
-                  "value": "all"
-              }
-
+            {
+              "name": "type",
+              "value": "all"
+            },
+            {
+              "name": "protocol",
+              "value": "all"
+            }
           ],
           "result": {
             "name": "Accessory List example",
@@ -222,119 +221,115 @@
           }
         },
         {
-            "name": "List Bluetooth accessories",
-            "params": [
-                {
-                    "name": "type",
-                    "value": "all"
-                },
-                {
-                    "name": "protocol",
-                    "value": "bluetooth"
-                }
-  
-            ],
-            "result": {
-              "name": "Accessory List example",
-              "value": {
-                "list": [
-                  {
-                    "type": "remote",
-                    "make": "uei",
-                    "model": "PR1",
-                    "protocol": "bluetooth"
-                  },
-                  {
-                    "type": "speaker",
-                    "make": "Sonos",
-                    "model": "V120",
-                    "protocol": "bluetooth"
-                  }
-                ]
-              }
+          "name": "List Bluetooth accessories",
+          "params": [
+            {
+              "name": "type",
+              "value": "all"
+            },
+            {
+              "name": "protocol",
+              "value": "bluetooth"
             }
-          },
-          {
-            "name": "List only Bluetooth Remotes",
-            "params": [
+          ],
+          "result": {
+            "name": "Accessory List example",
+            "value": {
+              "list": [
                 {
-                    "name": "type",
-                    "value": "remote"
+                  "type": "remote",
+                  "make": "uei",
+                  "model": "PR1",
+                  "protocol": "bluetooth"
                 },
                 {
-                    "name": "protocol",
-                    "value": "bluetooth"
+                  "type": "speaker",
+                  "make": "Sonos",
+                  "model": "V120",
+                  "protocol": "bluetooth"
                 }
-  
-            ],
-            "result": {
-              "name": "Accessory List example",
-              "value": {
-                "list": [
-                  {
-                    "type": "remote",
-                    "make": "uei",
-                    "model": "PR1",
-                    "protocol": "bluetooth"
-                  }
-                ]
-              }
-            }
-          },
-          {
-            "name": "List only Bluetooth Speakers",
-            "params": [
-                {
-                    "name": "type",
-                    "value": "speaker"
-                },
-                {
-                    "name": "protocol",
-                    "value": "bluetooth"
-                }
-  
-            ],
-            "result": {
-              "name": "Accessory List example",
-              "value": {
-                "list": [
-                  {
-                    "type": "remote",
-                    "make": "uei",
-                    "model": "PR1",
-                    "protocol": "bluetooth"
-                  }
-                ]
-              }
-            }
-          },
-          {
-            "name": "List only RF Remote",
-            "params": [
-                {
-                    "name": "type",
-                    "value": "remote"
-                },
-                {
-                    "name": "protocol",
-                    "value": "rf"
-                }
-  
-            ],
-            "result": {
-              "name": "Accessory List example",
-              "value": {
-                "list": [
-                  {
-                    "type": "remote",
-                    "make": "uei",
-                    "model": "PR1",
-                    "protocol": "bluetooth"
-                  }
-                ]
-              }
+              ]
             }
           }
+        },
+        {
+          "name": "List only Bluetooth Remotes",
+          "params": [
+            {
+              "name": "type",
+              "value": "remote"
+            },
+            {
+              "name": "protocol",
+              "value": "bluetooth"
+            }
+          ],
+          "result": {
+            "name": "Accessory List example",
+            "value": {
+              "list": [
+                {
+                  "type": "remote",
+                  "make": "uei",
+                  "model": "PR1",
+                  "protocol": "bluetooth"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "List only Bluetooth Speakers",
+          "params": [
+            {
+              "name": "type",
+              "value": "speaker"
+            },
+            {
+              "name": "protocol",
+              "value": "bluetooth"
+            }
+          ],
+          "result": {
+            "name": "Accessory List example",
+            "value": {
+              "list": [
+                {
+                  "type": "speaker",
+                  "make": "Sonos",
+                  "model": "V120",
+                  "protocol": "bluetooth"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "List only RF Remote",
+          "params": [
+            {
+              "name": "type",
+              "value": "remote"
+            },
+            {
+              "name": "protocol",
+              "value": "rf"
+            }
+          ],
+          "result": {
+            "name": "Accessory List example",
+            "value": {
+              "list": [
+                {
+                  "type": "remote",
+                  "make": "uei",
+                  "model": "XR15",
+                  "protocol": "rf"
+                }
+              ]
+            }
+          }
+        }
       ]
     }
   ]
