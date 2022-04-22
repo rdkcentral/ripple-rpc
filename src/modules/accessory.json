@@ -20,15 +20,45 @@
           }
         }
       },
+      "AccessoryPairingTimeout": {
+        "title": "AccessoryPairingTimeout",
+        "description": "Defines the timeout in seconds. If the threshold for timeout is passed without a result it will throw an error.",
+        "type": "integer",
+        "default": 0,
+        "minimum": 0,
+        "maximum": 9999
+      },
+      "AccessoryType": {
+        "title": "AccessoryType",
+        "description": "Type of the device Remote,Speaker or Other",
+        "type": "string",
+        "enum": ["Remote", "Speaker", "Other"]
+      },
+      "AccessoryTypeListParam": {
+        "title": "AccessoryType",
+        "description": "Type of the device Remote,Speaker or Other",
+        "type": "string",
+        "enum": ["Remote", "Speaker", "All"]
+      },
+      "AccessoryProtocol": {
+        "title": "AccessoryProtocol",
+        "description": "Mechanism to connect the accessory to the device",
+        "type": "string",
+        "enum": ["BluetoothLE", "RF4CE"]
+      },
+      "AccessoryProtocolListParam": {
+        "title": "AccessoryProtocol",
+        "description": "Mechanism to connect the accessory to the device",
+        "type": "string",
+        "enum": ["BluetoothLE", "RF4CE", "All"]
+      },
       "AccessoryInfo": {
         "title": "AccessoryInfo",
         "description": "Properties of a paired accessory.",
         "type": "object",
         "properties": {
           "type": {
-            "type": "string",
-            "description": "Type of accessory",
-            "enum": ["remote", "speaker", "other"]
+            "$ref": "#/components/schema/AccessoryType"
           },
           "make": {
             "type": "string",
@@ -39,8 +69,7 @@
             "description": "Model name of the accessory"
           },
           "protocol": {
-            "type": "string",
-            "description": "Mechanism through which the accessory is connected to the device. Eg Bluetooth, ZRC, RF4Ce"
+            "$ref": "#/components/schema/AccessoryProtocol"
           }
         }
       }
@@ -53,23 +82,20 @@
       "params": [
         {
           "name": "type",
-          "summary": "Defines the type of device being paired",
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schema/AccessoryType"
           }
         },
         {
           "name": "protocol",
-          "summary": "Defines the mechanism by which accessory will connect to the device.",
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schema/AccessoryProtocol"
           }
         },
         {
           "name": "timeout",
-          "summary": "Defines the timeout in seconds. If the threshold for timeout is passed without a result it will throw an error.",
           "schema": {
-            "type": "integer"
+            "$ref": "#/components/schema/AccessoryPairingTimeout"
           }
         }
       ],
@@ -86,11 +112,11 @@
           "params": [
             {
               "name": "type",
-              "value": "remote"
+              "value": "Remote"
             },
             {
               "name": "protocol",
-              "value": "bluetooth"
+              "value": "BluetoothLE"
             },
             {
               "name": "timeout",
@@ -100,10 +126,10 @@
           "result": {
             "name": "Bluetooth Remote successful pairing example",
             "value": {
-              "type": "remote",
+              "type": "Remote",
               "make": "UEI",
               "model": "PR1",
-              "protocol": "bluetooth"
+              "protocol": "BluetoothLE"
             }
           }
         },
@@ -112,11 +138,11 @@
           "params": [
             {
               "name": "type",
-              "value": "speaker"
+              "value": "Speaker"
             },
             {
               "name": "protocol",
-              "value": "bluetooth"
+              "value": "BluetoothLE"
             },
             {
               "name": "timeout",
@@ -126,10 +152,10 @@
           "result": {
             "name": "Bluetooth Speaker successful pairing example",
             "value": {
-              "type": "speaker",
+              "type": "Speaker",
               "make": "Sonos",
               "model": "V120",
-              "protocol": "bluetooth"
+              "protocol": "BluetoothLE"
             }
           }
         },
@@ -138,11 +164,11 @@
           "params": [
             {
               "name": "type",
-              "value": "remote"
+              "value": "Remote"
             },
             {
               "name": "protocol",
-              "value": "rf"
+              "value": "RF4CE"
             },
             {
               "name": "timeout",
@@ -152,10 +178,10 @@
           "result": {
             "name": "RF Remote successful pairing example",
             "value": {
-              "type": "remote",
+              "type": "Remote",
               "make": "UEI",
               "model": "15",
-              "protocol": "rf"
+              "protocol": "RF4CE"
             }
           }
         }
@@ -167,16 +193,15 @@
       "params": [
         {
           "name": "type",
-          "summary": "Defines the type of device being paired",
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schema/AccessoryTypeListParam"
           }
         },
         {
           "name": "protocol",
           "summary": "Defines the mechanism by which accessory will connect to the device.",
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schema/AccessoryProtocolListParam"
           }
         }
       ],
@@ -193,11 +218,11 @@
           "params": [
             {
               "name": "type",
-              "value": "all"
+              "value": "All"
             },
             {
               "name": "protocol",
-              "value": "all"
+              "value": "All"
             }
           ],
           "result": {
@@ -205,16 +230,16 @@
             "value": {
               "list": [
                 {
-                  "type": "remote",
+                  "type": "Remote",
                   "make": "uei",
                   "model": "PR1",
-                  "protocol": "bluetooth"
+                  "protocol": "BluetoothLE"
                 },
                 {
-                  "type": "speaker",
+                  "type": "Speaker",
                   "make": "Sonos",
                   "model": "V120",
-                  "protocol": "bluetooth"
+                  "protocol": "BluetoothLE"
                 }
               ]
             }
@@ -225,11 +250,11 @@
           "params": [
             {
               "name": "type",
-              "value": "all"
+              "value": "All"
             },
             {
               "name": "protocol",
-              "value": "bluetooth"
+              "value": "BluetoothLE"
             }
           ],
           "result": {
@@ -237,16 +262,16 @@
             "value": {
               "list": [
                 {
-                  "type": "remote",
+                  "type": "Remote",
                   "make": "uei",
                   "model": "PR1",
-                  "protocol": "bluetooth"
+                  "protocol": "BluetoothLE"
                 },
                 {
-                  "type": "speaker",
+                  "type": "Speaker",
                   "make": "Sonos",
                   "model": "V120",
-                  "protocol": "bluetooth"
+                  "protocol": "BluetoothLE"
                 }
               ]
             }
@@ -257,11 +282,11 @@
           "params": [
             {
               "name": "type",
-              "value": "remote"
+              "value": "Remote"
             },
             {
               "name": "protocol",
-              "value": "bluetooth"
+              "value": "BluetoothLE"
             }
           ],
           "result": {
@@ -269,10 +294,10 @@
             "value": {
               "list": [
                 {
-                  "type": "remote",
+                  "type": "Remote",
                   "make": "uei",
                   "model": "PR1",
-                  "protocol": "bluetooth"
+                  "protocol": "BluetoothLE"
                 }
               ]
             }
@@ -283,11 +308,11 @@
           "params": [
             {
               "name": "type",
-              "value": "speaker"
+              "value": "Speaker"
             },
             {
               "name": "protocol",
-              "value": "bluetooth"
+              "value": "BluetoothLE"
             }
           ],
           "result": {
@@ -295,10 +320,10 @@
             "value": {
               "list": [
                 {
-                  "type": "speaker",
+                  "type": "Speaker",
                   "make": "Sonos",
                   "model": "V120",
-                  "protocol": "bluetooth"
+                  "protocol": "BluetoothLE"
                 }
               ]
             }
@@ -309,11 +334,11 @@
           "params": [
             {
               "name": "type",
-              "value": "remote"
+              "value": "Remote"
             },
             {
               "name": "protocol",
-              "value": "rf"
+              "value": "RF4CE"
             }
           ],
           "result": {
@@ -321,10 +346,10 @@
             "value": {
               "list": [
                 {
-                  "type": "remote",
+                  "type": "Remote",
                   "make": "uei",
                   "model": "XR15",
-                  "protocol": "rf"
+                  "protocol": "RF4CE"
                 }
               ]
             }
