@@ -1,0 +1,92 @@
+{
+    "openrpc": "1.2.4",
+    "info": {
+        "title": "Settings",
+        "description": "A module for accessing Settings managed by other apps.",
+        "version": "0.0.0"
+    },
+    "methods": [
+        {
+            "name": "onRequestClosedCaptionsSettings",
+            "tags": [
+                {
+                    "name": "event",
+                    "x-provides": [
+                        "xrn:firebolt:capability:settings:closedcaptions"
+                    ],
+                    "x-response": {
+                        "$ref": "#/components/schemas/ClosedCaptionsSettingsProviderResponse"
+                    }
+                }
+            ],
+            "summary": "Listen requests to provide the current closed captions settings.",
+            "params": [
+                {
+                    "name": "listen",
+                    "required": true,
+                    "summary": "whether to listen, or stop listening",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "result": {
+                "name": "value",
+                "schema": {
+                    "oneOf": [
+                        {
+                            "const": null
+                        },
+                        {
+                            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+                        }
+                    ]
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                        {
+                            "name": "listen",
+                            "value": true
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": {
+                            "event": "Power.onPowerOn",
+                            "listening": true
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "components": {
+        "schemas": {
+            "ClosedCaptionsSettingsProviderResponse": {
+                "title": "ClosedCaptionsSettingsProviderResponse",
+                "allOf": [
+                    {
+                        "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ProviderResponse"
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "response"
+                        ],
+                        "properties": {
+                            "response": {
+                                "description": "The result of the provider response, containing whether the user approved or denied the challenge",
+                                "type": {
+                                    "$ref": "https://meta.comcast.com/firebolt/accessibility#/definitions/ClosedCaptionsSettings"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}
