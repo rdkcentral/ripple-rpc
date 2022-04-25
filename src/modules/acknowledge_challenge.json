@@ -210,21 +210,25 @@
       },
       "GrantResultProviderResponse": {
         "title": "GrantResultProviderResponse",
-        "type": "object",
-        "required": [
-          "correlationId",
-          "response"
-        ],
-        "properties": {
-          "correlationId": {
-            "type": "string",
-            "description": "The id that was passed in to the event that triggered a provider method to be called"
+        "allOf": [
+          {
+            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ProviderResponse"
           },
-          "response": {
-            "description": "The result of the provider response, containing whether the user approved or denied the challenge",
-            "$ref": "#/components/schemas/GrantResult"
+          {
+            "type": "object",
+            "required": [
+              "response"
+            ],
+            "properties": {
+              "response": {
+                "description": "The result of the provider response, containing whether the user approved or denied the challenge",
+                "type": {
+                  "$ref": "#/components/schemas/GrantResult"
+                }
+              }
+            }  
           }
-        }
+        ]
       }
     }
   }
