@@ -7,6 +7,54 @@
     },
     "methods": [
         {
+            "name": "onRequestClosedCaptionsSettings",
+            "tags": [
+                {
+                    "name": "events",
+                    "x-provides": [
+                        "xrn:firebolt:capability:settings:closedcaptions"
+                    ],
+                    "x-response": {
+                        // TODO: rationalize this with the `result` below...
+                        "$ref": "#/components/schemas/ClosedCaptionsSettingsProviderResponse"
+                    }
+                }
+            ],
+            "summary": "Dispatches a request for the current closed-captions settings to the closed-captions settings provider.",
+            "params": [],
+            // TODO: should this go away?
+            "result": {
+                "name": "settings",
+                "schema": {
+                    "$ref": "https://meta.comcast.com/firebolt/accessibility#/definitions/ClosedCaptionsSettings"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Getting the closed captions settings",
+                    "params": [],
+                    "result": {
+                        "name": "settings",
+                        "value": {
+                            "enabled": true,
+                            "styles": {
+                                "fontFamily": "Monospace sans-serif",
+                                "fontSize": 1,
+                                "fontColor": "#ffffff",
+                                "fontEdge": "none",
+                                "fontEdgeColor": "#7F7F7F",
+                                "fontOpacity": 100,
+                                "backgroundColor": "#000000",
+                                "backgroundOpacity": 100,
+                                "textAlign": "center",
+                                "textAlignVertical": "middle"
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        {
             "name": "enabled",
             "tags": [
                 {
@@ -17,8 +65,7 @@
                 }
             ],
             "summary": "Whether or not closed-captions are enabled.",
-            "params": [
-            ],
+            "params": [],
             "result": {
                 "name": "enabled",
                 "schema": {
@@ -28,8 +75,7 @@
             "examples": [
                 {
                     "name": "Default Example",
-                    "params": [
-                    ],
+                    "params": [],
                     "result": {
                         "name": "enabled",
                         "value": true
@@ -48,8 +94,7 @@
                 }
             ],
             "summary": "The prefered font family for displaying closed-captions.",
-            "params": [
-            ],
+            "params": [],
             "result": {
                 "name": "family",
                 "schema": {
@@ -59,8 +104,7 @@
             "examples": [
                 {
                     "name": "Default Example",
-                    "params": [
-                    ],
+                    "params": [],
                     "result": {
                         "name": "family",
                         "value": "Monospace sans-serif"
@@ -79,8 +123,7 @@
                 }
             ],
             "summary": "The prefered font size for displaying closed-captions.",
-            "params": [
-            ],
+            "params": [],
             "result": {
                 "name": "size",
                 "schema": {
@@ -90,8 +133,7 @@
             "examples": [
                 {
                     "name": "Default Example",
-                    "params": [
-                    ],
+                    "params": [],
                     "result": {
                         "name": "size",
                         "value": 1
@@ -110,8 +152,7 @@
                 }
             ],
             "summary": "The prefered font color for displaying closed-captions.",
-            "params": [
-            ],
+            "params": [],
             "result": {
                 "name": "color",
                 "schema": {
@@ -121,8 +162,7 @@
             "examples": [
                 {
                     "name": "Default Example",
-                    "params": [
-                    ],
+                    "params": [],
                     "result": {
                         "name": "color",
                         "value": "#ffffff"
@@ -141,8 +181,7 @@
                 }
             ],
             "summary": "The prefered font edge style for displaying closed-captions.",
-            "params": [
-            ],
+            "params": [],
             "result": {
                 "name": "edge",
                 "schema": {
@@ -152,8 +191,7 @@
             "examples": [
                 {
                     "name": "Default Example",
-                    "params": [
-                    ],
+                    "params": [],
                     "result": {
                         "name": "edge",
                         "value": "none"
@@ -172,8 +210,7 @@
                 }
             ],
             "summary": "The prefered font edge color for displaying closed-captions.",
-            "params": [
-            ],
+            "params": [],
             "result": {
                 "name": "color",
                 "schema": {
@@ -183,8 +220,7 @@
             "examples": [
                 {
                     "name": "Default Example",
-                    "params": [
-                    ],
+                    "params": [],
                     "result": {
                         "name": "color",
                         "value": "#000000"
@@ -203,8 +239,7 @@
                 }
             ],
             "summary": "The prefered opacity for displaying closed-captions characters.",
-            "params": [
-            ],
+            "params": [],
             "result": {
                 "name": "opacity",
                 "schema": {
@@ -214,8 +249,7 @@
             "examples": [
                 {
                     "name": "Default Example",
-                    "params": [
-                    ],
+                    "params": [],
                     "result": {
                         "name": "opacity",
                         "value": 100
@@ -234,8 +268,7 @@
                 }
             ],
             "summary": "The prefered background color for displaying closed-captions, .",
-            "params": [
-            ],
+            "params": [],
             "result": {
                 "name": "color",
                 "schema": {
@@ -245,8 +278,7 @@
             "examples": [
                 {
                     "name": "Default Example",
-                    "params": [
-                    ],
+                    "params": [],
                     "result": {
                         "name": "color",
                         "value": "#000000"
@@ -265,8 +297,7 @@
                 }
             ],
             "summary": "The prefered opacity for displaying closed-captions backgrounds.",
-            "params": [
-            ],
+            "params": [],
             "result": {
                 "name": "opacity",
                 "schema": {
@@ -276,8 +307,7 @@
             "examples": [
                 {
                     "name": "Default Example",
-                    "params": [
-                    ],
+                    "params": [],
                     "result": {
                         "name": "opacity",
                         "value": 100
@@ -296,8 +326,7 @@
                 }
             ],
             "summary": "The prefered horizontal alignment for displaying closed-captions characters.",
-            "params": [
-            ],
+            "params": [],
             "result": {
                 "name": "opacity",
                 "schema": {
@@ -307,8 +336,7 @@
             "examples": [
                 {
                     "name": "Default Example",
-                    "params": [
-                    ],
+                    "params": [],
                     "result": {
                         "name": "aligment",
                         "value": "center"
@@ -327,8 +355,7 @@
                 }
             ],
             "summary": "The prefered horizontal alignment for displaying closed-captions characters.",
-            "params": [
-            ],
+            "params": [],
             "result": {
                 "name": "opacity",
                 "schema": {
@@ -338,8 +365,7 @@
             "examples": [
                 {
                     "name": "Default Example",
-                    "params": [
-                    ],
+                    "params": [],
                     "result": {
                         "name": "alignement",
                         "value": "middle"
@@ -350,6 +376,28 @@
     ],
     "components": {
         "schemas": {
+            "ClosedCaptionsSettingsProviderResponse": {
+                "title": "ClosedCaptionsSettingsProviderResponse",
+                "allOf": [
+                    {
+                        "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ProviderResponse"
+                    },
+                    {
+                        "type": "object",
+                        "required": [
+                            "response"
+                        ],
+                        "properties": {
+                            "response": {
+                                "description": "The result of the provider response, containing the closed-captions settings.",
+                                "type": {
+                                    "$ref": "https://meta.comcast.com/firebolt/accessibility#/definitions/ClosedCaptionsSettings"
+                                }
+                            }
+                        }
+                    }
+                ]
+            }            
         }
     }
 }
