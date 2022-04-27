@@ -1,7 +1,7 @@
 {
     "openrpc": "1.2.4",
     "info": {
-        "title": "Device",
+        "title": "Privacy",
         "description": "A module for managing device settings.",
         "version": "0.0.0"
     },
@@ -24,13 +24,22 @@
                 {
                     "name": "appId",
                     "required": true,
-                    "type": "string"
+                    "schema": {
+                        "type": "string"
+                    }
                 }
             ],
             "result": {
-                "name": "policy",
+                "name": "result",
                 "schema": {
-                    "$ref": ""
+                    "oneOf": [
+                        {
+                          "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+                        },
+                        {
+                            "const": null
+                        }
+                    ]
                 }
             },
             "examples": [
@@ -39,8 +48,8 @@
                     "params": [
                     ],
                     "result": {
-                        "name": "name",
-                        "value": "Living Room"
+                        "name": "result",
+                        "value": null
                     }
                 }
             ]
@@ -60,7 +69,9 @@
                 {
                     "name": "appId",
                     "required": true,
-                    "type": "string"
+                    "schema": {
+                        "type": "string"
+                    }
                 }
             ],
             "result": {
@@ -96,7 +107,9 @@
                 {
                     "name": "appId",
                     "required": true,
-                    "type": "string"
+                    "schema": {
+                        "type": "string"
+                    }
                 }
             ],
             "result": {
@@ -132,7 +145,9 @@
                 {
                     "name": "appId",
                     "required": true,
-                    "type": "string"
+                    "schema": {
+                        "type": "string"
+                    }
                 }
             ],
             "result": {
@@ -170,9 +185,7 @@
                         "properties": {
                             "response": {
                                 "description": "The result of the provider response, containing the Content Policy",
-                                "type": {
-                                    "$ref": "https://meta.comcast.com/firebolt/privacy#/definitions/ContentPolicy"
-                                }
+                                "$ref": "https://meta.comcast.com/firebolt/privacy#/definitions/ContentPolicy"
                             }
                         }
                     }

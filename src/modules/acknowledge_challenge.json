@@ -222,9 +222,7 @@
             "properties": {
               "response": {
                 "description": "The result of the provider response, containing whether the user approved or denied the challenge",
-                "type": {
-                  "$ref": "#/components/schemas/GrantResult"
-                }
+                "$ref": "#/components/schemas/GrantResult"
               }
             }  
           }
