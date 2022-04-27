@@ -2,7 +2,8 @@
   "name": "@firebolt-js/manage-sdk",
   "version": "0.1.0-alpha.4",
   "description": "The Firebolt JS Manage SDK",
-  "main": "./dist/firebolt-manage.js",
+  "main": "./dist/lib/firebolt-manage.mjs",
+  "types": "./dist/lib/firebolt-manage.d.ts",  
   "scripts": {
     "prepare": "npm run prepare:setup && npm run dist:docs && npm run dist:sdk && npm run dist:d",
     "prepare:setup": "mkdir -p ./dist/docs ./build/docs/markdown ./build/sdk/javascript/src",
@@ -11,14 +12,13 @@
     "build:sdk": "firebolt-openrpc --task sdk --source ./src/ --template ./src/template/js --output ./build/sdk/javascript/src --shared-schemas node_modules/@firebolt-js/schemas/src/schemas/",
     "build:docs": "firebolt-openrpc --task docs --source ./src/ --template ./src/template/markdown --output ./build/docs/markdown --shared-schemas node_modules/@firebolt-js/schemas/src/schemas/ --as-path",
     "build:wiki": "firebolt-openrpc -task docs --source ./src/ --template ./src/template/markdown --output ./build/docs/markdown --shared-schemas node_modules/@firebolt-js/schemas/src/schemas/",
-    "dist:sdk": "npm run validate && npm run build:sdk && npm run pack && npm run test",
-    "dist:d": "npm run validate && firebolt-openrpc --task declarations --source ./src/ --output ./dist/firebolt-manage.d.ts --shared-schemas node_modules/@firebolt-js/schemas/src/schemas/",
+    "dist:sdk": "npm run validate && npm run build:sdk && rm -rf ./dist/lib && cp -R ./build/sdk/javascript/src ./dist/lib && npm run test",
+    "dist:d": "npm run validate && firebolt-openrpc --task declarations --source ./src/ --output ./dist/lib/firebolt-manage.d.ts --shared-schemas node_modules/@firebolt-js/schemas/src/schemas/",
     "dist:docs": "npm run validate && npm run build:docs asPath && rm -r ./dist/docs && cp -R ./build/docs/markdown ./dist/docs",
     "dist:wiki": "npm run validate && npm run build:wiki && rm -r ./dist/docs && cp -R ./build/docs/markdown ./dist/docs",
     "test": "jest --config=jest.config.js --detectOpenHandles",
-    "clean": "rm -rf build && mkdir -p build",
+    "clean": "rm -rf build && mkdir -p build && rm -rf dist && mkdir -p dist",
     "build": "npm run validate && npm run build:docs && npm run build:sdk",
-    "pack": "webpack --config ./webpack.config.js",
     "publish:docs": "npm run build:docs && sh ./push-docs.sh",
     "publish:word": "mkdir -p ./dist/word/schemas && cd ./dist/docs && find . -iname \"*.md\" -type f -exec sh -c 'pandoc \"${0}\" -o \"../word/${0%.md}.docx\"' {} \\;"
   },
@@ -38,9 +38,7 @@
     "@firebolt-js/openrpc": "../firebolt-openrpc",
     "@firebolt-js/schemas": "../firebolt-schemas",
     "ajv": "^6.12.6",
-    "jest": "^27.0.4",
-    "webpack": "^5.39.1",
-    "webpack-cli": "^4.2.0"
+    "jest": "^27.0.4"
   },
   "keywords": [
     "firebolt",

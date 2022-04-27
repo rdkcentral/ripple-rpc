@@ -22,7 +22,14 @@
             "result": {
                 "name": "name",
                 "schema": {
-                    "type": "string"
+                    "oneOf": [
+                        {
+                          "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+                        },
+                        {
+                            "type": "string"
+                        }
+                    ]
                 }
             },
             "examples": [
