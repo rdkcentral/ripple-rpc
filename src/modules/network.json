@@ -1,0 +1,528 @@
+{
+  "openrpc": "1.2.4",
+  "info": {
+    "title": "Network",
+    "description": "A module for providing support for Wifi and Ethernet.",
+    "version": "0.0.0"
+  },
+  "components": {
+    "schema": {
+      "AccessPointList": {
+        "title": "AccessPointList",
+        "type": "object",
+        "description": "List of scanned Wifi networks available near the device.",
+        "properties": {
+          "list": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schema/AccessPoint"
+            }
+          }
+        }
+      },
+      "WifiSecurityMode": {
+        "title": "WifiSecurityMode",
+        "description": "Security Mode supported for Wifi",
+        "type": "string",
+        "enum": [
+          "NONE",
+          "WEP64",
+          "WEP128",
+          "WPA_PSK_TKIP",
+          "WPA2_PSK_TKIP",
+          "WPA2_PSK_AES",
+          "WPA_ENTERPRISE_TKIP",
+          "WPA_ENTERPRISE_AES",
+          "WPA2_ENTERPRISE_TKIP",
+          "WPA2_ENTERPRISE_AES",
+          "WPA2_PSK",
+          "WPA2_ENTERPRISE",
+          "WPA3_PSK_AES",
+          "WPA3_SAE"
+        ]
+      },
+      "WifiSignalStrength": {
+        "title": "WifiSignalStrength",
+        "description": "Strength of Wifi signal, value is negative based on RSSI specification.",
+        "type": "integer",
+        "default": -255,
+        "minimum": -255,
+        "maximum": 0
+      },
+      "WifiFrequency": {
+        "title": "WifiFrequency",
+        "description": "Wifi Frequency in Ghz, example 2.4Ghz and 5Ghs.",
+        "type": "number",
+        "default": 0,
+        "minimum": 0
+      },
+      "AccessPoint": {
+        "title": "AccessPoint",
+        "description": "Properties of a scanned wifi list item.",
+        "type": "object",
+        "properties": {
+          "ssid": {
+            "type": "string",
+            "description": "Name of the wifi."
+          },
+          "securityMode": {
+            "$ref": "#/components/schema/WifiSecurityMode"
+          },
+          "signalStrength": {
+            "$ref": "#/components/schema/WifiSignalStrength"
+          },
+          "frequency": {
+            "$ref": "#/components/schema/WifiFrequency"
+          }
+        }
+      },
+      "WPSSecurityPin": {
+        "title": "WPSSecurityPin",
+        "description": "Security pin type for WPS(Wifi Protected Setup).",
+        "type": "string",
+        "enum": [
+          "PushButton",
+          "Pin",
+          "ManufacturerPin"
+        ]
+      },
+      "NetworkType": {
+        "title": "NetworkType",
+        "description": "Type of Network connected to the device.",
+        "type": "string",
+        "enum": [
+          "Wifi",
+          "Ethernet",
+          "None"
+        ]
+      },
+      "NetworkStatus": {
+        "title": "NetworkStatus",
+        "description": "Current Network Status of the device.",
+        "type": "object",
+        "properties": {
+          "connection": {
+            "type": "boolean",
+            "description": "Connection status to the router."
+          },
+          "interface": {
+            "$ref": "#/components/schema/NetworkType"
+          },
+          "internet": {
+            "type": "boolean",
+            "description": "Connectivity to internet."
+          }
+        }
+      },
+      "WifiConnectRequest" : {
+        "title": "WifiConnectRequest",
+        "description": "Current Network Status of the device.",
+        "type": "object",
+        "properties": {
+          "ssid" : {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "passphrase": {
+            "schema": {
+              "type": "string"
+            }
+          },
+          "securityMode": {
+            "schema": {
+              "$ref": "#/components/schema/WifiSecurityMode"
+            }
+          }
+        }
+      }
+    }
+  },
+  "methods": [
+    {
+      "name": "scan",
+      "summary": "Scan available wifi networks in the location.",
+      "params": [],
+      "result": {
+        "name": "list",
+        "summary": "Contains a list of wifi networks available near the device.",
+        "schema": {
+          "$ref": "#/components/schema/AccessPointList"
+        }
+      },
+      "examples": [
+        {
+          "name": "Successul Wifi List",
+          "params": [],
+          "result": {
+            "name": "Successul Wifi List example",
+            "value": {
+              "list": [
+                {
+                  "ssid": "DND",
+                  "security": "WPA2_PSK",
+                  "signalStrength": -70,
+                  "frequency": 2.4
+                },
+                {
+                  "ssid": "Fortnite",
+                  "security": "WPA2_ENTERPRISE_AES",
+                  "signalStrength": -70,
+                  "frequency": 5
+                },
+                {
+                  "ssid": "Guardian",
+                  "security": "NONE",
+                  "signalStrength": -70,
+                  "frequency": 2.4
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "connect",
+      "summary": "Connect the device to the specified SSID.",
+      "params": [
+        {
+          "name": "ssid",
+          "schema": {
+            "type": "string"
+          },
+          "description": "Name of Wifi SSID to connect for the device."
+        },
+        {
+          "name": "passphrase",
+          "schema": {
+            "type": "string"
+          },
+          "description": "Password or Passphrase for the wifi."
+        },
+        {
+          "name": "security",
+          "schema": {
+            "$ref": "#/components/schema/WifiSecurityMode"
+          }
+        }
+      ],
+      "result": {
+        "name": "Connected Wifi",
+        "summary": "Successful Response after connecting to the Wifi.",
+        "schema": {
+          "$ref": "#/components/schema/AccessPoint"
+        }
+      },
+      "examples": [
+        {
+          "name": "Connect to a WPA2_PSK Wifi with password",
+          "params": [
+            {
+              "name": "ssid",
+              "value": "DND"
+            },
+            {
+              "name": "passphrase",
+              "value": "gargoyle"
+            },
+            {
+              "name": "security",
+              "value": "WPA2_PSK"
+            }
+          ],
+          "result": {
+            "name": "Successful Wifi connection",
+            "value": {
+              "ssid": "DND",
+              "security": "WPA2_PSK",
+              "signalStrength": -70,
+              "frequency": 2.4
+            }
+          }
+        },
+        {
+          "name": "Connect to a WPA2_PSK Wifi with password",
+          "params": [
+            {
+              "name": "ssid",
+              "value": "Guardian WIFI"
+            },
+            {
+              "name": "passphrase",
+              "value": ""
+            },
+            {
+              "name": "security",
+              "value": "NONE"
+            }
+          ],
+          "result": {
+            "name": "Successful Wifi connection",
+            "value": {
+              "ssid": "Guardian WIFI",
+              "security": "NONE",
+              "signalStrength": -70,
+              "frequency": 2.4
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "connect",
+      "summary": "Connect the device to the specified SSID.",
+      "params": [
+        {
+          "name": "ssid",
+          "schema": {
+            "type": "string"
+          },
+          "description": "Name of Wifi SSID to connect for the device."
+        },
+        {
+          "name": "passphrase",
+          "schema": {
+            "type": "string"
+          },
+          "description": "Password or Passphrase for the wifi."
+        },
+        {
+          "name": "security",
+          "schema": {
+            "$ref": "#/components/schema/WifiSecurityMode"
+          }
+        }
+      ],
+      "result": {
+        "name": "Connected Wifi",
+        "summary": "Successful Response after connecting to the Wifi.",
+        "schema": {
+          "$ref": "#/components/schema/AccessPoint"
+        }
+      },
+      "examples": [
+        {
+          "name": "Connect to a WPA2_PSK Wifi with password",
+          "params": [
+            {
+              "name": "ssid",
+              "value": "DND"
+            },
+            {
+              "name": "passphrase",
+              "value": "gargoyle"
+            },
+            {
+              "name": "security",
+              "value": "WPA2_PSK"
+            }
+          ],
+          "result": {
+            "name": "Successful Wifi connection",
+            "value": {
+              "ssid": "DND",
+              "security": "WPA2_PSK",
+              "signalStrength": -70,
+              "frequency": 2.4
+            }
+          }
+        },
+        {
+          "name": "Connect to a WPA2_PSK Wifi with password",
+          "params": [
+            {
+              "name": "ssid",
+              "value": "Guardian WIFI"
+            },
+            {
+              "name": "passphrase",
+              "value": ""
+            },
+            {
+              "name": "security",
+              "value": "NONE"
+            }
+          ],
+          "result": {
+            "name": "Successful Wifi connection",
+            "value": {
+              "ssid": "Guardian WIFI",
+              "security": "NONE",
+              "signalStrength": -70,
+              "frequency": 2.4
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "disconnect",
+      "summary": "Disconnect the device if connected via WIFI.",
+      "params": [],
+      "result": {
+        "name": "result",
+        "schema": {
+          "const": null
+        }
+      },
+      "examples": [
+        {
+          "name": "Disconnect",
+          "params": [],
+          "result": {
+            "name": "Default Result",
+            "value": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "status",
+      "summary": "Status of the network connection.",
+      "params": [],
+      "result": {
+        "name": "Connected Wifi",
+        "summary": "Successful Response after connecting to the Wifi.",
+        "schema": {
+          "$ref": "#/components/schema/NetworkStatus"
+        }
+      },
+      "examples": [
+        {
+          "name": "Connected to a Wifi Router",
+          "params": [],
+          "result": {
+            "name": "Default Result",
+            "value": {
+              "connection": true,
+              "interface": "Wifi",
+              "internet": true
+            }
+          }
+        },
+        {
+          "name": "Connected to Ethernet",
+          "params": [],
+          "result": {
+            "name": "Default Result",
+            "value": {
+              "connection": true,
+              "interface": "Ethernet",
+              "internet": true
+            }
+          }
+        },
+        {
+          "name": "Connected to Wifi but no internet",
+          "params": [],
+          "result": {
+            "name": "Default Result",
+            "value": {
+              "connection": true,
+              "interface": "Ethernet",
+              "internet": false
+            }
+          }
+        },
+        {
+          "name": "Not connected",
+          "params": [],
+          "result": {
+            "name": "Default Result",
+            "value": {
+              "connection": false,
+              "interface": "None",
+              "internet": false
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "onConnectionChanged",
+      "summary": "Registers as a provider for when the Network or Internet connection fluctuates.",
+      "params": [
+        {
+          "name": "listen",
+          "summary": "Whether or not to listen for requests to this interface method.",
+          "schema": {
+            "type": "boolean"
+          }
+        }
+      ],
+      "result": {
+        "name": "status",
+        "summary": "The network status change event",
+        "schema": {
+          "oneOf": [
+            {
+              "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+            },
+            {
+              "$ref": "#/components/schema/NetworkStatus"
+            }
+          ]
+        }
+      },
+      "examples": [
+        {
+          "name": "Default Example",
+          "params": [
+            {
+              "name": "listen",
+              "value": true
+            }
+          ],
+          "result": {
+            "name": "Default Result",
+            "value": {
+              "connection": true,
+              "interface": "Wifi",
+              "internet": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "wps",
+      "summary": "Connect to WPS",
+      "params": [
+        {
+          "name": "security",
+          "schema": {
+            "$ref": "#/components/schema/WPSSecurityPin"
+          }
+        }
+      ],
+      "result": {
+        "name": "Connected Wifi",
+        "summary": "Successful Response after connecting to the Wifi.",
+        "schema": {
+          "$ref": "#/components/schema/AccessPoint"
+        }
+      },
+      "examples": [
+        {
+          "name": "Connect to a WPS Wifi router",
+          "params": [
+            {
+              "name": "security",
+              "value": "PushButton"
+            }
+          ],
+          "result": {
+            "name": "Successful Wifi connection",
+            "value": {
+              "ssid": "DND",
+              "security": "WPA2_PSK",
+              "signalStrength": -70,
+              "frequency": 2.4
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
