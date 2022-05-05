@@ -133,8 +133,29 @@
             "schema": {
               "$ref": "#/components/schema/WifiSecurityMode"
             }
+          },
+          "timeout": {
+            "schema": {
+              "$ref": "#/components/schema/ScanTimeout"
+            }
           }
         }
+      },
+      "ScanTimeout": {
+        "title": "ScanTimeout",
+        "description": "Defines the timeout in seconds. If the threshold for timeout is passed without a result it will throw an error.",
+        "type": "integer",
+        "default": 0,
+        "minimum": 0,
+        "maximum": 9999
+      },
+      "ConnectTimeout": {
+        "title": "ScanTimeout",
+        "description": "Defines the timeout in seconds. If the threshold for timeout is passed without a result it will throw an error.",
+        "type": "integer",
+        "default": 0,
+        "minimum": 0,
+        "maximum": 9999
       }
     }
   },
@@ -142,7 +163,14 @@
     {
       "name": "scan",
       "summary": "Scan available wifi networks in the location.",
-      "params": [],
+      "params": [
+        {
+          "name": "timeout",
+          "schema": {
+            "$ref": "#/components/schema/ScanTimeout"
+          }
+        }
+      ],
       "result": {
         "name": "list",
         "summary": "Contains a list of wifi networks available near the device.",
@@ -153,7 +181,12 @@
       "examples": [
         {
           "name": "Successul Wifi List",
-          "params": [],
+          "params": [
+            {
+              "name": "timeout",
+              "value": 30
+            }
+          ],
           "result": {
             "name": "Successul Wifi List example",
             "value": {
