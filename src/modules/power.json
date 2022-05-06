@@ -316,7 +316,8 @@
                         }
                     ]
                 }
-            },
+            }
+            ,
             "examples": [
                 {
                     "name": "Default Example",
@@ -385,7 +386,6 @@
                     }
                 }
             ]
-
         },
         {
             "name": "autoStandby",
