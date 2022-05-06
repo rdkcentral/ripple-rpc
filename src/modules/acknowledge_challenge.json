@@ -21,10 +21,14 @@
       "tags": [
         {
           "name": "event",
-          "x-provides": ["xrn:firebolt:capability:usergrant:acknowledgechallenge"],
           "x-response": {
             "$ref": "#/components/schemas/GrantResultProviderResponse"
-          }
+          },
+          "x-handshake": true
+        },
+        {
+          "name": "capabilities",
+          "x-provides": "xrn:firebolt:capability:usergrant:acknowledgechallenge"
         }
       ],
       "result": {
@@ -62,78 +66,6 @@
                 }
               }
             }
-          }
-        }
-      ]
-    },
-    {
-      "name": "challengeReady",
-      "summary": "Internal call made when a provider is invoked and the challenge is ready to be shown",
-      "params": [
-      ],
-      "tags": [
-        {
-          "name": "rpc-only"
-        }
-      ],
-      "result": {
-        "name": "result",
-        "schema": {
-          "const": null
-        }
-      },
-      "examples": [
-        {
-          "name": "Default Example",
-          "params": [
-          ],
-          "result": {
-            "name": "Default Result",
-            "value": null
-          }
-        }
-      ]
-    },
-    {
-      "name": "challengeResponse",
-      "summary": "Internal call made when a provider is invoked and the challenge is completed",
-      "params": [
-        {
-          "name": "response",
-          "summary": "The response from the challenge provider",
-          "schema": {
-            "$ref": "#/components/schemas/GrantResultProviderResponse"
-          }
-        }
-      ],
-      "tags": [
-        {
-          "name": "rpc-only"
-        }
-      ],
-      "result": {
-        "name": "result",
-        "schema": {
-          "const": null
-        }
-      },
-      "examples": [
-        {
-          "name": "Default Example",
-          "params": [
-            {
-              "name": "response",
-              "value": {
-                "correlationId": "abc",
-                "response": {
-                  "granted": true
-                }
-              }
-            }
-          ],
-          "result": {
-            "name": "Default Result",
-            "value": null
           }
         }
       ]
@@ -225,6 +157,14 @@
                 "$ref": "#/components/schemas/GrantResult"
               }
             }  
+          }
+        ],
+        "examples": [
+          {
+            "correlationId": "abc",
+            "response": {
+              "granted": true
+            }
           }
         ]
       }

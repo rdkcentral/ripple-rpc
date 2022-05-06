@@ -10,13 +10,15 @@
             "name": "onRequestClosedCaptionsSettings",
             "tags": [
                 {
-                    "name": "events",
-                    "x-provides": [
-                        "xrn:firebolt:capability:settings:closedcaptions"
-                    ],
+                    "name": "capabilities",
+                    "x-provides": "xrn:firebolt:capability:settings:closedcaptions",
+                    "x-handshake": false,
                     "x-response": {
                         "$ref": "#/components/schemas/ClosedCaptionsSettingsProviderResponse"
                     }
+                },
+                {
+                    "name": "events"
                 }
             ],
             "summary": "Dispatches a request for the current closed-captions settings to the closed-captions settings provider.",
@@ -25,16 +27,16 @@
                     "name": "listen",
                     "summary": "Whether or not to listen for requests to this interface method.",
                     "schema": {
-                      "type": "boolean"
+                        "type": "boolean"
                     }
-                }          
+                }
             ],
             "result": {
                 "name": "result",
                 "schema": {
                     "oneOf": [
                         {
-                          "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+                            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
                         },
                         {
                             "const": null
@@ -393,8 +395,28 @@
                             }
                         }
                     }
+                ],
+                "examples": [
+                    {
+                        "correlationId": "abc",
+                        "response": {
+                            "enabled": true,
+                            "styles": {
+                                "fontFamily": "Monospace sans-serif",
+                                "fontSize": 1,
+                                "fontColor": "#ffffff",
+                                "fontEdge": "none",
+                                "fontEdgeColor": "#7F7F7F",
+                                "fontOpacity": 100,
+                                "backgroundColor": "#000000",
+                                "backgroundOpacity": 100,
+                                "textAlign": "center",
+                                "textAlignVertical": "middle"
+                            }
+                        }
+                    }
                 ]
-            }            
+            }
         }
     }
 }
