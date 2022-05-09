@@ -39,7 +39,7 @@
                             "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
                         },
                         {
-                            "const": null
+                            "$ref": "#/components/schemas/ClosedCaptionsSettingsProviderRequest"
                         }
                     ]
                 }
@@ -377,6 +377,27 @@
     ],
     "components": {
         "schemas": {
+            "ClosedCaptionsSettingsProviderRequest": {
+                "title": "ClosedCaptionsSettingsProviderRequest",
+                "allOf": [
+                    {
+                        "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ProviderRequest"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "parameters": {
+                                "const": null
+                            }
+                        }
+                    }
+                ],
+                "examples": [
+                    {
+                        "correlationId": "abc"
+                    }
+                ]
+            },
             "ClosedCaptionsSettingsProviderResponse": {
                 "title": "ClosedCaptionsSettingsProviderResponse",
                 "allOf": [
@@ -386,10 +407,10 @@
                     {
                         "type": "object",
                         "required": [
-                            "response"
+                            "result"
                         ],
                         "properties": {
-                            "response": {
+                            "result": {
                                 "description": "The result of the provider response, containing the closed-captions settings.",
                                 "$ref": "https://meta.comcast.com/firebolt/accessibility#/definitions/ClosedCaptionsSettings"
                             }
@@ -399,7 +420,7 @@
                 "examples": [
                     {
                         "correlationId": "abc",
-                        "response": {
+                        "result": {
                             "enabled": true,
                             "styles": {
                                 "fontFamily": "Monospace sans-serif",

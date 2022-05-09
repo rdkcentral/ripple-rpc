@@ -58,7 +58,7 @@
             "name": "Default Result",
             "value": {
               "correlationId": "abc",
-              "request": {
+              "parameters": {
                 "capability": "xrn:firebolt:capability:localization::postalcode",
                 "requestor": {
                   "id": "ReferenceApp",
@@ -114,14 +114,14 @@
         "type": "object",
         "required": [
           "correlationId",
-          "request"
+          "parameters"
         ],
         "properties": {
           "correlationId": {
             "type": "string",
             "description": "An id to correlate the provider response with this request"
           },
-          "request": {
+          "parameters": {
             "description": "The request to challenge the user",
             "$ref": "#/components/schemas/Challenge"
           }
@@ -149,10 +149,10 @@
           {
             "type": "object",
             "required": [
-              "response"
+              "result"
             ],
             "properties": {
-              "response": {
+              "result": {
                 "description": "The result of the provider response, containing whether the user approved or denied the challenge",
                 "$ref": "#/components/schemas/GrantResult"
               }
@@ -162,7 +162,7 @@
         "examples": [
           {
             "correlationId": "abc",
-            "response": {
+            "result": {
               "granted": true
             }
           }
