@@ -29,6 +29,7 @@
           "WEP64",
           "WEP128",
           "WPA_PSK_TKIP",
+          "WPA_PSK_AES",
           "WPA2_PSK_TKIP",
           "WPA2_PSK_AES",
           "WPA_ENTERPRISE_TKIP",
@@ -80,21 +81,13 @@
         "title": "WPSSecurityPin",
         "description": "Security pin type for WPS(Wifi Protected Setup).",
         "type": "string",
-        "enum": [
-          "PushButton",
-          "Pin",
-          "ManufacturerPin"
-        ]
+        "enum": ["PushButton", "Pin", "ManufacturerPin"]
       },
       "NetworkType": {
         "title": "NetworkType",
         "description": "Type of Network connected to the device.",
         "type": "string",
-        "enum": [
-          "Wifi",
-          "Ethernet",
-          "None"
-        ]
+        "enum": ["Wifi", "Ethernet", "None"]
       },
       "NetworkStatus": {
         "title": "NetworkStatus",
@@ -114,12 +107,12 @@
           }
         }
       },
-      "WifiConnectRequest" : {
+      "WifiConnectRequest": {
         "title": "WifiConnectRequest",
         "description": "Current Network Status of the device.",
         "type": "object",
         "properties": {
-          "ssid" : {
+          "ssid": {
             "schema": {
               "type": "string"
             }
