@@ -1,7 +1,7 @@
 {
   "openrpc": "1.2.4",
   "info": {
-    "title": "Network",
+    "title": "Wifi",
     "description": "A module for providing support for Wifi and Ethernet.",
     "version": "0.0.0"
   },
@@ -25,21 +25,21 @@
         "description": "Security Mode supported for Wifi",
         "type": "string",
         "enum": [
-          "NONE",
-          "WEP64",
-          "WEP128",
-          "WPA_PSK_TKIP",
-          "WPA_PSK_AES",
-          "WPA2_PSK_TKIP",
-          "WPA2_PSK_AES",
-          "WPA_ENTERPRISE_TKIP",
-          "WPA_ENTERPRISE_AES",
-          "WPA2_ENTERPRISE_TKIP",
-          "WPA2_ENTERPRISE_AES",
-          "WPA2_PSK",
-          "WPA2_ENTERPRISE",
-          "WPA3_PSK_AES",
-          "WPA3_SAE"
+          "none",
+          "wep64",
+          "wep128",
+          "wpaPskTkip",
+          "wpaPskAes",
+          "wpa2PskTkip",
+          "wpa2PskAes",
+          "wpaEnterpriseTkip",
+          "wpaEnterpriseAes",
+          "wpa2EnterpriseTkip",
+          "wpa2EnterpriseAes",
+          "wpa2Psk",
+          "wpa2Enterprise",
+          "wpa3PskAes",
+          "wpa3Sae"
         ]
       },
       "WifiSignalStrength": {
@@ -52,7 +52,7 @@
       },
       "WifiFrequency": {
         "title": "WifiFrequency",
-        "description": "Wifi Frequency in Ghz, example 2.4Ghz and 5Ghs.",
+        "description": "Wifi Frequency in Ghz, example 2.4Ghz and 5Ghz.",
         "type": "number",
         "default": 0,
         "minimum": 0
@@ -81,13 +81,13 @@
         "title": "WPSSecurityPin",
         "description": "Security pin type for WPS(Wifi Protected Setup).",
         "type": "string",
-        "enum": ["PushButton", "Pin", "ManufacturerPin"]
+        "enum": ["pushButton", "pin", "manufacturerPin"]
       },
       "NetworkType": {
         "title": "NetworkType",
         "description": "Type of Network connected to the device.",
         "type": "string",
-        "enum": ["Wifi", "Ethernet", "None"]
+        "enum": ["Wifi", "Ethernet", "none"]
       },
       "NetworkStatus": {
         "title": "NetworkStatus",
@@ -186,7 +186,7 @@
               "list": [
                 {
                   "ssid": "DND",
-                  "security": "WPA2_PSK",
+                  "security": "wpa2Psk",
                   "signalStrength": -70,
                   "frequency": 2.4
                 },
@@ -198,7 +198,7 @@
                 },
                 {
                   "ssid": "Guardian",
-                  "security": "NONE",
+                  "security": "none",
                   "signalStrength": -70,
                   "frequency": 2.4
                 }
@@ -242,7 +242,7 @@
       },
       "examples": [
         {
-          "name": "Connect to a WPA2_PSK Wifi with password",
+          "name": "Connect to a wpa2Psk Wifi with password",
           "params": [
             {
               "name": "ssid",
@@ -254,21 +254,21 @@
             },
             {
               "name": "security",
-              "value": "WPA2_PSK"
+              "value": "wpa2Psk"
             }
           ],
           "result": {
             "name": "Successful Wifi connection",
             "value": {
               "ssid": "DND",
-              "security": "WPA2_PSK",
+              "security": "wpa2Psk",
               "signalStrength": -70,
               "frequency": 2.4
             }
           }
         },
         {
-          "name": "Connect to a WPA2_PSK Wifi with password",
+          "name": "Connect to a WPA2 PSK Wifi with password",
           "params": [
             {
               "name": "ssid",
@@ -280,14 +280,14 @@
             },
             {
               "name": "security",
-              "value": "NONE"
+              "value": "none"
             }
           ],
           "result": {
             "name": "Successful Wifi connection",
             "value": {
               "ssid": "Guardian WIFI",
-              "security": "NONE",
+              "security": "none",
               "signalStrength": -70,
               "frequency": 2.4
             }
@@ -371,7 +371,7 @@
             "name": "Default Result",
             "value": {
               "connection": false,
-              "interface": "None",
+              "interface": "none",
               "internet": false
             }
           }
@@ -448,14 +448,14 @@
           "params": [
             {
               "name": "security",
-              "value": "PushButton"
+              "value": "pushButton"
             }
           ],
           "result": {
             "name": "Successful Wifi connection",
             "value": {
               "ssid": "DND",
-              "security": "WPA2_PSK",
+              "security": "wpa2Psk",
               "signalStrength": -70,
               "frequency": 2.4
             }
