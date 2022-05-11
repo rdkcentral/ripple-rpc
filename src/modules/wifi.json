@@ -2,7 +2,7 @@
   "openrpc": "1.2.4",
   "info": {
     "title": "Wifi",
-    "description": "A module for providing support for Wifi and Ethernet.",
+    "description": "A module for providing support for Wifi.",
     "version": "0.0.0"
   },
   "components": {
@@ -83,30 +83,6 @@
         "type": "string",
         "enum": ["pushButton", "pin", "manufacturerPin"]
       },
-      "NetworkType": {
-        "title": "NetworkType",
-        "description": "Type of Network connected to the device.",
-        "type": "string",
-        "enum": ["Wifi", "Ethernet", "none"]
-      },
-      "NetworkStatus": {
-        "title": "NetworkStatus",
-        "description": "Current Network Status of the device.",
-        "type": "object",
-        "properties": {
-          "connection": {
-            "type": "boolean",
-            "description": "Connection status to the router."
-          },
-          "interface": {
-            "$ref": "#/components/schema/NetworkType"
-          },
-          "internet": {
-            "type": "boolean",
-            "description": "Connectivity to internet."
-          }
-        }
-      },
       "WifiConnectRequest": {
         "title": "WifiConnectRequest",
         "description": "Current Network Status of the device.",
@@ -129,26 +105,10 @@
           },
           "timeout": {
             "schema": {
-              "$ref": "#/components/schema/ScanTimeout"
+              "$ref": "https://meta.comcast.com/firebolt/types#/definitions/Timeout"
             }
           }
         }
-      },
-      "ScanTimeout": {
-        "title": "ScanTimeout",
-        "description": "Defines the timeout in seconds. If the threshold for timeout is passed without a result it will throw an error.",
-        "type": "integer",
-        "default": 0,
-        "minimum": 0,
-        "maximum": 9999
-      },
-      "ConnectTimeout": {
-        "title": "ScanTimeout",
-        "description": "Defines the timeout in seconds. If the threshold for timeout is passed without a result it will throw an error.",
-        "type": "integer",
-        "default": 0,
-        "minimum": 0,
-        "maximum": 9999
       }
     }
   },
@@ -160,7 +120,7 @@
         {
           "name": "timeout",
           "schema": {
-            "$ref": "#/components/schema/ScanTimeout"
+            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/Timeout"
           }
         }
       ],
@@ -312,114 +272,6 @@
           "result": {
             "name": "Default Result",
             "value": null
-          }
-        }
-      ]
-    },
-    {
-      "name": "status",
-      "summary": "Status of the network connection.",
-      "params": [],
-      "result": {
-        "name": "Connected Wifi",
-        "summary": "Successful Response after connecting to the Wifi.",
-        "schema": {
-          "$ref": "#/components/schema/NetworkStatus"
-        }
-      },
-      "examples": [
-        {
-          "name": "Connected to a Wifi Router",
-          "params": [],
-          "result": {
-            "name": "Default Result",
-            "value": {
-              "connection": true,
-              "interface": "Wifi",
-              "internet": true
-            }
-          }
-        },
-        {
-          "name": "Connected to Ethernet",
-          "params": [],
-          "result": {
-            "name": "Default Result",
-            "value": {
-              "connection": true,
-              "interface": "Ethernet",
-              "internet": true
-            }
-          }
-        },
-        {
-          "name": "Connected to Wifi but no internet",
-          "params": [],
-          "result": {
-            "name": "Default Result",
-            "value": {
-              "connection": true,
-              "interface": "Ethernet",
-              "internet": false
-            }
-          }
-        },
-        {
-          "name": "Not connected",
-          "params": [],
-          "result": {
-            "name": "Default Result",
-            "value": {
-              "connection": false,
-              "interface": "none",
-              "internet": false
-            }
-          }
-        }
-      ]
-    },
-    {
-      "name": "onConnectionChanged",
-      "summary": "Registers as a provider for when the Network or Internet connection fluctuates.",
-      "params": [
-        {
-          "name": "listen",
-          "summary": "Whether or not to listen for requests to this interface method.",
-          "schema": {
-            "type": "boolean"
-          }
-        }
-      ],
-      "result": {
-        "name": "status",
-        "summary": "The network status change event",
-        "schema": {
-          "oneOf": [
-            {
-              "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
-            },
-            {
-              "$ref": "#/components/schema/NetworkStatus"
-            }
-          ]
-        }
-      },
-      "examples": [
-        {
-          "name": "Default Example",
-          "params": [
-            {
-              "name": "listen",
-              "value": true
-            }
-          ],
-          "result": {
-            "name": "Default Result",
-            "value": {
-              "connection": true,
-              "interface": "Wifi",
-              "internet": true
-            }
           }
         }
       ]
