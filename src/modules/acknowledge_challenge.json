@@ -24,7 +24,7 @@
           "x-response": {
             "$ref": "#/components/schemas/GrantResultProviderResponse"
           },
-          "x-handshake": true
+          "x-allow-focus": true
         },
         {
           "name": "capabilities",

@@ -23,13 +23,13 @@ let providerMethodNotificationRegistered = false
 let providerMethodRequestDispatched = false
 let providerMethodResultSent = false
 let ccSettings
+let ccSession
 let responseCorrelationId
 
 
 beforeAll( () => {
     
     transport.onSend(json => {
-        console.log(json.method)
         if (json.method === 'closedcaptions.onRequestClosedCaptionsSettings') {
             providerMethodNotificationRegistered = true
 
@@ -49,14 +49,14 @@ beforeAll( () => {
         }
         else if (json.method === 'closedcaptions.closedCaptionsSettingsResponse') {
             providerMethodResultSent = true
-            console.log(json)
             ccSettings = json.params.result
             responseCorrelationId = json.params.correlationId
         }
     })
 
     ClosedCaptions.provide('xrn:firebolt:capability:settings:closedcaptions', {
-        closedCaptionsSettings: _ => {
+        closedCaptionsSettings: (...args) => {
+            ccSession = args[1]
             return Promise.resolve({
                 fontFamily: 'Comic Sans'
             })
@@ -83,6 +83,14 @@ test('Provider method request dispatched', () => {
 
 test('Provider response used correct correlationId', () => {
     expect(responseCorrelationId).toBe(123)
+})
+
+test('Provide method session arg DOES have correlationId', () => {
+    expect(ccSession.correlationId()).toBe(123)
+})
+
+test('Provide method session arg DOES NOT have focus', () => {
+    expect(ccSession.hasOwnProperty('focus')).toBe(false)
 })
 
 test('Provider method result is correct', () => {

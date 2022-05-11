@@ -12,7 +12,7 @@
                 {
                     "name": "capabilities",
                     "x-provides": "xrn:firebolt:capability:settings:closedcaptions",
-                    "x-handshake": false,
+                    "x-allow-focus": false,
                     "x-response": {
                         "$ref": "#/components/schemas/ClosedCaptionsSettingsProviderResponse"
                     }
