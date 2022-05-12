@@ -23,12 +23,12 @@
           "name": "event",
           "x-response": {
             "$ref": "#/components/schemas/GrantResultProviderResponse"
-          },
-          "x-allow-focus": true
+          }
         },
         {
           "name": "capabilities",
-          "x-provides": "xrn:firebolt:capability:usergrant:acknowledgechallenge"
+          "x-provides": "xrn:firebolt:capability:usergrant:acknowledgechallenge",
+          "x-allow-focus": true
         }
       ],
       "result": {
@@ -111,21 +111,23 @@
       },
       "ChallengeProviderRequest": {
         "title": "ChallengeProviderRequest",
-        "type": "object",
-        "required": [
-          "correlationId",
-          "parameters"
-        ],
-        "properties": {
-          "correlationId": {
-            "type": "string",
-            "description": "An id to correlate the provider response with this request"
+        "allOf": [
+          {
+            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ProviderRequest"
           },
-          "parameters": {
-            "description": "The request to challenge the user",
-            "$ref": "#/components/schemas/Challenge"
+          {
+            "type": "object",
+            "required": [
+              "parameters"
+            ],
+            "properties": {
+              "parameters": {
+                "description": "The request to challenge the user",
+                "$ref": "#/components/schemas/Challenge"
+              }
+            }
           }
-        }
+        ]
       },
       "GrantResult": {
         "title": "GrantResult",
