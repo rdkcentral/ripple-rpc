@@ -85,7 +85,7 @@
       },
       "WifiConnectRequest": {
         "title": "WifiConnectRequest",
-        "description": "Current Network Status of the device.",
+        "description": "Request object for the wifi connection.",
         "type": "object",
         "properties": {
           "ssid": {
