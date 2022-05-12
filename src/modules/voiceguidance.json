@@ -10,10 +10,11 @@
             "name": "onRequestVoiceGuidanceSettings",
             "tags": [
                 {
-                    "name": "events",
-                    "x-provides": [
-                        "xrn:firebolt:capability:settings:voiceguidance"
-                    ]
+                    "name": "capabilities",
+                    "x-provides": "xrn:firebolt:capability:settings:voiceguidance"
+                },
+                {
+                    "name": "event"
                 }
             ],
             "summary": "Dispatches a request for the current voice-guidance settings to the voice-guidance settings provider.",

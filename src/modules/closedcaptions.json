@@ -12,13 +12,13 @@
                 {
                     "name": "capabilities",
                     "x-provides": "xrn:firebolt:capability:settings:closedcaptions",
-                    "x-allow-focus": false,
+                    "x-allow-focus": false
+                },
+                {
+                    "name": "event",
                     "x-response": {
                         "$ref": "#/components/schemas/ClosedCaptionsSettingsProviderResponse"
                     }
-                },
-                {
-                    "name": "event"
                 }
             ],
             "summary": "Dispatches a request for the current closed-captions settings to the closed-captions settings provider.",

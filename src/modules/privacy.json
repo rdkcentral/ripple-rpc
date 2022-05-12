@@ -10,10 +10,11 @@
             "name": "onRequestContentPolicy",
             "tags": [
                 {
+                    "name": "capabilities",
+                    "x-provides": "xrn:firebolt:capability:privacy:content"
+                },
+                {
                     "name": "event",
-                    "x-provides": [
-                        "xrn:firebolt:capability:privacy:content"
-                    ],
                     "x-response": {
                         "$ref": "#/components/schemas/ContentPolicyProviderResponse"
                     }
@@ -180,13 +181,23 @@
                     {
                         "type": "object",
                         "required": [
-                            "response"
+                            "result"
                         ],
                         "properties": {
-                            "response": {
+                            "result": {
                                 "description": "The result of the provider response, containing the Content Policy",
                                 "$ref": "https://meta.comcast.com/firebolt/privacy#/definitions/ContentPolicy"
                             }
+                        }
+                    }
+                ],
+                "examples": [
+                    {
+                        "correlationId": "123",
+                        "result": {
+                            "enableRecommendations": true,
+                            "shareWatchHistory": false,
+                            "rememberWatchedPrograms": true
                         }
                     }
                 ]
