@@ -11,9 +11,16 @@
             "tags": [
                 {
                     "name": "event",
-                    "x-provides": [
-                        "xrn:firebolt:capability:settings:device"
-                    ]
+                    "x-response": {
+                        "type": "string",
+                        "examples": [
+                            "Living Room"
+                        ]
+                    }
+                },
+                {
+                    "name": "capabilities",
+                    "x-provides": "xrn:firebolt:capability:settings:device"
                 }
             ],
             "summary": "Request the user-asigned name of this device from the device settings provider.",
