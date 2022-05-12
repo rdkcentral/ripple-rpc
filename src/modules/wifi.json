@@ -141,7 +141,7 @@
             }
           ],
           "result": {
-            "name": "Successul Wifi List example",
+            "name": "successfulWifiResultExample",
             "value": {
               "list": [
                 {
@@ -194,7 +194,7 @@
         }
       ],
       "result": {
-        "name": "Connected Wifi",
+        "name": "connectedWifi",
         "summary": "Successful Response after connecting to the Wifi.",
         "schema": {
           "$ref": "#/components/schemas/AccessPoint"
@@ -218,7 +218,7 @@
             }
           ],
           "result": {
-            "name": "Successful Wifi connection",
+            "name": "successfulWifiConnection",
             "value": {
               "ssid": "DND",
               "security": "wpa2Psk",
@@ -244,7 +244,7 @@
             }
           ],
           "result": {
-            "name": "Successful Wifi connection",
+            "name": "successfulWifiConnection",
             "value": {
               "ssid": "Guardian WIFI",
               "security": "none",
@@ -270,7 +270,7 @@
           "name": "Disconnect",
           "params": [],
           "result": {
-            "name": "Default Result",
+            "name": "defaultResult",
             "value": null
           }
         }
@@ -288,7 +288,7 @@
         }
       ],
       "result": {
-        "name": "Connected Wifi",
+        "name": "connectedWifi",
         "summary": "Successful Response after connecting to the Wifi.",
         "schema": {
           "$ref": "#/components/schemas/AccessPoint"
@@ -304,7 +304,7 @@
             }
           ],
           "result": {
-            "name": "Successful Wifi connection",
+            "name": "successfulWifiConnection",
             "value": {
               "ssid": "DND",
               "security": "wpa2Psk",
