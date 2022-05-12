@@ -133,7 +133,7 @@
       },
       "examples": [
         {
-          "name": "Successul Wifi List",
+          "name": "Successful Wifi List",
           "params": [
             {
               "name": "timeout",
