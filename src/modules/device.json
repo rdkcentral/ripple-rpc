@@ -34,7 +34,20 @@
                           "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
                         },
                         {
-                            "type": "string"
+                            "allOf": [
+                                {
+                                    "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ProviderRequest"
+                                },
+                                {
+                                    "type": "object",
+                                    "required": [ "parameters"],
+                                    "properties": {
+                                        "parameters": {
+                                            "const": null
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     ]
                 }
@@ -45,8 +58,11 @@
                     "params": [
                     ],
                     "result": {
-                        "name": "name",
-                        "value": "Living Room"
+                        "name": "result",
+                        "value": {
+                            "correlationId": "123",
+                            "parameters": null
+                        }
                     }
                 }
             ]
