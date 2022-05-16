@@ -16,7 +16,14 @@
                 {
                     "name": "event",
                     "x-response": {
-                        "$ref": "#/components/schemas/ContentPolicyProviderResponse"
+                        "$ref": "https://meta.comcast.com/firebolt/privacy#/definitions/ContentPolicy",
+                        "examples": [
+                            {
+                                "enableRecommendations": true,
+                                "shareWatchHistory": false,
+                                "rememberWatchedPrograms": true
+                            }
+                        ]
                     }
                 }
             ],
@@ -38,7 +45,19 @@
                           "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
                         },
                         {
-                            "const": null
+                            "allOf": [
+                                {
+                                    "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ProviderRequest"
+                                },
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "parameters": {
+                                            "const": null
+                                        }
+                                    }
+                                }
+                            ]
                         }
                     ]
                 }
@@ -50,7 +69,10 @@
                     ],
                     "result": {
                         "name": "result",
-                        "value": null
+                        "value": {
+                            "correlationId": "xyz",
+                            "parameters": null
+                        }
                     }
                 }
             ]
@@ -172,36 +194,6 @@
    ],
     "components": {
         "schemas": {
-            "ContentPolicyProviderResponse": {
-                "title": "ContentPolicyProviderResponse",
-                "allOf": [
-                    {
-                        "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ProviderResponse"
-                    },
-                    {
-                        "type": "object",
-                        "required": [
-                            "result"
-                        ],
-                        "properties": {
-                            "result": {
-                                "description": "The result of the provider response, containing the Content Policy",
-                                "$ref": "https://meta.comcast.com/firebolt/privacy#/definitions/ContentPolicy"
-                            }
-                        }
-                    }
-                ],
-                "examples": [
-                    {
-                        "correlationId": "123",
-                        "result": {
-                            "enableRecommendations": true,
-                            "shareWatchHistory": false,
-                            "rememberWatchedPrograms": true
-                        }
-                    }
-                ]
-            }
         }
     }
 }

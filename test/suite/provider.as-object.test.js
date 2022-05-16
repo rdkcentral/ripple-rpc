@@ -30,7 +30,7 @@ let responseCorrelationId
 beforeAll( () => {
     
     transport.onSend(json => {
-        if (json.method === 'closedcaptions.onRequestClosedCaptionsSettings') {
+        if (json.method === 'closedcaptions.onRequestSettings') {
             providerMethodNotificationRegistered = true
 
             // Confirm the listener is on
@@ -47,7 +47,7 @@ beforeAll( () => {
                 })
             })
         }
-        else if (json.method === 'closedcaptions.closedCaptionsSettingsResponse') {
+        else if (json.method === 'closedcaptions.settingsResponse') {
             providerMethodResultSent = true
             ccSettings = json.params.result
             responseCorrelationId = json.params.correlationId
@@ -55,7 +55,7 @@ beforeAll( () => {
     })
 
     ClosedCaptions.provide('xrn:firebolt:capability:settings:closedcaptions', {
-        closedCaptionsSettings: (...args) => {
+        settings: (...args) => {
             ccSession = args[1]
             return Promise.resolve({
                 fontFamily: 'Comic Sans'

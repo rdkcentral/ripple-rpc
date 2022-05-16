@@ -7,22 +7,37 @@
     },
     "methods": [
         {
-            "name": "onRequestVoiceGuidanceSettings",
+            "name": "onRequestSettings",
             "tags": [
                 {
                     "name": "capabilities",
                     "x-provides": "xrn:firebolt:capability:settings:voiceguidance"
                 },
                 {
-                    "name": "event"
+                    "name": "event",
+                    "x-response": {
+                        "$ref": "https://meta.comcast.com/firebolt/accessibility#/definitions/VoiceGuidanceSettings"
+                    }
                 }
             ],
             "summary": "Dispatches a request for the current voice-guidance settings to the voice-guidance settings provider.",
             "params": [],
             "result": {
-                "name": "settings",
+                "name": "result",
                 "schema": {
-                    "$ref": "https://meta.comcast.com/firebolt/accessibility#/definitions/VoiceGuidanceSettings"
+                    "oneOf": [
+                        {
+                            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "parameters": {
+                                    "const": null
+                                }
+                            }
+                        }
+                    ]
                 }
             },
             "examples": [
@@ -32,8 +47,8 @@
                     "result": {
                         "name": "settings",
                         "value": {
-                            "enabled": true,
-                            "speed": 5
+                            "correlationId": "xyz",
+                            "parameters": null
                         }
                     }
                 }

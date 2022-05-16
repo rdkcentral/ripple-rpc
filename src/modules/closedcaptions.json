@@ -7,7 +7,7 @@
     },
     "methods": [
         {
-            "name": "onRequestClosedCaptionsSettings",
+            "name": "onRequestSettings",
             "tags": [
                 {
                     "name": "capabilities",
@@ -17,7 +17,8 @@
                 {
                     "name": "event",
                     "x-response": {
-                        "$ref": "#/components/schemas/ClosedCaptionsSettingsProviderResponse"
+                        "description": "The result of the provider response, containing the closed-captions settings.",
+                        "$ref": "https://meta.comcast.com/firebolt/accessibility#/definitions/ClosedCaptionsSettings"
                     }
                 }
             ],
@@ -50,7 +51,10 @@
                     "params": [],
                     "result": {
                         "name": "result",
-                        "value": null
+                        "value": {
+                            "correlationId": "123",
+                            "parameters": null
+                        }
                     }
                 }
             ]
@@ -387,6 +391,7 @@
                         "type": "object",
                         "properties": {
                             "parameters": {
+                                "title": "SettingsParameters",
                                 "const": null
                             }
                         }
@@ -395,46 +400,6 @@
                 "examples": [
                     {
                         "correlationId": "abc"
-                    }
-                ]
-            },
-            "ClosedCaptionsSettingsProviderResponse": {
-                "title": "ClosedCaptionsSettingsProviderResponse",
-                "allOf": [
-                    {
-                        "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ProviderResponse"
-                    },
-                    {
-                        "type": "object",
-                        "required": [
-                            "result"
-                        ],
-                        "properties": {
-                            "result": {
-                                "description": "The result of the provider response, containing the closed-captions settings.",
-                                "$ref": "https://meta.comcast.com/firebolt/accessibility#/definitions/ClosedCaptionsSettings"
-                            }
-                        }
-                    }
-                ],
-                "examples": [
-                    {
-                        "correlationId": "abc",
-                        "result": {
-                            "enabled": true,
-                            "styles": {
-                                "fontFamily": "Monospace sans-serif",
-                                "fontSize": 1,
-                                "fontColor": "#ffffff",
-                                "fontEdge": "none",
-                                "fontEdgeColor": "#7F7F7F",
-                                "fontOpacity": 100,
-                                "backgroundColor": "#000000",
-                                "backgroundOpacity": 100,
-                                "textAlign": "center",
-                                "textAlignVertical": "middle"
-                            }
-                        }
                     }
                 ]
             }

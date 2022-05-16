@@ -31,7 +31,7 @@ let responseCorrelationId
 beforeAll( () => {
 
     class CCProvider {
-        closedCaptionsSettings(...args) {
+        settings(...args) {
             numberOfArgs = args.length
             ccSession = args[1]
             return Promise.resolve({
@@ -41,7 +41,7 @@ beforeAll( () => {
     }
     
     transport.onSend(json => {
-        if (json.method === 'closedcaptions.onRequestClosedCaptionsSettings') {
+        if (json.method === 'closedcaptions.onRequestSettings') {
             providerMethodNotificationRegistered = true
 
             // Confirm the listener is on
@@ -58,7 +58,7 @@ beforeAll( () => {
                 })
             })
         }
-        else if (json.method === 'closedcaptions.closedCaptionsSettingsResponse') {
+        else if (json.method === 'closedcaptions.settingsResponse') {
             providerMethodResultSent = true
             ccSettings = json.params.result
             responseCorrelationId = json.params.correlationId
