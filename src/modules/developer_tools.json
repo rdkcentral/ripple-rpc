@@ -1,0 +1,250 @@
+{
+    "openrpc": "1.2.4",
+    "info": {
+        "title": "DeveloperTools",
+        "description": "A module for supporting off-device developer tools.",
+        "version": "0.0.0"
+    },
+    "methods": [
+        {
+            "name": "find",
+            "summary": "Starts a long-running DNS-SD search for a list of developer tools that match the standard 'Firebolt Developer Tool' service type",
+            "tags": [],
+            "params": [],
+            "result": {
+                "name": "result",
+                "schema": {
+                    "const": null
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "stopFind",
+            "summary": "Stops the long-running find operation",
+            "tags": [],
+            "params": [],
+            "result": {
+                "name": "result",
+                "schema": {
+                    "const": null
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "pair",
+            "summary": "Configures Firebolt to accept incoming Firebolt JSON RPC messages from the developer tool identified by the given developer tool ID",
+            "tags": [],
+            "params": [
+                {
+                    "name": "developerToolId",
+                    "summary": "The ID of the DeveloperTool to which to connect",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                }
+            ],
+            "result": {
+                "name": "result",
+                "schema": {
+                    "const": null
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                        {
+                            "name": "developerToolId",
+                            "value": "ff6340fb-8576-494c-97c6-e60e9a4eeba9"
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "unpair",
+            "summary": "Disconnect Firebolt as a web socket client from the web socket that corresponds to the given developer tool ID",
+            "tags": [],
+            "params": [
+                {
+                    "name": "developerToolId",
+                    "summary": "The ID of the DeveloperTool from which to disconnect",
+                    "required": true,
+                    "schema": {
+                        "type": "string",
+                        "format": "uuid"
+                    }
+                }
+            ],
+            "result": {
+                "name": "result",
+                "schema": {
+                    "const": null
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                        {
+                            "name": "developerToolId",
+                            "value": "ff6340fb-8576-494c-97c6-e60e9a4eeba9"
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "onDeveloperToolUp",
+            "tags": [
+                {
+                    "name": "event"
+                }
+            ],
+            "summary": "Listen to the developerToolUp event",
+            "params": [
+                {
+                    "name": "listen",
+                    "required": true,
+                    "summary": "whether to listen, or stop listening",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "result": {
+                "name": "value",
+                "schema": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/components/schemas/DeveloperTool"
+                        },
+                        {
+                            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+                        }
+                    ]
+               }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                        {
+                            "name": "listen",
+                            "value": true
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": {
+                            "id": "ff6340fb-8576-494c-97c6-e60e9a4eeba9",
+                            "name": "sideloader"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "onDeveloperToolDown",
+            "tags": [
+                {
+                    "name": "event"
+                }
+            ],
+            "summary": "Listen to the developerToolDown event",
+            "params": [
+                {
+                    "name": "listen",
+                    "required": true,
+                    "summary": "whether to listen, or stop listening",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "result": {
+                "name": "value",
+                "schema": {
+                    "oneOf": [
+                        {
+                            "$ref": "#/components/schemas/DeveloperTool"
+                        },
+                        {
+                            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+                        }
+                    ]
+               }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                        {
+                            "name": "listen",
+                            "value": true
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": {
+                            "id": "ff6340fb-8576-494c-97c6-e60e9a4eeba9",
+                            "name": "sideloader"
+                        }
+                    }
+                }
+            ]
+        }
+    ],
+    "components": {
+        "schemas": {
+            "DeveloperTool": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "name"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "format": "uuid",
+                        "description": "The ID that uniquely identifies this instance of a developer tool"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Developer-visible 'friendly name' for the developer tool"
+                    }
+                }
+            }
+        }
+    }
+}
