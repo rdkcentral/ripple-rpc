@@ -97,6 +97,37 @@
                     }
                 }
             ]
+        },
+        {
+            "name": "developerMode",
+            "tags": [
+                {
+                    "name": "property",
+                    "x-manages": [
+                        "xrn:firebolt:capability:settings:device"
+                    ]
+                }
+            ],
+            "summary": "Whether or not developer mode is enabled.",
+            "params": [
+            ],
+            "result": {
+                "name": "developerMode",
+                "schema": {
+                    "type": "boolean"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                    ],
+                    "result": {
+                        "name": "developerMode",
+                        "value": true
+                    }
+                }
+            ]
         }
    ],
     "components": {
