@@ -7,9 +7,16 @@
     },
     "methods": [
         {
-            "name": "find",
+            "name": "scan",
             "summary": "Starts a long-running DNS-SD search for a list of developer tools that match the standard 'Firebolt Developer Tool' service type",
-            "tags": [],
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-manages": [
+                        "xrn:firebolt:capability:settings:developer-mode"
+                    ]
+                }
+            ],
             "params": [],
             "result": {
                 "name": "result",
@@ -29,9 +36,16 @@
             ]
         },
         {
-            "name": "stopFind",
-            "summary": "Stops the long-running find operation",
-            "tags": [],
+            "name": "stopScan",
+            "summary": "Stops the long-running scan operation",
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-manages": [
+                        "xrn:firebolt:capability:settings:developer-mode"
+                    ]
+                }
+            ],
             "params": [],
             "result": {
                 "name": "result",
@@ -53,10 +67,17 @@
         {
             "name": "pair",
             "summary": "Configures Firebolt to accept incoming Firebolt JSON RPC messages from the developer tool identified by the given developer tool ID",
-            "tags": [],
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-manages": [
+                        "xrn:firebolt:capability:settings:developer-mode"
+                    ]
+                }
+            ],
             "params": [
                 {
-                    "name": "developerToolId",
+                    "name": "id",
                     "summary": "The ID of the DeveloperTool to which to connect",
                     "required": true,
                     "schema": {
@@ -76,7 +97,7 @@
                     "name": "Default Example",
                     "params": [
                         {
-                            "name": "developerToolId",
+                            "name": "id",
                             "value": "ff6340fb-8576-494c-97c6-e60e9a4eeba9"
                         }
                     ],
@@ -90,10 +111,17 @@
         {
             "name": "unpair",
             "summary": "Disconnect Firebolt as a web socket client from the web socket that corresponds to the given developer tool ID",
-            "tags": [],
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-manages": [
+                        "xrn:firebolt:capability:settings:developer-mode"
+                    ]
+                }
+            ],
             "params": [
                 {
-                    "name": "developerToolId",
+                    "name": "id",
                     "summary": "The ID of the DeveloperTool from which to disconnect",
                     "required": true,
                     "schema": {
@@ -113,7 +141,7 @@
                     "name": "Default Example",
                     "params": [
                         {
-                            "name": "developerToolId",
+                            "name": "id",
                             "value": "ff6340fb-8576-494c-97c6-e60e9a4eeba9"
                         }
                     ],
@@ -125,13 +153,19 @@
             ]
         },
         {
-            "name": "onDeveloperToolUp",
+            "name": "onToolAvailable",
             "tags": [
                 {
                     "name": "event"
+                },
+                {
+                    "name": "capabilities",
+                    "x-manages": [
+                        "xrn:firebolt:capability:settings:developer-mode"
+                    ]
                 }
             ],
-            "summary": "Listen to the developerToolUp event",
+            "summary": "Listen to the toolAvailable event",
             "params": [
                 {
                     "name": "listen",
@@ -175,13 +209,19 @@
             ]
         },
         {
-            "name": "onDeveloperToolDown",
+            "name": "onToolUnavailable",
             "tags": [
                 {
                     "name": "event"
+                },
+                {
+                    "name": "capabilities",
+                    "x-manages": [
+                        "xrn:firebolt:capability:settings:developer-mode"
+                    ]
                 }
             ],
-            "summary": "Listen to the developerToolDown event",
+            "summary": "Listen to the toolUnavailable event",
             "params": [
                 {
                     "name": "listen",
