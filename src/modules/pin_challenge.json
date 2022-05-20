@@ -164,6 +164,7 @@
         "title": "PinChallengeResult",
         "type": "object",
         "required": [
+          "granted",
           "reason"
         ],
         "properties": {
