@@ -30,7 +30,7 @@
               },
               {
                 "granted": false,
-                "reason": "skipped"
+                "reason": "cancelled"
               }
             ]
           }
