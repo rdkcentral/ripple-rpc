@@ -153,11 +153,11 @@
         "type": "string",
         "description": "The reason for the result of challenging the user",
         "enum": [
-          "open",
-          "temporaryOpen",
-          "locked",
+          "noPinRequired",
+          "noPinRequiredWindow",
+          "exceededPinFailures",
           "correctPin",
-          "skipped"
+          "cancelled"
         ]
       },
       "PinChallengeResult": {
