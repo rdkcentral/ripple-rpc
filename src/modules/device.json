@@ -100,6 +100,27 @@
                     }
                 }
             ]
+        },
+        {
+            "name": "serialization",
+            "summary": "Return encoded serial key from the device needed for provisioning.",
+            "params": [],
+            "result": {
+                "name": "key",
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "key",
+                        "value": "646576696365547970653D49705374622C6D616B653D41727269732C"
+                    }
+                }
+            ]
         }
    ],
     "components": {
