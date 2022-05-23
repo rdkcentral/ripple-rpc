@@ -1,0 +1,45 @@
+{
+  "openrpc": "1.2.4",
+  "info": {
+    "title": "Session",
+    "description": "A module for managing Session.",
+    "version": "0.0.0"
+  },
+  "methods": [
+    {
+      "name": "push",
+      "summary": "Used by a distributor to push Session token to firebolt.",
+      "params": [
+        {
+          "name": "token",
+          "summary": "Authentication token provided by the distributor for the device operations.",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "name": "result",
+        "schema": {
+          "const": null
+        }
+      },
+      "examples": [
+        {
+          "name": "Default Example",
+          "params": [
+            {
+              "name": "token",
+              "value": "RmlyZWJvbHQgTWFuYWdlIFNESyBSb2NrcyEhIQ=="
+            }
+          ],
+          "result": {
+            "name": "defaultResult",
+            "value": null
+          }
+        }
+      ]
+    }
+  ]
+}

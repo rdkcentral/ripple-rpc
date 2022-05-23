@@ -1,0 +1,69 @@
+{
+  "openrpc": "1.2.4",
+  "info": {
+    "title": "Provision",
+    "description": "A module for managing provisioning and activation.",
+    "version": "0.0.0"
+  },
+  "methods": [
+    {
+      "name": "push",
+      "summary": "Used by a distributor to push provision info to firebolt.",
+      "params": [
+        {
+          "name": "distributorId",
+          "summary": "The id of the distributor that this device was provisioned for. (Sometimes called partnerId).",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "accountId",
+          "summary": "The id of the account that is device is attached to in the back office.",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        },
+        {
+          "name": "deviceId",
+          "summary": "The id of the device in the back office.",
+          "required": true,
+          "schema": {
+            "type": "string"
+          }
+        }
+      ],
+      "result": {
+        "name": "result",
+        "schema": {
+          "const": null
+        }
+      },
+      "examples": [
+        {
+          "name": "Default Example",
+          "params": [
+            {
+              "name": "distributorId",
+              "value": "fireboltGlobal"
+            },
+            {
+                "name": "accountId",
+                "value": "12345678910"
+            },
+            {
+                "name": "deviceId",
+                "value": "987654321111"
+            }
+          ],
+          "result": {
+            "name": "defaultResult",
+            "value": null
+          }
+        }
+      ]
+    }
+  ]
+}
