@@ -15,8 +15,8 @@
                 },
                 {
                     "name": "capabilities",
-                    "x-manages": [
-                        "xrn:firebolt:capability:settings:developer-mode"
+                    "x-uses": [
+                        "xrn:firebolt:capability:developer:tools"
                     ]
                 }
              ],
@@ -50,7 +50,14 @@
         {
             "name": "pair",
             "summary": "Configures Firebolt to accept incoming Firebolt JSON RPC messages from the developer tool identified by the given developer tool ID",
-            "tags": [],
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:developer:tools"
+                    ]
+                }
+            ],
             "params": [
                 {
                     "name": "id",
@@ -87,7 +94,14 @@
         {
             "name": "unpair",
             "summary": "Disconnect Firebolt as a web socket client from the web socket that corresponds to the given developer tool ID",
-            "tags": [],
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-uses": [
+                        "xrn:firebolt:capability:developer:tools"
+                    ]
+                }
+            ],
             "params": [
                 {
                     "name": "id",
