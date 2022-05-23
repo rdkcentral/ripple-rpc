@@ -12,8 +12,14 @@
             "tags": [
                 {
                     "name": "temporal-set"
+                },
+                {
+                    "name": "capabilities",
+                    "x-manages": [
+                        "xrn:firebolt:capability:settings:developer-mode"
+                    ]
                 }
-            ],
+             ],
             "params": [],
             "result": {
                 "name": "result",
@@ -47,7 +53,7 @@
             "tags": [],
             "params": [
                 {
-                    "name": "developerToolId",
+                    "name": "id",
                     "summary": "The ID of the DeveloperTool to which to connect",
                     "required": true,
                     "schema": {
@@ -67,7 +73,7 @@
                     "name": "Default Example",
                     "params": [
                         {
-                            "name": "developerToolId",
+                            "name": "id",
                             "value": "ff6340fb-8576-494c-97c6-e60e9a4eeba9"
                         }
                     ],
@@ -84,7 +90,7 @@
             "tags": [],
             "params": [
                 {
-                    "name": "developerToolId",
+                    "name": "id",
                     "summary": "The ID of the DeveloperTool from which to disconnect",
                     "required": true,
                     "schema": {
@@ -104,7 +110,7 @@
                     "name": "Default Example",
                     "params": [
                         {
-                            "name": "developerToolId",
+                            "name": "id",
                             "value": "ff6340fb-8576-494c-97c6-e60e9a4eeba9"
                         }
                     ],
