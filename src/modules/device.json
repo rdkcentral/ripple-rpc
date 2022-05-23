@@ -107,7 +107,7 @@
                 {
                     "name": "capabilities",
                     "x-manages": [
-                        "xrn:firebolt:capability:settings:developer-mode"
+                        "xrn:firebolt:capability:developer:tools"
                     ]
                 }
             ],
