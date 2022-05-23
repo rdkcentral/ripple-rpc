@@ -24,12 +24,10 @@ group OS Bootup
         core -> ui:Device Token
         ui -> core:Device.id()
         core -> ui:Mac Address
-        ui -> manage:Device.serialization()
-        core -> ui:Device Serial Key
         ui -> distributor:Provision
         note right of ui: Distributor uses the sensitive device info \nto setup billing and services.
         distributor -> ui:Account Id, Device Id, Distributor Id
-        ui -> manage:Provision.push(accountId, deviceId, distributorId)
+        ui -> manage:Device.provision(accountId, deviceId, distributorId)
         manage -> ui:status
         ui -> distributor:activate
         note right of ui: Lets the distributor know that\nthe device is fully activated
