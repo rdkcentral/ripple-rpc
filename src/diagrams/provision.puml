@@ -1,0 +1,56 @@
+@startuml
+
+box os
+    participant boot as "Boot"
+    participant device as "Device"
+    participant auth as "Auth"
+    participant account as "Account"
+end box
+participant rdk as "RDK"
+participant ui as "UI"
+
+participant core as "Core SDK"
+participant manage as "Manage SDK"
+participant distributor as "Distributor Service"
+actor user as "User"
+
+group OS Bootup
+    boot -> device: check if device is provisioned
+    device --> rdk : get device provision info
+    rdk -> boot : provision details
+    group Not Provisioned
+        boot -> ui :launch
+        ui -> core:Authentication.token("device")
+        core -> ui:Device Token
+        ui -> core:Device.id()
+        core -> ui:Mac Address
+        ui -> manage:Device.serialization()
+        core -> ui:Device Serial Key
+        ui -> distributor:Provision
+        note right of ui: Distributor uses the sensitive device info \nto setup billing and services.
+        distributor -> ui:Account Id, Device Id, Distributor Id
+        ui -> manage:Provision.push(accountId, deviceId, distributorId)
+        manage -> ui:status
+        ui -> distributor:activate
+        note right of ui: Lets the distributor know that\nthe device is fully activated
+        distributor -> ui: status
+        ui -> ui:Continue to \nSession update
+    end
+    group Provisioned
+        boot -> account : get session
+        account --> rdk: get session token info
+        rdk -> boot : session details
+        boot -> ui :launch
+        group Session update
+            ui -> core:Authentication.token("device")
+            core -> ui:Device Token
+            ui -> distributor:Get platform Token
+            ui -> manage:Account.session(token)
+            manage -> ui:status
+        end
+    end
+
+end
+
+
+@enduml
