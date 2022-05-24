@@ -1,16 +1,18 @@
 @startuml
 
-box os
-    participant boot as "Boot"
-    participant device as "Device"
-    participant auth as "Auth"
-    participant account as "Account"
-end box
 participant rdk as "RDK"
-participant ui as "UI"
+
+box os
+    participant boot as "Boot\nService"
+    participant device as "Device\nService"
+    participant auth as "Auth\nService"
+    participant account as "Account\nService"
+end box
 
 participant core as "Core SDK"
 participant manage as "Manage SDK"
+participant ui as "UI"
+
 participant distributor as "Distributor Service"
 actor user as "User"
 
@@ -21,13 +23,25 @@ group OS Bootup
     group Not Provisioned
         boot -> ui :launch
         ui -> core:Authentication.token("device")
+        core --> auth: 
+        auth --> rdk: Get auth token
+        rdk --> auth: 
+        auth --> core:
         core -> ui:Device Token
         ui -> core:Device.id()
+        core --> device:
+        device --> rdk: get mac address
+        rdk --> device:
+        device --> core:
         core -> ui:Mac Address
         ui -> distributor:Provision
         note right of ui: Distributor uses the sensitive device info \nto setup billing and services.
         distributor -> ui:Account Id, Device Id
         ui -> manage:Device.provision(accountId, deviceId)
+        manage --> device:
+        device --> rdk: set provision info
+        rdk --> device:
+        device --> manage:
         manage -> ui:status
         ui -> distributor:activate
         note right of ui: Lets the distributor know that\nthe device is fully activated
@@ -41,9 +55,17 @@ group OS Bootup
         boot -> ui :launch
         group Session update
             ui -> core:Authentication.token("device")
+            core --> auth: 
+            auth --> rdk: Get auth token
+            rdk --> auth: 
+            auth --> core:
             core -> ui:Device Token
             ui -> distributor:Get platform Token
             ui -> manage:Account.session(token)
+            manage --> account: 
+            account --> rdk: Push session token
+            rdk --> account: 
+            account --> manage:
             manage -> ui:status
         end
     end

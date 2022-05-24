@@ -114,7 +114,12 @@
               "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
             },
             {
-              "$ref": "#/components/schemas/Session"
+              "type": "object",
+              "properties": {
+                "parameters": {
+                  "const": null
+                }
+              }
             }
           ]
         }
@@ -132,10 +137,7 @@
             "name": "Default Result",
             "value": {
               "correlationId": "abc",
-              "parameters": {
-                "token": "RmlyZWJvbHQgTWFuYWdlIFNESyBSb2NrcyEhIQ==",
-                "expiresIn": 84000
-              }
+              "parameters": null
             }
           }
         }
