@@ -26,8 +26,8 @@ group OS Bootup
         core -> ui:Mac Address
         ui -> distributor:Provision
         note right of ui: Distributor uses the sensitive device info \nto setup billing and services.
-        distributor -> ui:Account Id, Device Id, Distributor Id
-        ui -> manage:Device.provision(accountId, deviceId, distributorId)
+        distributor -> ui:Account Id, Device Id
+        ui -> manage:Device.provision(accountId, deviceId)
         manage -> ui:status
         ui -> distributor:activate
         note right of ui: Lets the distributor know that\nthe device is fully activated
