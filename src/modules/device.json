@@ -106,14 +106,6 @@
             "summary": "Used by a distributor to push provision info to firebolt.",
             "params": [
               {
-                "name": "distributorId",
-                "summary": "The id of the distributor that this device was provisioned for. (Sometimes called partnerId).",
-                "required": true,
-                "schema": {
-                  "type": "string"
-                }
-              },
-              {
                 "name": "accountId",
                 "summary": "The id of the account that is device is attached to in the back office.",
                 "required": true,
@@ -140,10 +132,6 @@
               {
                 "name": "Default Example",
                 "params": [
-                  {
-                    "name": "distributorId",
-                    "value": "fireboltGlobal"
-                  },
                   {
                       "name": "accountId",
                       "value": "12345678910"
