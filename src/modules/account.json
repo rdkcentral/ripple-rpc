@@ -75,7 +75,7 @@
       ]
     },
     {
-      "name": "onRequestSessopm",
+      "name": "onRequestSession",
       "summary": "Registers as a provider for when device needs a session",
       "params": [
         {
