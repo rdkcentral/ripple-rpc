@@ -3,10 +3,10 @@
 participant rdk as "RDK"
 
 box os
-    participant boot as "Boot\nService"
-    participant device as "Device\nService"
-    participant auth as "Auth\nService"
-    participant account as "Account\nService"
+participant boot as "Boot\nService"
+participant device as "Device\nService"
+participant auth as "Auth\nService"
+participant account as "Account\nService"
 end box
 
 participant core as "Core SDK"
@@ -23,9 +23,9 @@ group OS Bootup
     group Not Provisioned
         boot -> ui :launch
         ui -> core:Authentication.token("device")
-        core --> auth: 
+        core --> auth:
         auth --> rdk: Get auth token
-        rdk --> auth: 
+        rdk --> auth:
         auth --> core:
         core -> ui:Device Token
         ui -> core:Device.id()
@@ -55,16 +55,16 @@ group OS Bootup
         boot -> ui :launch
         group Session update
             ui -> core:Authentication.token("device")
-            core --> auth: 
+            core --> auth:
             auth --> rdk: Get auth token
-            rdk --> auth: 
+            rdk --> auth:
             auth --> core:
             core -> ui:Device Token
             ui -> distributor:Get platform Token
             ui -> manage:Account.session(token)
-            manage --> account: 
+            manage --> account:
             account --> rdk: Push session token
-            rdk --> account: 
+            rdk --> account:
             account --> manage:
             manage -> ui:status
         end
