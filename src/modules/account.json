@@ -5,6 +5,31 @@
     "description": "A module for managing Session.",
     "version": "0.0.0"
   },
+  "components": {
+    "schemas": {
+      "Token": {
+        "type": "string",
+        "description": "Encoded token provided by the Distributor for Device Authentication."
+      },
+      "Expiry": {
+        "type": "integer",
+        "description": "Number of secs before the token expires",
+        "minimum": 1
+      },
+      "Session": {
+        "description": "Session Token from the distributor.",
+        "type": "object",
+        "properties": {
+          "token": {
+            "$ref": "#/components/schemas/Token"
+          },
+          "expiresIn": {
+            "$ref": "#/components/schemas/Expiry"
+          }
+        }
+      }
+    }
+  },
   "methods": [
     {
       "name": "session",
@@ -12,10 +37,14 @@
       "params": [
         {
           "name": "token",
-          "summary": "Authentication token provided by the distributor for the device operations.",
-          "required": true,
           "schema": {
-            "type": "string"
+            "$ref": "#/components/schemas/Token"
+          }
+        },
+        {
+          "name": "expiresIn",
+          "schema": {
+            "$ref": "#/components/schemas/Expiry"
           }
         }
       ],
@@ -32,11 +61,82 @@
             {
               "name": "token",
               "value": "RmlyZWJvbHQgTWFuYWdlIFNESyBSb2NrcyEhIQ=="
+            },
+            {
+              "name": "expiresIn",
+              "value": 84000
             }
           ],
           "result": {
             "name": "defaultResult",
             "value": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "onRequestSessopm",
+      "summary": "Registers as a provider for when device needs a session",
+      "params": [
+        {
+          "name": "listen",
+          "summary": "Whether or not to listen for requests to this interface method.",
+          "schema": {
+            "type": "boolean"
+          }
+        }
+      ],
+      "tags": [
+        {
+          "name": "event",
+          "x-response": {
+            "$ref": "#/components/schemas/Session",
+            "examples": [
+              {
+                "token": "RmlyZWJvbHQgTWFuYWdlIFNESyBSb2NrcyEhIQ==",
+                "expiresIn": 84000
+              }
+            ]
+          }
+        },
+        {
+          "name": "capabilities",
+          "x-provides": "xrn:firebolt:capability:account:session",
+          "x-allow-focus": true
+        }
+      ],
+      "result": {
+        "name": "session",
+        "summary": "The request to get a new session",
+        "schema": {
+          "oneOf": [
+            {
+              "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
+            },
+            {
+              "$ref": "#/components/schemas/Session"
+            }
+          ]
+        }
+      },
+      "examples": [
+        {
+          "name": "Default Example",
+          "params": [
+            {
+              "name": "listen",
+              "value": true
+            }
+          ],
+          "result": {
+            "name": "Default Result",
+            "value": {
+              "correlationId": "abc",
+              "parameters": {
+                "token": "RmlyZWJvbHQgTWFuYWdlIFNESyBSb2NrcyEhIQ==",
+                "expiresIn": 84000
+              }
+            }
           }
         }
       ]
