@@ -7,51 +7,29 @@
     },
     "methods": [
         {
-            "name": "scan",
+            "name": "find",
             "summary": "Starts a long-running DNS-SD search for a list of developer tools that match the standard 'Firebolt Developer Tool' service type",
             "tags": [
                 {
+                    "name": "temporal-set"
+                },
+                {
                     "name": "capabilities",
-                    "x-manages": [
-                        "xrn:firebolt:capability:settings:developer-mode"
+                    "x-uses": [
+                        "xrn:firebolt:capability:developer:tools"
                     ]
                 }
-            ],
+             ],
             "params": [],
             "result": {
                 "name": "result",
                 "schema": {
-                    "const": null
-                }
-            },
-            "examples": [
-                {
-                    "name": "Default Example",
-                    "params": [],
-                    "result": {
-                        "name": "Default Result",
-                        "value": null
+                    "type": "array",
+                    "items": {
+                        "title": "Tool",
+                        "$ref": "#/components/schemas/DeveloperTool"
                     }
                 }
-            ]
-        },
-        {
-            "name": "stopScan",
-            "summary": "Stops the long-running scan operation",
-            "tags": [
-                {
-                    "name": "capabilities",
-                    "x-manages": [
-                        "xrn:firebolt:capability:settings:developer-mode"
-                    ]
-                }
-            ],
-            "params": [],
-            "result": {
-                "name": "result",
-                "schema": {
-                    "const": null
-                }
             },
             "examples": [
                 {
@@ -59,7 +37,12 @@
                     "params": [],
                     "result": {
                         "name": "Default Result",
-                        "value": null
+                        "value": [
+                            {
+                                "id": "ff6340fb-8576-494c-97c6-e60e9a4eeba9",
+                                "name": "A tool"
+                            }
+                        ]
                     }
                 }
             ]
@@ -70,8 +53,8 @@
             "tags": [
                 {
                     "name": "capabilities",
-                    "x-manages": [
-                        "xrn:firebolt:capability:settings:developer-mode"
+                    "x-uses": [
+                        "xrn:firebolt:capability:developer:tools"
                     ]
                 }
             ],
@@ -114,8 +97,8 @@
             "tags": [
                 {
                     "name": "capabilities",
-                    "x-manages": [
-                        "xrn:firebolt:capability:settings:developer-mode"
+                    "x-uses": [
+                        "xrn:firebolt:capability:developer:tools"
                     ]
                 }
             ],
@@ -151,123 +134,12 @@
                     }
                 }
             ]
-        },
-        {
-            "name": "onToolAvailable",
-            "tags": [
-                {
-                    "name": "event"
-                },
-                {
-                    "name": "capabilities",
-                    "x-manages": [
-                        "xrn:firebolt:capability:settings:developer-mode"
-                    ]
-                }
-            ],
-            "summary": "Listen to the toolAvailable event",
-            "params": [
-                {
-                    "name": "listen",
-                    "required": true,
-                    "summary": "whether to listen, or stop listening",
-                    "schema": {
-                        "type": "boolean"
-                    }
-                }
-            ],
-            "result": {
-                "name": "value",
-                "schema": {
-                    "oneOf": [
-                        {
-                            "$ref": "#/components/schemas/DeveloperTool"
-                        },
-                        {
-                            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
-                        }
-                    ]
-               }
-            },
-            "examples": [
-                {
-                    "name": "Default Example",
-                    "params": [
-                        {
-                            "name": "listen",
-                            "value": true
-                        }
-                    ],
-                    "result": {
-                        "name": "Default Result",
-                        "value": {
-                            "id": "ff6340fb-8576-494c-97c6-e60e9a4eeba9",
-                            "name": "sideloader"
-                        }
-                    }
-                }
-            ]
-        },
-        {
-            "name": "onToolUnavailable",
-            "tags": [
-                {
-                    "name": "event"
-                },
-                {
-                    "name": "capabilities",
-                    "x-manages": [
-                        "xrn:firebolt:capability:settings:developer-mode"
-                    ]
-                }
-            ],
-            "summary": "Listen to the toolUnavailable event",
-            "params": [
-                {
-                    "name": "listen",
-                    "required": true,
-                    "summary": "whether to listen, or stop listening",
-                    "schema": {
-                        "type": "boolean"
-                    }
-                }
-            ],
-            "result": {
-                "name": "value",
-                "schema": {
-                    "oneOf": [
-                        {
-                            "$ref": "#/components/schemas/DeveloperTool"
-                        },
-                        {
-                            "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
-                        }
-                    ]
-               }
-            },
-            "examples": [
-                {
-                    "name": "Default Example",
-                    "params": [
-                        {
-                            "name": "listen",
-                            "value": true
-                        }
-                    ],
-                    "result": {
-                        "name": "Default Result",
-                        "value": {
-                            "id": "ff6340fb-8576-494c-97c6-e60e9a4eeba9",
-                            "name": "sideloader"
-                        }
-                    }
-                }
-            ]
         }
     ],
     "components": {
         "schemas": {
             "DeveloperTool": {
+                "title": "DeveloperTool",
                 "type": "object",
                 "required": [
                     "id",
