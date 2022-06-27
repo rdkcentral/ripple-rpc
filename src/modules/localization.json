@@ -179,6 +179,19 @@
                         "name": "Default Result",
                         "value": null
                     }
+                },
+                {
+                    "name": "Variant Example",
+                    "params": [
+                        {
+                            "name": "locale",
+                            "value": "en-US-klingon"
+                        }
+                    ],
+                    "result": {
+                        "name": "Default Result",
+                        "value": null
+                    }
                 }
             ]
         }
