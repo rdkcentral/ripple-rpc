@@ -17,7 +17,8 @@
  */
 
 import { ClosedCaptions } from '../../dist/lib/firebolt-manage.mjs'
-import { transport } from '../Setup.js'
+import Setup from '../Setup.js'
+import { transport } from '../TransportHarness.js'
 
 let providerMethodNotificationRegistered = false
 let providerMethodRequestDispatched = false

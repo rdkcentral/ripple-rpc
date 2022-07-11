@@ -5,91 +5,117 @@
     "description": "A module for assisting pairing and managing Firebolt compatible accessories.",
     "version": "0.0.0"
   },
-  "components": {
-    "schemas": {
-      "AccessoryList": {
-        "title": "AccessoryList",
-        "type": "object",
-        "description": "Contains a list of Accessories paired to the device.",
-        "properties": {
-          "list": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/AccessoryInfo"
-            }
-          }
-        }
-      },
-      "AccessoryPairingTimeout": {
-        "title": "AccessoryPairingTimeout",
-        "description": "Defines the timeout in seconds. If the threshold for timeout is passed without a result it will throw an error.",
-        "type": "integer",
-        "default": 0,
-        "minimum": 0,
-        "maximum": 9999
-      },
-      "AccessoryType": {
-        "title": "AccessoryType",
-        "description": "Type of the device Remote,Speaker or Other",
-        "type": "string",
-        "enum": ["Remote", "Speaker", "Other"]
-      },
-      "AccessoryTypeListParam": {
-        "title": "AccessoryTypeListParam",
-        "description": "Type of the device Remote,Speaker or Other",
-        "type": "string",
-        "enum": ["Remote", "Speaker", "All"]
-      },
-      "AccessoryProtocol": {
-        "title": "AccessoryProtocol",
-        "description": "Mechanism to connect the accessory to the device",
-        "type": "string",
-        "enum": ["BluetoothLE", "RF4CE"]
-      },
-      "AccessoryProtocolListParam": {
-        "title": "AccessoryProtocolListParam",
-        "description": "Mechanism to connect the accessory to the device",
-        "type": "string",
-        "enum": ["BluetoothLE", "RF4CE", "All"]
-      },
-      "AccessoryInfo": {
-        "title": "AccessoryInfo",
-        "description": "Properties of a paired accessory.",
-        "type": "object",
-        "properties": {
-          "type": {
-            "$ref": "#/components/schemas/AccessoryType"
-          },
-          "make": {
-            "type": "string",
-            "description": "Name of the manufacturer of the accessory"
-          },
-          "model": {
-            "type": "string",
-            "description": "Model name of the accessory"
-          },
-          "protocol": {
-            "$ref": "#/components/schemas/AccessoryProtocol"
-          }
-        }
-      }
-    }
-  },
   "methods": [
     {
-      "name": "pair",
-      "summary": "Pair an accessory with the device.",
+      "name": "find",
+      "summary": "Find available accessories to pair with this device.",
+      "tags": [
+        {
+          "name": "capabilities",
+          "x-uses-operator": "anyOf",
+          "x-uses": [
+            "xrn:firebolt:capability:bluetooth:scan",
+            "xrn:firebolt:capability:rf4ce:scan"
+          ]
+        },
+        {
+          "name": "temporal-set"
+        }
+      ],
       "params": [
         {
           "name": "type",
+          "required": true,
           "schema": {
             "$ref": "#/components/schemas/AccessoryType"
           }
+        }
+      ],
+      "result": {
+        "name": "accessory",
+        "schema": {
+          "type": "array",
+          "items": {
+              "title": "Accessory",
+              "$ref": "#/components/schemas/AccessoryInfo"
+          }
+        }
+      },
+      "examples": [
+        {
+          "name": "Find a Remote",
+          "params": [
+            {
+              "name": "type",
+              "value": "remote"
+            }
+          ],
+          "result": {
+            "name": "accessories",
+            "value": [
+              {
+                "type": "remote",
+                "make": "UEI",
+                "model": "PR1",
+                "protocol": "bluetoothLE"
+              },
+              {
+                "type": "remote",
+                "make": "XYZ",
+                "model": "ABC",
+                "protocol": "rf4ce"
+              }              
+            ]
+          }
         },
         {
-          "name": "protocol",
+          "name": "Find a Speaker",
+          "params": [
+            {
+              "name": "type",
+              "value": "speaker"
+            },
+            {
+              "name": "timeout",
+              "value": 180
+            }
+          ],
+          "result": {
+            "name": "accessories",
+            "value": [
+              {
+                "type": "speaker",
+                "make": "Sonos",
+                "model": "V120",
+                "protocol": "bluetoothLE"
+              }
+            ]
+          }
+        }   
+      ]
+    },
+    {
+      "name": "pair",
+      "tags": [
+        {
+          "name": "capabilities",
+          "x-uses-operator": "anyOf",
+          "x-uses": [
+            "xrn:firebolt:capability:bluetooth:scan",
+            "xrn:firebolt:capability:rf4ce:scan"
+          ]
+        },
+        {
+          "name": "rpc-only"
+        }
+      ],
+      "summary": "Pair an accessory with the device.",
+      "params": [
+        {
+          "name": "accessory",
+          "required": true,
           "schema": {
-            "$ref": "#/components/schemas/AccessoryProtocol"
+            "$ref": "#/components/schemas/AccessoryInfo"
           }
         },
         {
@@ -100,89 +126,26 @@
         }
       ],
       "result": {
-        "name": "pairedAccessory",
-        "summary": "The state of last paired accessory",
+        "name": "result",
         "schema": {
-          "$ref": "#/components/schemas/AccessoryInfo"
+          "type": "null"
         }
       },
       "examples": [
         {
-          "name": "Pair a Bluetooth Remote",
+          "name": "default example",
           "params": [
             {
-              "name": "type",
-              "value": "Remote"
-            },
-            {
-              "name": "protocol",
-              "value": "BluetoothLE"
-            },
-            {
-              "name": "timeout",
-              "value": 180
+              "name": "accessory",
+              "value": {
+                "address": "00:00:00:00:00:00",
+                "name": "A cool remote"
+              }
             }
           ],
           "result": {
-            "name": "Bluetooth Remote successful pairing example",
-            "value": {
-              "type": "Remote",
-              "make": "UEI",
-              "model": "PR1",
-              "protocol": "BluetoothLE"
-            }
-          }
-        },
-        {
-          "name": "Pair a Bluetooth Speaker",
-          "params": [
-            {
-              "name": "type",
-              "value": "Speaker"
-            },
-            {
-              "name": "protocol",
-              "value": "BluetoothLE"
-            },
-            {
-              "name": "timeout",
-              "value": 180
-            }
-          ],
-          "result": {
-            "name": "Bluetooth Speaker successful pairing example",
-            "value": {
-              "type": "Speaker",
-              "make": "Sonos",
-              "model": "V120",
-              "protocol": "BluetoothLE"
-            }
-          }
-        },
-        {
-          "name": "Pair a RF Remote",
-          "params": [
-            {
-              "name": "type",
-              "value": "Remote"
-            },
-            {
-              "name": "protocol",
-              "value": "RF4CE"
-            },
-            {
-              "name": "timeout",
-              "value": 180
-            }
-          ],
-          "result": {
-            "name": "RF Remote successful pairing example",
-            "value": {
-              "type": "Remote",
-              "make": "UEI",
-              "model": "15",
-              "protocol": "RF4CE"
-            }
+            "name": "result",
+            "value": null
           }
         }
       ]
@@ -209,7 +172,10 @@
         "name": "list",
         "summary": "Contains a list of Accesories paired to the device.",
         "schema": {
-          "$ref": "#/components/schemas/AccessoryList"
+          "type": "array",
+          "items": {
+            "$ref": "#/components/schemas/AccessoryInfo"
+          }
         }
       },
       "examples": [
@@ -218,31 +184,29 @@
           "params": [
             {
               "name": "type",
-              "value": "All"
+              "value": "all"
             },
             {
               "name": "protocol",
-              "value": "All"
+              "value": "all"
             }
           ],
           "result": {
             "name": "Accessory List example",
-            "value": {
-              "list": [
-                {
-                  "type": "Remote",
-                  "make": "uei",
-                  "model": "PR1",
-                  "protocol": "BluetoothLE"
-                },
-                {
-                  "type": "Speaker",
-                  "make": "Sonos",
-                  "model": "V120",
-                  "protocol": "BluetoothLE"
-                }
-              ]
-            }
+            "value": [
+              {
+                "type": "remote",
+                "make": "uei",
+                "model": "PR1",
+                "protocol": "bluetoothLE"
+              },
+              {
+                "type": "speaker",
+                "make": "Sonos",
+                "model": "V120",
+                "protocol": "bluetoothLE"
+              }
+            ]
           }
         },
         {
@@ -250,31 +214,29 @@
           "params": [
             {
               "name": "type",
-              "value": "All"
+              "value": "all"
             },
             {
               "name": "protocol",
-              "value": "BluetoothLE"
+              "value": "bluetoothLE"
             }
           ],
           "result": {
             "name": "Accessory List example",
-            "value": {
-              "list": [
-                {
-                  "type": "Remote",
-                  "make": "uei",
-                  "model": "PR1",
-                  "protocol": "BluetoothLE"
-                },
-                {
-                  "type": "Speaker",
-                  "make": "Sonos",
-                  "model": "V120",
-                  "protocol": "BluetoothLE"
-                }
-              ]
-            }
+            "value": [
+              {
+                "type": "remote",
+                "make": "uei",
+                "model": "PR1",
+                "protocol": "bluetoothLE"
+              },
+              {
+                "type": "speaker",
+                "make": "Sonos",
+                "model": "V120",
+                "protocol": "bluetoothLE"
+              }
+            ]
           }
         },
         {
@@ -282,25 +244,23 @@
           "params": [
             {
               "name": "type",
-              "value": "Remote"
+              "value": "remote"
             },
             {
               "name": "protocol",
-              "value": "BluetoothLE"
+              "value": "bluetoothLE"
             }
           ],
           "result": {
             "name": "Accessory List example",
-            "value": {
-              "list": [
-                {
-                  "type": "Remote",
-                  "make": "uei",
-                  "model": "PR1",
-                  "protocol": "BluetoothLE"
-                }
-              ]
-            }
+            "value": [
+              {
+                "type": "remote",
+                "make": "uei",
+                "model": "PR1",
+                "protocol": "bluetoothLE"
+              }
+            ]
           }
         },
         {
@@ -308,25 +268,23 @@
           "params": [
             {
               "name": "type",
-              "value": "Speaker"
+              "value": "speaker"
             },
             {
               "name": "protocol",
-              "value": "BluetoothLE"
+              "value": "bluetoothLE"
             }
           ],
           "result": {
             "name": "Accessory List example",
-            "value": {
-              "list": [
-                {
-                  "type": "Speaker",
-                  "make": "Sonos",
-                  "model": "V120",
-                  "protocol": "BluetoothLE"
-                }
-              ]
-            }
+            "value": [
+              {
+                "type": "speaker",
+                "make": "Sonos",
+                "model": "V120",
+                "protocol": "bluetoothLE"
+              }
+            ]
           }
         },
         {
@@ -334,28 +292,93 @@
           "params": [
             {
               "name": "type",
-              "value": "Remote"
+              "value": "remote"
             },
             {
               "name": "protocol",
-              "value": "RF4CE"
+              "value": "rf4ce"
             }
           ],
           "result": {
             "name": "Accessory List example",
-            "value": {
-              "list": [
-                {
-                  "type": "Remote",
-                  "make": "uei",
-                  "model": "XR15",
-                  "protocol": "RF4CE"
-                }
-              ]
-            }
+            "value": [
+              {
+                "type": "remote",
+                "make": "uei",
+                "model": "XR15",
+                "protocol": "rf4ce"
+              }
+            ]
           }
         }
       ]
     }
-  ]
+  ],
+  "components": {
+    "schemas": {
+      "AccessoryPairingTimeout": {
+        "title": "AccessoryPairingTimeout",
+        "description": "Defines the timeout in seconds. If the threshold for timeout is passed without a result it will throw an error.",
+        "type": "integer",
+        "default": 0,
+        "minimum": 0,
+        "maximum": 9999
+      },
+      "AccessoryType": {
+        "title": "AccessoryType",
+        "description": "Type of the device Remote,Speaker or Other",
+        "type": "string",
+        "enum": ["remote", "speaker", "other"]
+      },
+      "AccessoryTypeListParam": {
+        "title": "AccessoryTypeListParam",
+        "description": "Type of the device Remote,Speaker or Other",
+        "type": "string",
+        "enum": ["remote", "speaker", "all"]
+      },
+      "AccessoryProtocol": {
+        "title": "AccessoryProtocol",
+        "description": "Mechanism to connect the accessory to the device",
+        "type": "string",
+        "enum": ["bluetoothLE", "rf4ce"]
+      },
+      "AccessoryProtocolListParam": {
+        "title": "AccessoryProtocolListParam",
+        "description": "Mechanism to connect the accessory to the device",
+        "type": "string",
+        "enum": ["bluetoothLE", "rf4ce", "all"]
+      },
+      "AccessoryInfo": {
+        "title": "AccessoryInfo",
+        "description": "Properties of a paired accessory.",
+        "type": "object",
+        "properties": {
+          "type": {
+            "$ref": "#/components/schemas/AccessoryType"
+          },
+          "make": {
+            "type": "string",
+            "description": "Name of the manufacturer of the accessory"
+          },
+          "model": {
+            "type": "string",
+            "description": "Model name of the accessory"
+          },
+          "address": {
+            "type": "string",
+            "description": "MAC address of the accessory, for pairing"
+          },
+          "protocol": {
+            "$ref": "#/components/schemas/AccessoryProtocol"
+          },
+          "pair": {
+            "type": "null",
+            "x-method": "Accessory.pair",
+            "x-this-param": "accessory",
+            "x-additional-params": ["timeout"]
+          }
+        }
+      }
+    }
+  }
 }

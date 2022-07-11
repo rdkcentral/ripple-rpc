@@ -23,3 +23,14 @@ test('ClosedCaptions.provide() declarations ', () => {
     ClosedCaptions.provide('xrn:firebolt:capability:settings:closedcaptions', new CCProvider())
     expect(1).toBe(1)
 });
+
+let listenerId:number
+
+test('Able to get TypeScript listenerId', () => {
+    return ClosedCaptions.listen('backgroundColorChanged', () => {}).then((id:number) => {
+        listenerId = id
+        console.log(listenerId)
+        expect(listenerId > 0).toBe(true)
+    })
+})
+
