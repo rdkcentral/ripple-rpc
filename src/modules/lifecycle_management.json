@@ -1,0 +1,189 @@
+{
+    "openrpc": "1.2.4",
+    "info": {
+        "title": "LifecycleManagement",
+        "description": "A module for managing application lifecycle.",
+        "version": "0.0.0"
+    },
+    "components": {
+        "schemas": {
+            "State": {
+                "type": "string",
+                "description": "The application lifecycle state",
+                "enum": [
+                    "initializing",
+                    "inactive",
+                    "foreground",
+                    "background",
+                    "unloading",
+                    "suspended"
+                ]
+            },
+            "AppId": {
+                "type": "string",
+                "description": "Application ID"
+            }
+        }
+    },
+    "methods": [
+        {
+            "name": "setState",
+            "summary": "Used by provider to update the state of an application so that the state can be emitted to apps.",
+            "params": [
+                {
+                    "name": "state",
+                    "schema": {
+                        "$ref": "#/components/schemas/State"
+                    }
+                }
+            ],
+            "result": {
+                "name": "result",
+                "schema": {
+                    "const": null
+                }
+            },
+            "examples": [
+                {
+                    "name": "Set application lifecycle state to inactive",
+                    "params": [
+                        {
+                            "name": "state",
+                            "value": "inactive"
+                        }
+                    ],
+                    "result": {
+                        "name": "result",
+                        "value": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "onRequestReady",
+            "summary": "Tells the provider that an app has said they are ready",
+            "params": [
+                {
+                    "name": "listen",
+                    "summary": "Whether or not to listen for requests to this interface method.",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-provides": "xrn:firebolt:capability:app:lifecycle",
+                    "x-allow-focus": false
+                }
+            ],
+            "result": {
+                "name": "ready",
+                "summary": "The app has said they are ready",
+                "schema": {
+                    "$ref": "#/components/schemas/AppId"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                        {
+                            "name": "listen",
+                            "value": true
+                        }
+                    ],
+                    "result": {
+                        "name": "defaultResult",
+                        "value": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "onRequestClose",
+            "summary": "Tells the provider that an app has requested closing itself",
+            "params": [
+                {
+                    "name": "listen",
+                    "summary": "Whether or not to listen for requests to this interface method.",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-provides": "xrn:firebolt:capability:app:lifecycle",
+                    "x-allow-focus": false
+                }
+            ],
+            "result": {
+                "name": "close",
+                "summary": "The app requests to be closed",
+                "schema": {
+                    "$ref": "#/components/schemas/AppId"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                        {
+                            "name": "listen",
+                            "value": true
+                        }
+                    ],
+                    "result": {
+                        "name": "defaultResult",
+                        "value": null
+                    }
+                }
+            ]
+        },
+        {
+            "name": "onRequestFinished",
+            "summary": "Tells the provider that an app has said they are finished cleaning up while unloading",
+            "params": [
+                {
+                    "name": "listen",
+                    "summary": "Whether or not to listen for requests to this interface method.",
+                    "schema": {
+                        "type": "boolean"
+                    }
+                }
+            ],
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-provides": "xrn:firebolt:capability:app:lifecycle",
+                    "x-allow-focus": false
+                }
+            ],
+            "result": {
+                "name": "finished",
+                "summary": "The app has said they are finished",
+                "schema": {
+                    "$ref": "#/components/schemas/AppId"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [
+                        {
+                            "name": "listen",
+                            "value": true
+                        }
+                    ],
+                    "result": {
+                        "name": "defaultResult",
+                        "value": null
+                    }
+                }
+            ]
+        }
+    ]
+}
