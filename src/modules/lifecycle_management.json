@@ -53,15 +53,15 @@
             "summary": "Used by provider to update the state of an application so that the state can be emitted to apps.",
             "params": [
                 {
-                    "name": "state",
-                    "schema": {
-                        "$ref": "#/components/schemas/State"
-                    }
-                },
-                {
                     "name": "appId",
                     "schema": {
                         "type": "string"
+                    }
+                },
+                {
+                    "name": "state",
+                    "schema": {
+                        "$ref": "#/components/schemas/State"
                     }
                 }
             ],
