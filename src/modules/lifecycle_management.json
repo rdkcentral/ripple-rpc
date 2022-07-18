@@ -5,48 +5,6 @@
         "description": "A module for managing application lifecycle.",
         "version": "0.0.0"
     },
-    "components": {
-        "schemas": {
-            "State": {
-                "type": "string",
-                "description": "The application lifecycle state",
-                "enum": [
-                    "initializing",
-                    "inactive",
-                    "foreground",
-                    "background",
-                    "unloading",
-                    "suspended"
-                ]
-            },
-            "LifecycleParameters": {
-                "title": "LifecycleParameters",
-                "type": "object",
-                "required": [
-                  "appId"
-                ],
-                "properties": {
-                  "appId": {
-                    "description": "The application ID",
-                    "type": "string"
-                  }
-                }
-            },        
-            "LifecycleResult": {
-                "title": "LifecycleResult",
-                "type": "object",
-                "required": [
-                  "parameters"
-                ],
-                "properties": {
-                  "parameters": {
-                    "description": "The associated lifecycle parameters",
-                    "$ref": "#/components/schemas/LifecycleParameters"
-                  }
-                }
-              }        
-        }
-    },
     "methods": [
         {
             "name": "setState",
@@ -54,12 +12,14 @@
             "params": [
                 {
                     "name": "appId",
+                    "required": true,
                     "schema": {
                         "type": "string"
                     }
                 },
                 {
                     "name": "state",
+                    "required": true,
                     "schema": {
                         "$ref": "#/components/schemas/State"
                     }
@@ -119,7 +79,7 @@
                           "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
                         },
                         {
-                          "$ref": "#/components/schemas/LifecycleResult"
+                          "$ref": "#/components/schemas/LifecycleReadyRequest"
                         }
                     ]            
                 }
@@ -172,7 +132,7 @@
                           "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
                         },
                         {
-                          "$ref": "#/components/schemas/LifecycleResult"
+                          "$ref": "#/components/schemas/LifecycleCloseRequest"
                         }
                     ]            
                 }
@@ -190,7 +150,8 @@
                         "name": "Default Result",
                         "value": {
                           "parameters": {
-                            "appId": "SomeAppId"
+                            "appId": "SomeAppId",
+                            "reason": "userExit"
                           }
                         }
                     }
@@ -225,7 +186,7 @@
                           "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
                         },
                         {
-                          "$ref": "#/components/schemas/LifecycleResult"
+                          "$ref": "#/components/schemas/LifecycleFinishedRequest"
                         }
                     ]            
                 }
@@ -250,5 +211,113 @@
                 }
             ]
         }
-    ]
+    ],
+    "components": {
+        "schemas": {
+            "State": {
+                "type": "string",
+                "description": "The application lifecycle state",
+                "enum": [
+                    "initializing",
+                    "inactive",
+                    "foreground",
+                    "background",
+                    "unloading",
+                    "suspended"
+                ]
+            },
+            "CloseReason": {
+                "type": "string",
+                "description": "The application close reason",
+                "enum": [
+                    "remoteButton",
+                    "userExit",
+                    "error"
+                ]
+            },
+            "LifecycleReadyParameters": {
+                "title": "LifecycleReadyParameters",
+                "type": "object",
+                "required": [
+                  "appId"
+                ],
+                "properties": {
+                  "appId": {
+                    "description": "The application ID",
+                    "type": "string"
+                  }
+                }
+            },
+            "LifecycleCloseParameters": {
+                "title": "LifecycleCloseParameters",
+                "type": "object",
+                "required": [
+                  "appId",
+                  "reason"
+                ],
+                "properties": {
+                  "appId": {
+                    "description": "The application ID",
+                    "type": "string"
+                  },
+                  "reason": {
+                    "description": "The close reason",
+                    "$ref": "#/components/schemas/CloseReason"
+                  }
+                }
+            },
+            "LifecycleFinishedParameters": {
+                "title": "LifecycleFinishedParameters",
+                "type": "object",
+                "required": [
+                  "appId"
+                ],
+                "properties": {
+                  "appId": {
+                    "description": "The application ID",
+                    "type": "string"
+                  }
+                }
+            },
+            "LifecycleReadyRequest": {
+                "title": "LifecycleReadyRequest",
+                "type": "object",
+                "required": [
+                  "parameters"
+                ],
+                "properties": {
+                  "parameters": {
+                    "description": "The associated lifecycle parameters",
+                    "$ref": "#/components/schemas/LifecycleReadyParameters"
+                  }
+                }
+            },
+            "LifecycleCloseRequest": {
+                "title": "LifecycleCloseRequest",
+                "type": "object",
+                "required": [
+                  "parameters"
+                ],
+                "properties": {
+                  "parameters": {
+                    "description": "The associated lifecycle parameters",
+                    "$ref": "#/components/schemas/LifecycleCloseParameters"
+                  }
+                }
+            },
+            "LifecycleFinishedRequest": {
+                "title": "LifecycleFinishedRequest",
+                "type": "object",
+                "required": [
+                  "parameters"
+                ],
+                "properties": {
+                  "parameters": {
+                    "description": "The associated lifecycle parameters",
+                    "$ref": "#/components/schemas/LifecycleFinishedParameters"
+                  }
+                }
+            }        
+        }
+    }
 }
