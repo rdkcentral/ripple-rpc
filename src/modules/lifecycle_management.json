@@ -18,7 +18,33 @@
                     "unloading",
                     "suspended"
                 ]
-            }
+            },
+            "LifecycleParameters": {
+                "title": "LifecycleParameters",
+                "type": "object",
+                "required": [
+                  "appId"
+                ],
+                "properties": {
+                  "appId": {
+                    "description": "The application ID",
+                    "type": "string"
+                  }
+                }
+            },        
+            "LifecycleResult": {
+                "title": "LifecycleResult",
+                "type": "object",
+                "required": [
+                  "parameters"
+                ],
+                "properties": {
+                  "parameters": {
+                    "description": "The associated lifecycle parameters",
+                    "$ref": "#/components/schemas/LifecycleParameters"
+                  }
+                }
+              }        
         }
     },
     "methods": [
@@ -30,6 +56,12 @@
                     "name": "state",
                     "schema": {
                         "$ref": "#/components/schemas/State"
+                    }
+                },
+                {
+                    "name": "appId",
+                    "schema": {
+                        "type": "string"
                     }
                 }
             ],
@@ -46,6 +78,10 @@
                         {
                             "name": "state",
                             "value": "inactive"
+                        },
+                        {
+                            "name": "appId",
+                            "value": "SomeAppId"
                         }
                     ],
                     "result": {
@@ -65,13 +101,6 @@
                     "schema": {
                         "type": "boolean"
                     }
-                },
-                {
-                    "name": "appId",
-                    "summary": "The application ID for the lifecycle request",
-                    "schema": {
-                        "type": "string"
-                    }
                 }
             ],
             "tags": [
@@ -90,12 +119,7 @@
                           "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
                         },
                         {
-                            "type": "object",
-                            "properties": {
-                                "parameters": {
-                                    "const": null
-                                }
-                            }
+                          "$ref": "#/components/schemas/LifecycleResult"
                         }
                     ]            
                 }
@@ -112,7 +136,9 @@
                     "result": {
                         "name": "Default Result",
                         "value": {
-                            "parameters": null
+                          "parameters": {
+                            "appId": "SomeAppId"
+                          }
                         }
                     }
                 }
@@ -128,13 +154,6 @@
                     "schema": {
                         "type": "boolean"
                     }
-                },
-                {
-                    "name": "appId",
-                    "summary": "The application ID for the lifecycle request",
-                    "schema": {
-                        "type": "string"
-                    }
                 }
             ],
             "tags": [
@@ -146,19 +165,14 @@
               ],
             "result": {
                 "name": "close",
-                "summary": "The app has said has requested to be closed",
+                "summary": "The app has requested to be closed",
                 "schema": {
                     "oneOf": [
                         {
                           "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
                         },
                         {
-                            "type": "object",
-                            "properties": {
-                                "parameters": {
-                                    "const": null
-                                }
-                            }
+                          "$ref": "#/components/schemas/LifecycleResult"
                         }
                     ]            
                 }
@@ -175,7 +189,9 @@
                     "result": {
                         "name": "Default Result",
                         "value": {
-                            "parameters": null
+                          "parameters": {
+                            "appId": "SomeAppId"
+                          }
                         }
                     }
                 }
@@ -183,20 +199,13 @@
         },
         {
             "name": "onRequestFinished",
-            "summary": "Tells the provider that an app has said they are finished",
+            "summary": "Tells the provider that an app has said they are finished cleaning up while unloading",
             "params": [
                 {
                     "name": "listen",
                     "summary": "Whether or not to listen for requests to this interface method.",
                     "schema": {
                         "type": "boolean"
-                    }
-                },
-                {
-                    "name": "appId",
-                    "summary": "The application ID for the lifecycle request",
-                    "schema": {
-                        "type": "string"
                     }
                 }
             ],
@@ -216,12 +225,7 @@
                           "$ref": "https://meta.comcast.com/firebolt/types#/definitions/ListenResponse"
                         },
                         {
-                            "type": "object",
-                            "properties": {
-                                "parameters": {
-                                    "const": null
-                                }
-                            }
+                          "$ref": "#/components/schemas/LifecycleResult"
                         }
                     ]            
                 }
@@ -238,7 +242,9 @@
                     "result": {
                         "name": "Default Result",
                         "value": {
-                            "parameters": null
+                          "parameters": {
+                            "appId": "SomeAppId"
+                          }
                         }
                     }
                 }
