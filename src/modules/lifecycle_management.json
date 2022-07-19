@@ -21,7 +21,7 @@
                     "name": "state",
                     "required": true,
                     "schema": {
-                        "$ref": "#/components/schemas/State"
+                        "$ref": "https://meta.comcast.com/firebolt/lifecycle#/definitions/State"
                     }
                 }
             ],
@@ -214,27 +214,6 @@
     ],
     "components": {
         "schemas": {
-            "State": {
-                "type": "string",
-                "description": "The application lifecycle state",
-                "enum": [
-                    "initializing",
-                    "inactive",
-                    "foreground",
-                    "background",
-                    "unloading",
-                    "suspended"
-                ]
-            },
-            "CloseReason": {
-                "type": "string",
-                "description": "The application close reason",
-                "enum": [
-                    "remoteButton",
-                    "userExit",
-                    "error"
-                ]
-            },
             "LifecycleReadyParameters": {
                 "title": "LifecycleReadyParameters",
                 "type": "object",
@@ -262,7 +241,7 @@
                   },
                   "reason": {
                     "description": "The close reason",
-                    "$ref": "#/components/schemas/CloseReason"
+                    "$ref": "https://meta.comcast.com/firebolt/lifecycle#/definitions/CloseReason"
                   }
                 }
             },
