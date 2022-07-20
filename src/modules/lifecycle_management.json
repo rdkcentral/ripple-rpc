@@ -21,7 +21,7 @@
                     "name": "state",
                     "required": true,
                     "schema": {
-                        "$ref": "https://meta.comcast.com/firebolt/lifecycle#/definitions/State"
+                        "$ref": "https://meta.comcast.com/firebolt/lifecycle#/definitions/LifecycleState"
                     }
                 }
             ],
