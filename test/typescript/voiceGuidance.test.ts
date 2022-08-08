@@ -19,6 +19,15 @@
 import { test, expect } from "@jest/globals";
 import { VoiceGuidance } from "../../dist/lib/firebolt-manage";
 
+class VGProvider implements VoiceGuidance.SettingsProvider {
+  settings(
+    parameters: void,
+    session: object
+  ): Promise<VoiceGuidance.VoiceGuidanceSettings> {
+    return Promise.resolve(null);
+  }
+}
+
 test("VoiceGuidance.enabled()", () => {
   return VoiceGuidance.enabled().then((res) => {
     expect(res).toEqual(true);
@@ -48,6 +57,14 @@ test("VoiceGuidance.once()", () => {
 test("VoiceGuidance.clear()", () => {
   const result = VoiceGuidance.clear(2);
   expect(result).toBeFalsy();
+});
+
+test("VoiceGuidance.provide() declarations ", () => {
+  VoiceGuidance.provide(
+    "xrn:firebolt:capability:settings:voiceguidance",
+    new VGProvider()
+  );
+  expect(1).toBe(1);
 });
 
 test("VoiceGuidance.provide() with blank object", () => {

@@ -19,6 +19,12 @@
 import { test, expect } from "@jest/globals";
 import { Device } from "../../dist/lib/firebolt-manage";
 
+test("Device.name()", () => {
+  return Device.name(() => {}).then((res: number) => {
+    expect(res > 0).toBe(true);
+  });
+});
+
 test("Device.provision()", () => {
   return Device.provision("Test_Account_Id", "Test_Device_Id").then((res) => {
     expect(res).toEqual({});

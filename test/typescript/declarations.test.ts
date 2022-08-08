@@ -1,14 +1,9 @@
 import { test, expect } from "@jest/globals";
 import {
   ClosedCaptions,
-  VoiceGuidance,
   Account,
-  AcknowledgeChallenge,
   Device,
-  Keyboard,
-  PinChallenge,
   LifecycleManagement,
-  Privacy,
 } from "../../dist/lib/firebolt-manage";
 
 class AccPovider implements Account.SessionProvider {
@@ -16,24 +11,6 @@ class AccPovider implements Account.SessionProvider {
     parameters: void,
     session: Account.FocusableProviderSession
   ): Promise<object> {
-    return Promise.resolve(null);
-  }
-}
-
-class ACKPovider implements AcknowledgeChallenge.ChallengeProvider {
-  challenge(
-    parameters: object,
-    session: AcknowledgeChallenge.FocusableProviderSession
-  ): Promise<AcknowledgeChallenge.GrantResult> {
-    return Promise.resolve(null);
-  }
-}
-
-class VGProvider implements VoiceGuidance.SettingsProvider {
-  settings(
-    parameters: void,
-    session: object
-  ): Promise<VoiceGuidance.VoiceGuidanceSettings> {
     return Promise.resolve(null);
   }
 }
@@ -60,36 +37,6 @@ class DeviceProvider implements Device.DeviceSettingsProvider {
   }
 }
 
-class KBProvider implements Keyboard.KeyboardInputProvider {
-  standard(
-    parameters: Keyboard.KeyboardParameters,
-    session: Keyboard.FocusableProviderSession
-  ): Promise<Keyboard.KeyboardResult> {
-    return Promise.resolve(null);
-  }
-  password(
-    parameters: Keyboard.KeyboardParameters,
-    session: Keyboard.FocusableProviderSession
-  ): Promise<Keyboard.KeyboardResult> {
-    return Promise.resolve(null);
-  }
-  email(
-    parameters: Keyboard.KeyboardParameters,
-    session: Keyboard.FocusableProviderSession
-  ): Promise<Keyboard.KeyboardResult> {
-    return Promise.resolve(null);
-  }
-}
-
-class PCProvider implements PinChallenge.ChallengeProvider {
-  challenge(
-    parameters: object,
-    session: PinChallenge.FocusableProviderSession
-  ): Promise<PinChallenge.PinChallengeResult> {
-    return Promise.resolve(null);
-  }
-}
-
 class LCMProvider implements LifecycleManagement.LifecycleAppProvider {
   ready(
     parameters: LifecycleManagement.LifecycleReadyParameters,
@@ -111,23 +58,6 @@ class LCMProvider implements LifecycleManagement.LifecycleAppProvider {
   }
 }
 
-class PrivacyProvider implements Privacy.ContentPolicyProvider {
-  contentPolicy(
-    parameters: object,
-    session: Privacy.ProviderSession
-  ): Promise<Privacy.ContentPolicy> {
-    return Promise.resolve(null);
-  }
-}
-
-test("VoiceGuidance.provide() declarations ", () => {
-  VoiceGuidance.provide(
-    "xrn:firebolt:capability:settings:voiceguidance",
-    new VGProvider()
-  );
-  expect(1).toBe(1);
-});
-
 test("ClosedCaptions.provide() declarations ", () => {
   ClosedCaptions.provide(
     "xrn:firebolt:capability:settings:closedcaptions",
@@ -141,14 +71,6 @@ test("Account.provide() declarations", () => {
   expect(1).toBe(1);
 });
 
-test("AcknowledgeChallenge.provide() declarations", () => {
-  AcknowledgeChallenge.provide(
-    "xrn:firebolt:capability:usergrant:acknowledgechallenge",
-    new ACKPovider()
-  );
-  expect(1).toBe(1);
-});
-
 test("Device.provide() declarations", () => {
   Device.provide(
     "xrn:firebolt:capability:settings:device",
@@ -157,31 +79,10 @@ test("Device.provide() declarations", () => {
   expect(1).toBe(1);
 });
 
-test("Keyboard.provide() declarations", () => {
-  Keyboard.provide("xrn:firebolt:capability:input:keyboard", new KBProvider());
-  expect(1).toBe(1);
-});
-
-test("PinChallenge.provide() declarations", () => {
-  PinChallenge.provide(
-    "xrn:firebolt:capability:usergrant:pinchallenge",
-    new PCProvider()
-  );
-  expect(1).toBe(1);
-});
-
 test("LifecycleManagement.provide() declarations", () => {
   LifecycleManagement.provide(
     "xrn:firebolt:capability:app:lifecycle",
     new LCMProvider()
-  );
-  expect(1).toBe(1);
-});
-
-test("privacy.provide() declarations", () => {
-  Privacy.provide(
-    "xrn:firebolt:capability:privacy:content",
-    new PrivacyProvider()
   );
   expect(1).toBe(1);
 });

@@ -19,6 +19,23 @@
 import { test, expect } from "@jest/globals";
 import { AcknowledgeChallenge } from "../../dist/lib/firebolt-manage";
 
+class ACKPovider implements AcknowledgeChallenge.ChallengeProvider {
+  challenge(
+    parameters: object,
+    session: AcknowledgeChallenge.FocusableProviderSession
+  ): Promise<AcknowledgeChallenge.GrantResult> {
+    return Promise.resolve(null);
+  }
+}
+
+test("AcknowledgeChallenge.provide() declarations", () => {
+  AcknowledgeChallenge.provide(
+    "xrn:firebolt:capability:usergrant:acknowledgechallenge",
+    new ACKPovider()
+  );
+  expect(1).toBe(1);
+});
+
 test("AcknowledgeChallenge.provide() with blank object", () => {
   expect(() => {
     AcknowledgeChallenge.provide(

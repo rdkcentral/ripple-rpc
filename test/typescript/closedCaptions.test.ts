@@ -19,6 +19,12 @@
 import { test, expect } from "@jest/globals";
 import { ClosedCaptions } from "../../dist/lib/firebolt-manage";
 
+test("ClosedCaptions.enabled()", () => {
+  return ClosedCaptions.enabled().then((res: boolean) => {
+    expect(res).toBe(true);
+  });
+});
+
 test("ClosedCaptions.fontFamily()", () => {
   return ClosedCaptions.fontFamily().then((res: string) => {
     expect(res).toEqual("Monospace sans-serif");
