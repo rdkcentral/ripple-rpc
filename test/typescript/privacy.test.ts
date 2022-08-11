@@ -47,6 +47,15 @@ test("Able to get TypeScript listenerId", () => {
   );
 });
 
+test("privacy.once() for limitAdTrackingChanged event", () => {
+  Privacy.once;
+  return Privacy.once("limitAdTrackingChanged", () => {}).then(
+    (res: number) => {
+      expect(res > 0).toBe(true);
+    }
+  );
+});
+
 test("privacy.shareWatchHistory()", () => {
   return Privacy.shareWatchHistory(String).then((res: number) => {
     expect(res > 0).toBe(true);
@@ -65,11 +74,92 @@ test("privacy.rememberWatchedPrograms()", () => {
   });
 });
 
-test("privacy.once()", () => {
+test("privacy.listen() for requestContentPolicy event", () => {
+  Privacy.once;
+  return Privacy.listen("requestContentPolicy", () => {}).then(
+    (res: number) => {
+      expect(res > 0).toBe(true);
+    }
+  );
+});
+
+test("privacy.once() for requestContentPolicy event", () => {
   Privacy.once;
   return Privacy.once("requestContentPolicy", () => {}).then((res: number) => {
     expect(res > 0).toBe(true);
   });
+});
+
+test("privacy.listen() for enableRecommendationsChanged event", () => {
+  Privacy.once;
+  return Privacy.listen("enableRecommendationsChanged", () => {}).then(
+    (res: number) => {
+      expect(res > 0).toBe(true);
+    }
+  );
+});
+
+test("privacy.once() for enableRecommendationsChanged event", () => {
+  Privacy.once;
+  return Privacy.once("enableRecommendationsChanged", () => {}).then(
+    (res: number) => {
+      expect(res > 0).toBe(true);
+    }
+  );
+});
+
+test("privacy.listen() for rememberWatchedProgramsChanged event", () => {
+  Privacy.once;
+  return Privacy.listen("rememberWatchedProgramsChanged", () => {}).then(
+    (res: number) => {
+      expect(res > 0).toBe(true);
+    }
+  );
+});
+
+test("privacy.once() for rememberWatchedProgramsChanged event", () => {
+  Privacy.once;
+  return Privacy.once("rememberWatchedProgramsChanged", () => {}).then(
+    (res: number) => {
+      expect(res > 0).toBe(true);
+    }
+  );
+});
+
+test("privacy.listen() for requestAdvertisingPolicy event", () => {
+  Privacy.once;
+  return Privacy.listen("requestAdvertisingPolicy", () => {}).then(
+    (res: number) => {
+      expect(res > 0).toBe(true);
+    }
+  );
+});
+
+test("privacy.once() for requestAdvertisingPolicy event", () => {
+  Privacy.once;
+  return Privacy.once("requestAdvertisingPolicy", () => {}).then(
+    (res: number) => {
+      expect(res > 0).toBe(true);
+    }
+  );
+});
+
+test("privacy.listen() for shareWatchHistoryChanged event", () => {
+  Privacy.once;
+  return Privacy.listen("shareWatchHistoryChanged", () => {}).then(
+    (res: number) => {
+      expect(res > 0).toBe(true);
+    }
+  );
+});
+
+test("privacy.once() for shareWatchHistoryChanged event", () => {
+  Privacy.once;
+  return Privacy.once("shareWatchHistoryChanged", () => {}).then(
+    (res: number) => {
+      expect(res > 0).toBe(true);
+    }
+  );
 });
 
 test("privacy.clear()", () => {

@@ -44,3 +44,26 @@ test("AcknowledgeChallenge.provide() with blank object", () => {
     );
   }).toThrow();
 });
+
+// Events Test cases
+
+// test("AcknowledgeChallenge.listen() for requestChallenge event", () => {
+//   return AcknowledgeChallenge.listen("requestChallenge", () => {}).then(
+//     (res: number) => {
+//       expect(res > 0).toBe(true);
+//     }
+//   );
+// });
+
+// test("AcknowledgeChallenge.once() for requestChallenge event", () => {
+//   return AcknowledgeChallenge.once("requestChallenge", () => {}).then(
+//     (res: number) => {
+//       expect(res > 0).toBe(true);
+//     }
+//   );
+// });
+
+// test("AcknowledgeChallenge.clear()", () => {
+//   const result = AcknowledgeChallenge.clear(2);
+//   expect(result).toBeFalsy();
+// });

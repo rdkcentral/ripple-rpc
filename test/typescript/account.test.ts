@@ -31,3 +31,22 @@ test("Account.provide() with blank object", () => {
     Account.provide("xrn:firebolt:capability:account:session", {});
   }).toThrow();
 });
+
+// Events Test cases
+
+// test("Account.listen() for requestSession event", () => {
+//   return Account.listen("requestSession", () => {}).then((res: number) => {
+//     expect(res > 0).toBe(true);
+//   });
+// });
+
+// test("Account.once() for requestSession event", () => {
+//   return Account.once("requestSession", () => {}).then((res: number) => {
+//     expect(res > 0).toBe(true);
+//   });
+// });
+
+// test("Account.clear()", () => {
+//   const result = Account.clear(2);
+//   expect(result).toBeFalsy();
+// });

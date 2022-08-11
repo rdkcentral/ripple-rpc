@@ -43,14 +43,86 @@ test("power.sleep()", () => {
   });
 });
 
-test("power.listen()", () => {
+test("power.listen() for active event", () => {
   return Power.listen("active", () => {}).then((res: number) => {
     expect(res > 0).toBe(true);
   });
 });
 
-test("power.once()", () => {
+test("power.once() for active event", () => {
   return Power.once("active", () => {}).then((res: number) => {
+    expect(res > 0).toBe(true);
+  });
+});
+
+test("power.listen() for activeStandby event", () => {
+  return Power.listen("activeStandby", () => {}).then((res: number) => {
+    expect(res > 0).toBe(true);
+  });
+});
+
+test("power.once() for activeStandby event", () => {
+  return Power.once("activeStandby", () => {}).then((res: number) => {
+    expect(res > 0).toBe(true);
+  });
+});
+
+test("power.listen() for inactivity event", () => {
+  return Power.listen("inactivity", () => {}).then((res: number) => {
+    expect(res > 0).toBe(true);
+  });
+});
+
+test("power.once() for inactivity event", () => {
+  return Power.once("inactivity", () => {}).then((res: number) => {
+    expect(res > 0).toBe(true);
+  });
+});
+
+test("power.listen() for inactivityCancelled event", () => {
+  return Power.listen("inactivityCancelled", () => {}).then((res: number) => {
+    expect(res > 0).toBe(true);
+  });
+});
+
+test("power.once() for inactivityCancelled event", () => {
+  return Power.once("inactivityCancelled", () => {}).then((res: number) => {
+    expect(res > 0).toBe(true);
+  });
+});
+
+test("power.listen() for powerOn event", () => {
+  return Power.listen("powerOn", () => {}).then((res: number) => {
+    expect(res > 0).toBe(true);
+  });
+});
+
+test("power.once() for powerOn event", () => {
+  return Power.once("powerOn", () => {}).then((res: number) => {
+    expect(res > 0).toBe(true);
+  });
+});
+
+test("power.listen() for resumedFromSuspended event", () => {
+  return Power.listen("resumedFromSuspended", () => {}).then((res: number) => {
+    expect(res > 0).toBe(true);
+  });
+});
+
+test("power.once() for resumedFromSuspended event", () => {
+  return Power.once("resumedFromSuspended", () => {}).then((res: number) => {
+    expect(res > 0).toBe(true);
+  });
+});
+
+test("power.listen() for suspendPending event", () => {
+  return Power.listen("suspendPending", () => {}).then((res: number) => {
+    expect(res > 0).toBe(true);
+  });
+});
+
+test("power.once() for suspendPending event", () => {
+  return Power.once("suspendPending", () => {}).then((res: number) => {
     expect(res > 0).toBe(true);
   });
 });

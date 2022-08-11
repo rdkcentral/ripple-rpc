@@ -39,3 +39,40 @@ test("DeveloperTools.unpair()", () => {
     expect(res).toEqual({});
   });
 });
+
+// Events Test cases
+
+// test("DeveloperTools.listen() for toolAvailable event", () => {
+//   return DeveloperTools.listen("toolAvailable", () => {}).then(
+//     (res: number) => {
+//       expect(res > 0).toBe(true);
+//     }
+//   );
+// });
+
+// test("DeveloperTools.once() for toolAvailable event", () => {
+//   return DeveloperTools.once("toolAvailable", () => {}).then((res: number) => {
+//     expect(res > 0).toBe(true);
+//   });
+// });
+
+// test("DeveloperTools.listen() for toolUnavailable event", () => {
+//   return DeveloperTools.listen("toolUnavailable", () => {}).then(
+//     (res: number) => {
+//       expect(res > 0).toBe(true);
+//     }
+//   );
+// });
+
+// test("DeveloperTools.once() for toolUnavailable event", () => {
+//   return DeveloperTools.once("toolUnavailable", () => {}).then(
+//     (res: number) => {
+//       expect(res > 0).toBe(true);
+//     }
+//   );
+// });
+
+// test("DeveloperTools.clear()", () => {
+//   const result = DeveloperTools.clear(2);
+//   expect(result).toBeFalsy();
+// });

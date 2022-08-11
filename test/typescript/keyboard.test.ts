@@ -50,3 +50,46 @@ test("Keyboard.provide() with blank object", () => {
     Keyboard.provide("xrn:firebolt:capability:input:keyboard", {});
   }).toThrow();
 });
+
+// Events Test cases
+
+// test("Keyboard.listen() for requestEmail event", () => {
+//   return Keyboard.listen("requestEmail", () => {}).then((res: number) => {
+//     expect(res > 0).toBe(true);
+//   });
+// });
+
+// test("Keyboard.once() for requestEmail event", () => {
+//   return Keyboard.once("requestEmail", () => {}).then((res: number) => {
+//     expect(res > 0).toBe(true);
+//   });
+// });
+
+// test("Keyboard.listen() for requestPassword event", () => {
+//   return Keyboard.listen("requestPassword", () => {}).then((res: number) => {
+//     expect(res > 0).toBe(true);
+//   });
+// });
+
+// test("Keyboard.once() for requestPassword event", () => {
+//   return Keyboard.once("requestPassword", () => {}).then((res: number) => {
+//     expect(res > 0).toBe(true);
+//   });
+// });
+
+// test("Keyboard.listen() for requestStandard event", () => {
+//   return Keyboard.listen("requestStandard", () => {}).then((res: number) => {
+//     expect(res > 0).toBe(true);
+//   });
+// });
+
+// test("Keyboard.once() for requestStandard event", () => {
+//   return Keyboard.once("requestStandard", () => {}).then((res: number) => {
+//     expect(res > 0).toBe(true);
+//   });
+// });
+
+// test("Keyboard.clear()", () => {
+//   const result = Keyboard.clear(2);
+//   expect(result).toBeFalsy();
+// });

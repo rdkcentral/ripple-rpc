@@ -41,3 +41,24 @@ test("PinChallenge.provide() with blank object", () => {
     PinChallenge.provide("xrn:firebolt:capability:usergrant:pinchallenge", {});
   }).toThrow();
 });
+
+// Events Test cases
+
+// test("PinChallenge.listen() for requestChallenge event", () => {
+//   return PinChallenge.listen("requestChallenge", () => {}).then(
+//     (res: number) => {
+//       expect(res > 0).toBe(true);
+//     }
+//   );
+// });
+
+// test("PinChallenge.once() for requestChallenge event", () => {
+//   return PinChallenge.once("requestChallenge", () => {}).then((res: number) => {
+//     expect(res > 0).toBe(true);
+//   });
+// });
+
+// test("PinChallenge.clear()", () => {
+//   const result = PinChallenge.clear(2);
+//   expect(result).toBeFalsy();
+// });
