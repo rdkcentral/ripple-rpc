@@ -68,6 +68,14 @@
                   "name": "capabilities",
                   "x-provides": "xrn:firebolt:capability:app:lifecycle",
                   "x-allow-focus": false
+                },
+                {
+                  "name": "event",
+                  "x-response": {
+                    "schema": {
+                      "const": null
+                    }
+                  }
                 }
               ],
             "result": {
@@ -121,6 +129,14 @@
                   "name": "capabilities",
                   "x-provides": "xrn:firebolt:capability:app:lifecycle",
                   "x-allow-focus": false
+                },
+                {
+                  "name": "event",
+                  "x-response": {
+                    "schema": {
+                      "const": null
+                    }
+                  }
                 }
               ],
             "result": {
@@ -175,6 +191,14 @@
                   "name": "capabilities",
                   "x-provides": "xrn:firebolt:capability:app:lifecycle",
                   "x-allow-focus": false
+                },
+                {
+                  "name": "event",
+                  "x-response": {
+                    "schema": {
+                      "const": null
+                    }
+                  }
                 }
               ],
             "result": {
