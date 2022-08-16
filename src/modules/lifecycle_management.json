@@ -103,6 +103,7 @@
                     "result": {
                         "name": "Default Result",
                         "value": {
+                          "correlationId": "123",
                           "parameters": {
                             "appId": "SomeAppId"
                           }
@@ -165,6 +166,7 @@
                     "result": {
                         "name": "Default Result",
                         "value": {
+                          "correlationId": "123",
                           "parameters": {
                             "appId": "SomeAppId",
                             "reason": "userExit"
@@ -228,6 +230,7 @@
                     "result": {
                         "name": "Default Result",
                         "value": {
+                          "correlationId": "123",
                           "parameters": {
                             "appId": "SomeAppId"
                           }
