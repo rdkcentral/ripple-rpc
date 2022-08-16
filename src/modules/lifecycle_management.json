@@ -64,18 +64,17 @@
                 }
             ],
             "tags": [
-                {
+              {
+                "name": "event",
+                "x-response": {
+                  "const": null,
+                  "examples": [null]                  
+                }
+              },
+              {
                   "name": "capabilities",
                   "x-provides": "xrn:firebolt:capability:app:lifecycle",
                   "x-allow-focus": false
-                },
-                {
-                  "name": "event",
-                  "x-response": {
-                    "schema": {
-                      "const": null
-                    }
-                  }
                 }
               ],
             "result": {
@@ -133,9 +132,10 @@
                 {
                   "name": "event",
                   "x-response": {
-                    "schema": {
-                      "const": null
-                    }
+                    "const": null,
+                    "examples": [
+                      null
+                    ]        
                   }
                 }
               ],
@@ -195,9 +195,10 @@
                 {
                   "name": "event",
                   "x-response": {
-                    "schema": {
-                      "const": null
-                    }
+                    "const": null,
+                    "examples": [
+                      null
+                    ]        
                   }
                 }
               ],
