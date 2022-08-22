@@ -25,6 +25,12 @@
                     }
                 }
             ],
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-manages": "xrn:firebolt:capability:app:lifecycle"
+                }
+            ],
             "result": {
                 "name": "result",
                 "schema": {
@@ -61,6 +67,12 @@
                     "schema": {
                         "$ref": "#/components/schemas/AppSession"
                     }
+                }
+            ],
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-manages": "xrn:firebolt:capability:app:lifecycle"
                 }
             ],
             "result": {
