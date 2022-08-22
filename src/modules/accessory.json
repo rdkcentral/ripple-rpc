@@ -12,7 +12,6 @@
       "tags": [
         {
           "name": "capabilities",
-          "x-uses-operator": "anyOf",
           "x-uses": [
             "xrn:firebolt:capability:bluetooth:scan",
             "xrn:firebolt:capability:rf4ce:scan"
@@ -99,7 +98,6 @@
       "tags": [
         {
           "name": "capabilities",
-          "x-uses-operator": "anyOf",
           "x-uses": [
             "xrn:firebolt:capability:bluetooth:scan",
             "xrn:firebolt:capability:rf4ce:scan"
