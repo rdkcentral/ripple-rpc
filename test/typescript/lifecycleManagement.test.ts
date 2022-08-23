@@ -19,7 +19,7 @@
 import { test, expect } from "@jest/globals";
 import { LifecycleManagement } from "../../dist/lib/firebolt-manage";
 
-test("LifecycleManagement.setState() with blank object", () => {
+test("LifecycleManagement.setState()", () => {
   return LifecycleManagement.setState("Test_APP_ID", "initializing").then(
     (res) => {
       expect(res).toEqual({});
@@ -31,4 +31,21 @@ test("LifecycleManagement.provide() with blank object", () => {
   expect(() => {
     LifecycleManagement.provide("xrn:firebolt:capability:app:lifecycle", {});
   }).toThrow();
+});
+
+test("LifecycleManagement.session()", () => {
+  const dummyData: LifecycleManagement.AppSession = {
+    app: {
+      id: "123",
+      url: "test_url",
+      title: "test_title",
+      catalog: "test_catalog",
+    },
+    runtime: {
+      id: "123",
+    },
+  };
+  return LifecycleManagement.session(dummyData).then((res: void) => {
+    expect(res).toEqual({});
+  });
 });
