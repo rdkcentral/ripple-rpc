@@ -7,8 +7,8 @@
     },
     "methods": [
         {
-            "name": "resetIdentity",
-            "summary": "Resets a user's identity in the ad platform so that the advertising id that apps get will be a new value",
+            "name": "resetIdentifier",
+            "summary": "Resets a user's identifier in the ad platform so that the advertising id that apps get will be a new value",
             "params": [
             ],
             "result": {
