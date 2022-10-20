@@ -75,41 +75,6 @@
             ]
         },
         {
-            "name": "distributor",
-            "summary": "Used by a distributor to push distributor name to firebolt.",
-            "params": [
-                {
-                    "name": "name",
-                    "summary": "The name of the distributor set by provisioning app.",
-                    "required": true,
-                    "schema": {
-                        "type": "string"
-                    }
-                }
-            ],
-            "result": {
-                "name": "result",
-                "schema": {
-                    "const": null
-                }
-            },
-            "examples": [
-                {
-                    "name": "Default Example",
-                    "params": [
-                        {
-                            "name": "name",
-                            "value": "global"
-                        }
-                    ],
-                    "result": {
-                        "name": "defaultResult",
-                        "value": null
-                    }
-                }
-            ]
-        },
-        {
             "name": "onRequestSession",
             "summary": "Registers as a provider for when device needs a session",
             "params": [
