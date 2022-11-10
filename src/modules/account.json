@@ -81,55 +81,6 @@
                     }
                 }
             ]
-        },
-        {
-            "name": "onRequestSession",
-            "summary": "Registers as a provider for when device needs a session",
-            "params": [],
-            "tags": [
-                {
-                    "name": "event",
-                    "x-response": {
-                        "$ref": "#/components/schemas/Session",
-                        "examples": [
-                            {
-                                "token": "RmlyZWJvbHQgTWFuYWdlIFNESyBSb2NrcyEhIQ==",
-                                "expiresIn": 84000
-                            }
-                        ]
-                    }
-                },
-                {
-                    "name": "capabilities",
-                    "x-provides": "xrn:firebolt:capability:token:session",
-                    "x-allow-focus": true
-                }
-            ],
-            "result": {
-                "name": "session",
-                "summary": "The request to get a new session",
-                "schema": {
-                    "type": "object",
-                    "properties": {
-                        "parameters": {
-                            "const": null
-                        }
-                    }
-                }
-            },
-            "examples": [
-                {
-                    "name": "Default Example",
-                    "params": [],
-                    "result": {
-                        "name": "Default Result",
-                        "value": {
-                            "correlationId": "abc",
-                            "parameters": null
-                        }
-                    }
-                }
-            ]
         }
     ]
 }
