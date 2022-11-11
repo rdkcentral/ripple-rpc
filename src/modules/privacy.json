@@ -56,7 +56,8 @@
             "name": "allowAppEntitlementCollection",
             "tags": [
                 {
-                    "name": "property"
+                    "name": "property",
+                    "x-allow-value": true
                 },
                 {
                     "name": "capabilities",
@@ -101,7 +102,8 @@
             "name": "allowResumePoints",
             "tags": [
                 {
-                    "name": "property"
+                    "name": "property",
+                    "x-allow-value": true
                 },
                 {
                     "name": "capabilities",
@@ -135,7 +137,8 @@
             "name": "allowUnentitledResumePoints",
             "tags": [
                 {
-                    "name": "property"
+                    "name": "property",
+                    "x-allow-value": true
                 },
                 {
                     "name": "capabilities",
@@ -169,7 +172,8 @@
             "name": "allowWatchHistory",
             "tags": [
                 {
-                    "name": "property"
+                    "name": "property",
+                    "x-allow-value": true
                 },
                 {
                     "name": "capabilities",
@@ -203,7 +207,8 @@
             "name": "allowProductAnalytics",
             "tags": [
                 {
-                    "name": "property"
+                    "name": "property",
+                    "x-allow-value": true
                 },
                 {
                     "name": "capabilities",
@@ -237,7 +242,8 @@
             "name": "allowPersonalization",
             "tags": [
                 {
-                    "name": "property"
+                    "name": "property",
+                    "x-allow-value": true
                 },
                 {
                     "name": "capabilities",
@@ -271,7 +277,8 @@
             "name": "allowUnentitledPersonalization",
             "tags": [
                 {
-                    "name": "property"
+                    "name": "property",
+                    "x-allow-value": true
                 },
                 {
                     "name": "capabilities",
@@ -305,7 +312,8 @@
             "name": "allowRemoteDiagnostics",
             "tags": [
                 {
-                    "name": "property"
+                    "name": "property",
+                    "x-allow-value": true
                 },
                 {
                     "name": "capabilities",
@@ -339,7 +347,8 @@
             "name": "allowPrimaryContentAdTargeting",
             "tags": [
                 {
-                    "name": "property"
+                    "name": "property",
+                    "x-allow-value": true
                 },
                 {
                     "name": "capabilities",
@@ -373,7 +382,8 @@
             "name": "allowPrimaryBrowseAdTargeting",
             "tags": [
                 {
-                    "name": "property"
+                    "name": "property",
+                    "x-allow-value": true
                 },
                 {
                     "name": "capabilities",
@@ -407,7 +417,8 @@
             "name": "allowAppContentAdTargeting",
             "tags": [
                 {
-                    "name": "property"
+                    "name": "property",
+                    "x-allow-value": true
                 },
                 {
                     "name": "capabilities",
@@ -441,7 +452,8 @@
             "name": "allowACRCollection",
             "tags": [
                 {
-                    "name": "property"
+                    "name": "property",
+                    "x-allow-value": true
                 },
                 {
                     "name": "capabilities",
@@ -475,7 +487,8 @@
             "name": "allowCameraAnalytics",
             "tags": [
                 {
-                    "name": "property"
+                    "name": "property",
+                    "x-allow-value": true
                 },
                 {
                     "name": "capabilities",
