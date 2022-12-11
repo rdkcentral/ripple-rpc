@@ -4,7 +4,7 @@ import { Privacy } from "../../dist/lib/firebolt-manage";
 let listenerId: number;
 
 test("Able to get TypeScript listenerId", () => {
-  return Privacy.listen("limitAdTrackingChanged", () => {}).then(
+  return Privacy.listen("allowAppDataCollectionChanged", () => {}).then(
     (id: number) => {
       listenerId = id;
       console.log(listenerId);
@@ -13,84 +13,84 @@ test("Able to get TypeScript listenerId", () => {
   );
 });
 
-test("privacy.once() for limitAdTrackingChanged event", () => {
+test("privacy.once() for allowAppDataCollectionChanged event", () => {
   Privacy.once;
-  return Privacy.once("limitAdTrackingChanged", () => {}).then(
+  return Privacy.once("allowAppDataCollectionChanged", () => {}).then(
     (res: number) => {
       expect(res > 0).toBe(true);
     }
   );
 });
 
-test("privacy.shareWatchHistory()", () => {
-  return Privacy.shareWatchHistory('test').then((res: boolean) => {
+test("privacy.allowAppDataCollection()", () => {
+  return Privacy.allowAppDataCollection('test').then((res: boolean) => {
     // TODO: fix
     expect(true).toBe(true);
   });
 });
 
-test("privacy.enableRecommendations()", () => {
-  return Privacy.enableRecommendations('test').then((res: boolean) => {
+test("privacy.allowAppEntitlementCollection()", () => {
+  return Privacy.allowAppEntitlementCollection('test').then((res: boolean) => {
     // TODO: fix
     expect(true).toBe(true);
   });
 });
 
-test("privacy.rememberWatchedPrograms()", () => {
-  return Privacy.rememberWatchedPrograms('test').then((res: boolean) => {
+test("privacy.allowResumePoints()", () => {
+  return Privacy.allowResumePoints().then((res: boolean) => {
     // TODO: fix
     expect(true).toBe(true);
   });
 });
 
-test("privacy.listen() for enableRecommendationsChanged event", () => {
+test("privacy.listen() for allowPersonalizationChanged event", () => {
   Privacy.once;
-  return Privacy.listen("enableRecommendationsChanged", () => {}).then(
+  return Privacy.listen("allowPersonalizationChanged", () => {}).then(
     (res: number) => {
       expect(res > 0).toBe(true);
     }
   );
 });
 
-test("privacy.once() for enableRecommendationsChanged event", () => {
+test("privacy.once() for allowPersonalizationChanged event", () => {
   Privacy.once;
-  return Privacy.once("enableRecommendationsChanged", () => {}).then(
+  return Privacy.once("allowPersonalizationChanged", () => {}).then(
     (res: number) => {
       expect(res > 0).toBe(true);
     }
   );
 });
 
-test("privacy.listen() for rememberWatchedProgramsChanged event", () => {
+test("privacy.listen() for allowWatchHistoryChanged event", () => {
   Privacy.once;
-  return Privacy.listen("rememberWatchedProgramsChanged", () => {}).then(
+  return Privacy.listen("allowWatchHistoryChanged", () => {}).then(
     (res: number) => {
       expect(res > 0).toBe(true);
     }
   );
 });
 
-test("privacy.once() for rememberWatchedProgramsChanged event", () => {
+test("privacy.once() for allowWatchHistoryChanged event", () => {
   Privacy.once;
-  return Privacy.once("rememberWatchedProgramsChanged", () => {}).then(
+  return Privacy.once("allowWatchHistoryChanged", () => {}).then(
     (res: number) => {
       expect(res > 0).toBe(true);
     }
   );
 });
 
-test("privacy.listen() for shareWatchHistoryChanged event", () => {
+test("privacy.listen() for allowAppContentAdTargetingChanged event", () => {
   Privacy.once;
-  return Privacy.listen("shareWatchHistoryChanged", () => {}).then(
+  return Privacy.listen("allowAppContentAdTargetingChanged", () => {}).then(
     (res: number) => {
       expect(res > 0).toBe(true);
     }
   );
 });
 
-test("privacy.once() for shareWatchHistoryChanged event", () => {
+test("privacy.once() for allowAppContentAdTargetingChanged event", () => {
   Privacy.once;
-  return Privacy.once("shareWatchHistoryChanged", () => {}).then(
+  return Privacy.once("allowAppContentAdTargetingChanged", () => {}).then(
     (res: number) => {
       expect(res > 0).toBe(true);
     }
