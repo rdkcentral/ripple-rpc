@@ -8,7 +8,7 @@
     "methods": [
         {
             "name": "app",
-            "summary": "Get all active and denied user grants for the given app",
+            "summary": "Get all granted and denied user grants for the given app",
             "tags": [
                 {
                     "name": "capabilities",
@@ -53,7 +53,7 @@
                                     "id": "certapp",
                                     "title": "Firebolt Certification"
                                 },
-                                "state": "active",
+                                "state": "granted",
                                 "capability": "xrn:firebolt:capability:data:app-usage",
                                 "role": "use",
                                 "lifespan": "seconds",
@@ -76,7 +76,7 @@
         },
         {
             "name": "device",
-            "summary": "Get all active and denied user grants for the device",
+            "summary": "Get all granted and denied user grants for the device",
             "tags": [
                 {
                     "name": "capabilities",
@@ -104,7 +104,7 @@
                         "name": "defaultResult",
                         "value": [
                             {
-                                "state": "active",
+                                "state": "granted",
                                 "capability": "xrn:firebolt:capability:localization:postal-code",
                                 "role": "use",
                                 "lifespan": "powerActive"
@@ -116,7 +116,7 @@
         },
         {
             "name": "capability",
-            "summary": "Get all active and denied user grants for the given capability",
+            "summary": "Get all granted and denied user grants for the given capability",
             "tags": [
                 {
                     "name": "capabilities",
@@ -157,7 +157,7 @@
                         "name": "defaultResult",
                         "value": [
                             {
-                                "state": "active",
+                                "state": "granted",
                                 "capability": "xrn:firebolt:capability:localization:postal-code",
                                 "role": "use",
                                 "lifespan": "powerActive"
@@ -169,7 +169,7 @@
         },
         {
             "name": "grant",
-            "summary": "Grants a given Capability, to a specific app if appropriate. Calling this results in a persisted Active Grant that lasts for the duration of the Grant Policy lifespan. ",
+            "summary": "Grants a given capability to a specific app, if appropriate. Calling this results in a persisted active grant that lasts for the duration of the grant policy lifespan. ",
             "tags": [
                 {
                     "name": "capabilities",
@@ -429,7 +429,7 @@
                                     "id": "certapp",
                                     "title": "Certification App"
                                 },
-                                "state": "active",
+                                "state": "granted",
                                 "capability": "xrn:firebolt:capability:localization:postal-code",
                                 "role": "use",
                                 "lifespan": "powerActive"
@@ -486,7 +486,7 @@
                             "id": "certapp",
                             "title": "Firebolt Certification"
                         },
-                        "state": "active",
+                        "state": "granted",
                         "capability": "xrn:firebolt:capability:data:app-usage",
                         "role": "use",
                         "lifespan": "seconds",
@@ -514,7 +514,7 @@
                 "description": "The state the grant is in",
                 "type": "string",
                 "enum": [
-                    "active",
+                    "granted",
                     "denied"
                 ]
             },
