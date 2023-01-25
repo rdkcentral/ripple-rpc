@@ -36,40 +36,6 @@
                     }
                 }
             ]
-        },
-        {
-            "name": "skipRestriction",
-            "tags": [
-                {
-                    "name": "property"
-                },
-                {
-                    "name": "capabilities",
-                    "x-uses": [
-                        "xrn:firebolt:capability:advertising:configuration"
-                    ]
-                }
-            ],
-            "summary": "Property for what restrictions are in place for skipping advertisments on this device",
-            "params": [
-            ],
-            "result": {
-                "name": "skipRestriction",
-                "schema": {
-                    "$ref": "https://meta.comcast.com/firebolt/advertising#/definitions/SkipRestriction"
-                }
-            },
-            "examples": [
-                {
-                    "name": "Default Example",
-                    "params": [
-                    ],
-                    "result": {
-                        "name": "skipRestriction",
-                        "value": "adsUnwatched"
-                    }
-                }
-            ]
         }
     ],
     "components": {
