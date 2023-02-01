@@ -19,7 +19,7 @@
     "dist:declarations": "npx firebolt-openrpc --task declarations --source src --output dist/lib/firebolt-manage.d.ts --shared-schemas node_modules/@firebolt-js/schemas/src/schemas",
     "dist:docs": "cp -R ./build/docs/markdown ./dist/docs",
     "dist:wiki": "cp -R ./build/docs/markdown ./dist/docs",
-    "test:setup": "rimraf test/transpiled-suite && npx tsc --target es6 --moduleResolution node --outDir test/transpiled-suite",
+    "test:setup": "npx rimraf test/transpiled-suite && npx tsc --target es6 --moduleResolution node --outDir test/transpiled-suite",
     "test": "npm run test:setup && NODE_OPTIONS=--experimental-vm-modules npx --config=jest.config.json --detectOpenHandles jest",
     "clean": "npx rimraf build && npx rimraf dist",
     "publish:docs": "npm run build:docs && sh ./push-docs.sh",
