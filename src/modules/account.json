@@ -33,12 +33,12 @@
     "methods": [
         {
             "name": "session",
-            "summary": "Used by a distributor to push Session token to firebolt.",
+            "summary": "Used by a distributor to push an account session token to firebolt.",
             "tags": [
                 {
                     "name": "capabilities",
                     "x-manages": [
-                        "xrn:firebolt:capability:token:session"
+                        "xrn:firebolt:capability:token:account"
                     ]
                 }
             ],
