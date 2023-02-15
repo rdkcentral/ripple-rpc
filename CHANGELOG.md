@@ -1,3 +1,10 @@
+# [0.1.0-next.2](https://github.com/rdkcentral/firebolt-manage-sdk/compare/v0.1.0-next.1...v0.1.0-next.2) (2023-02-15)
+
+
+### Bug Fixes
+
+* Capability for account.session should be token:account ([#60](https://github.com/rdkcentral/firebolt-manage-sdk/issues/60)) ([5f26ad2](https://github.com/rdkcentral/firebolt-manage-sdk/commit/5f26ad22e3ed8385d6d629882441d4e6e254d9e6))
+
 # [0.1.0-next.1](https://github.com/rdkcentral/firebolt-manage-sdk/compare/v0.0.0...v0.1.0-next.1) (2023-02-01)
 
 
