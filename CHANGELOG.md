@@ -1,3 +1,10 @@
+# [0.1.0-next.3](https://github.com/rdkcentral/firebolt-manage-sdk/compare/v0.1.0-next.2...v0.1.0-next.3) (2023-03-07)
+
+
+### Bug Fixes
+
+* Marking params of account.session as mandatory field. ([#62](https://github.com/rdkcentral/firebolt-manage-sdk/issues/62)) ([de1fdac](https://github.com/rdkcentral/firebolt-manage-sdk/commit/de1fdac2e212054bf24f16116c8df6ff0f583cae))
+
 # [0.1.0-next.2](https://github.com/rdkcentral/firebolt-manage-sdk/compare/v0.1.0-next.1...v0.1.0-next.2) (2023-02-15)
 
 
