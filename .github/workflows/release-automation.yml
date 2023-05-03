@@ -34,7 +34,7 @@ jobs:
       - name: Build markdown docs
         run: |
           npm run docs
-          npm run dist:docs
+          npm run dist:copy:docs
       - name: Set explicit npm dist-tag default
         if: github.ref_name == 'main'
         run: echo "NPM_DIST_TAG=latest" >> $GITHUB_ENV
