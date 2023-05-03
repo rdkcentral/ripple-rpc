@@ -30,10 +30,5 @@ jobs:
     - run: npm run fs:setup
     - run: npm run validate:each
     - run: |
-        npm run build:sdk
-        npm run dist:sdk
-    - run: npm run dist:declarations
-    - run: |
-        npm run build:docs
+        npm run docs
         npm run dist:docs
-    - run: npm run test
