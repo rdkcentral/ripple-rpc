@@ -35,6 +35,7 @@ jobs:
         run: |
           npm run docs
           npm run dist:copy:docs
+          npm run publish:docs
       - name: Set explicit npm dist-tag default
         if: github.ref_name == 'main'
         run: echo "NPM_DIST_TAG=latest" >> $GITHUB_ENV
