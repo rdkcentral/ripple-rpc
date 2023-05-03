@@ -6,7 +6,7 @@
       "prerelease": true
     }
   ],
-  "dryRun": false,
+  "dryRun": true,
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
@@ -24,7 +24,7 @@
     [
       "@semantic-release/npm",
       {
-        "npmPublish": true,
+        "npmPublish": false,
         "tarballDir": "./"
       }
     ],

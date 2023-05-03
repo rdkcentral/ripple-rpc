@@ -28,21 +28,14 @@ jobs:
       - name: Validate each OpenRPC spec
         run: npm run validate:each
       - name: Build fully assembled OpenRPC spec
-        run: npm run build:openrpc
+        run: npm run compile
       - name: Validate fully assembled OpenRPC spec
-        run: npm run validate:assembled
-      - name: Build JavaScript SDK
-        run: |
-            npm run build:sdk
-            npm run dist:sdk
-      - name: Generate TypeScript declarations
-        run: npm run dist:declarations
-      - name: Run JavaScript SDK unit tests
-        run: npm run test
+        run: npm run validate:compiled
       - name: Build markdown docs
         run: |
-          npm run build:docs
-          npm run dist:docs
+          npm run docs
+          npm run dist:copy:docs
+          npm run publish:docs
       - name: Set explicit npm dist-tag default
         if: github.ref_name == 'main'
         run: echo "NPM_DIST_TAG=latest" >> $GITHUB_ENV

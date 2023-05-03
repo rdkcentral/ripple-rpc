@@ -1,43 +1,37 @@
 {
-  "name": "@firebolt-js/manage-sdk",
+  "name": "@firebolt-js/ripple-rpc",
   "version": "0.1.0-next.3",
-  "description": "The Firebolt JS Manage SDK",
-  "main": "./dist/lib/firebolt-manage.mjs",
-  "types": "./dist/lib/firebolt-manage.d.ts",
+  "description": "A Ripple specific RPC definition",
+  "main": "./dist/lib/ripple-rpc.mjs",
+  "types": "./dist/lib/ripple-rpc.d.ts",
   "type": "module",
   "scripts": {
     "prepare": "husky install",
-    "prepack": "npm run fs:setup && npm run build:openrpc && npm run build:sdk && npm run dist:sdk && npm run dist:declarations",
     "fs:setup": "npm run clean && npx mkdirp ./dist/docs ./dist/lib ./build/docs/markdown ./build/docs/wiki ./build/sdk/javascript/src",
-    "validate:each": "npx firebolt-openrpc --task validate --source ./src --shared-schemas node_modules/@firebolt-js/schemas/src/schemas",
-    "validate:assembled": "npx firebolt-openrpc --task validate --source dist/firebolt-manage-open-rpc.json --shared-schemas node_modules/@firebolt-js/schemas/src/schemas",
-    "build:openrpc": "npx firebolt-openrpc --task openrpc --source src --template src/template/openrpc/template.json --output ./dist/firebolt-manage-open-rpc.json --shared-schemas node_modules/@firebolt-js/schemas/src/schemas",
-    "build:sdk": "npx firebolt-openrpc --task sdk --source ./src/ --template ./src/template/js --output ./build/sdk/javascript/src --shared-schemas node_modules/@firebolt-js/schemas/src/schemas/",
-    "build:docs": "npx firebolt-openrpc --task docs --source ./src/ --template ./src/template/markdown --output ./build/docs/markdown --shared-schemas node_modules/@firebolt-js/schemas/src/schemas/ --as-path",
-    "build:wiki": "npx firebolt-openrpc -task docs --source ./src/ --template ./src/template/markdown --output ./build/docs/wiki --shared-schemas node_modules/@firebolt-js/schemas/src/schemas/",
-    "dist:sdk": "cp -R ./build/sdk/javascript/src/* ./dist/lib",
-    "dist:declarations": "npx firebolt-openrpc --task declarations --source src --output dist/lib/firebolt-manage.d.ts --shared-schemas node_modules/@firebolt-js/schemas/src/schemas",
-    "dist:docs": "cp -R ./build/docs/markdown ./dist/docs",
-    "dist:wiki": "cp -R ./build/docs/markdown ./dist/docs",
-    "test:setup": "npx rimraf test/transpiled-suite && npx tsc --target es6 --moduleResolution node --outDir test/transpiled-suite",
-    "test": "npm run test:setup && NODE_OPTIONS=--experimental-vm-modules npx --config=jest.config.json --detectOpenHandles jest",
+    "validate:each": "npx firebolt-openrpc validate --input src/openrpc --schemas node_modules/@firebolt-js/schemas/src/schemas --transformations",
+    "validate:compiled": "npx firebolt-openrpc validate --input dist/ripple-rpc.json",
+    "compile": "npx firebolt-openrpc openrpc --input src --template src/template/openrpc/template.json --output ./dist/ripple-rpc.json --schemas node_modules/@firebolt-js/schemas/src/schemas",
+    "docs": "npm run markdown && npm run wiki",
+    "markdown": "npx firebolt-openrpc docs --input ./dist/ripple-rpc.json --output build/docs/markdown --as-path",
+    "wiki": "npx firebolt-openrpc docs --input ./dist/ripple-rpc.json --output build/docs/wiki",
+    "dist": "npm run clean && npm run compile && npm run docs && npm run wiki && npm run dist:copy:docs",
+    "dist:copy:docs": "mkdirp ./dist && cp -R build/docs/markdown dist/docs && cp -R build/docs/wiki dist/docs",
     "clean": "npx rimraf build && npx rimraf dist",
-    "publish:docs": "npm run build:docs && sh ./push-docs.sh",
-    "publish:word": "npx mkdirp ./dist/word/schemas && cd ./dist/docs && find . -iname \"*.md\" -type f -exec sh -c 'pandoc \"${0}\" -o \"../word/${0%.md}.docx\"' {} \\;",
-    "postinstall": "npm update @firebolt-js/openrpc"
+    "publish:docs": "npm run wiki && sh ./push-docs.sh",
+    "publish:word": "npx mkdirp ./dist/word/schemas && cd ./dist/docs && find . -iname \"*.md\" -type f -exec sh -c 'pandoc \"${0}\" -o \"../word/${0%.md}.docx\"' {} \\;"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rdkcentral/firebolt-manage-sdk.git"
+    "url": "git+https://github.com/rdkcentral/ripple-rpc-sdk.git"
   },
   "author": "",
   "bugs": {
-    "url": "https://github.com/rdkcentral/firebolt-manage-sdk/issues"
+    "url": "https://github.com/rdkcentral/ripple-rpc-sdk/issues"
   },
-  "homepage": "https://github.com/rdkcentral/firebolt-manage-sdk#readme",
+  "homepage": "https://github.com/rdkcentral/ripple-rpc-sdk#readme",
   "devDependencies": {
-    "@firebolt-js/openrpc": "^1.8.0-next.1",
-    "@firebolt-js/schemas": "^0.8.0-next.0",
+    "@firebolt-js/openrpc": "^2.0.0",
+    "@firebolt-js/schemas": "^0.9.0",
     "@commitlint/cli": "^17.3.0",
     "@commitlint/config-conventional": "^17.3.0",
     "@semantic-release/changelog": "^6.0.2",
@@ -54,9 +48,7 @@
   },
   "keywords": [
     "firebolt",
-    "manage",
-    "device",
-    "sdk"
+    "ripple"
   ],
   "license": "Apache-2.0"
 }
