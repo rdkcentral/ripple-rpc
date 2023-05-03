@@ -12,11 +12,11 @@
     "validate:compiled": "npx firebolt-openrpc validate --input dist/ripple-rpc.json",
     "compile": "npx firebolt-openrpc openrpc --input src --template src/template/openrpc/template.json --output ./dist/ripple-rpc.json --schemas node_modules/@firebolt-js/schemas/src/schemas",
     "docs": "npx firebolt-openrpc docs --input ./dist/ripple-rpc.json --output build/docs/markdown --as-path",
-	"wiki": "npx firebolt-openrpc docs --input ./dist/ripple-rpc.json --output build/docs/markdown",
+    "wiki": "npx firebolt-openrpc docs --input ./dist/ripple-rpc.json --output build/docs/wiki",
     "dist": "npm run clean && npm run compile && npm run docs && npm run wiki && npm run dist:copy:docs",
-	"dist:copy:docs": "mkdirp ./dist && cp -R build/docs/markdown dist/docs",
+    "dist:copy:docs": "mkdirp ./dist && cp -R build/docs/markdown dist/docs && cp -R build/docs/wiki dist/docs",
     "clean": "npx rimraf build && npx rimraf dist",
-    "publish:docs": "npm run build:docs && sh ./push-docs.sh",
+    "publish:docs": "npm run wiki && sh ./push-docs.sh",
     "publish:word": "npx mkdirp ./dist/word/schemas && cd ./dist/docs && find . -iname \"*.md\" -type f -exec sh -c 'pandoc \"${0}\" -o \"../word/${0%.md}.docx\"' {} \\;"
   },
   "repository": {

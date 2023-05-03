@@ -18,7 +18,6 @@
 
 mkdir -p /tmp/firebolt-docs/build
 mkdir -p /tmp/firebolt-docs/wiki
-mkdir -p /tmp/firebolt-docs/ottxdocs
 
 cp -r ./build/docs/wiki /tmp/firebolt-docs/build
 
@@ -41,7 +40,7 @@ then
    git commit -m 'Publishing docs to wiki'
    git push
 else
-    echo "Publishing $BRANCH docs to ottx-docs wiki..."
+    echo "Publishing $BRANCH docs to repo wiki..."
     echo "ERROR: not supported yet..."
 fi
 
