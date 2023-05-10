@@ -120,7 +120,8 @@
                         "name": "defaultResult",
                         "value": {
                             "sessionId": "c0d012b4-0854-4bbc-82d5-ab52ac29dd94",
-                            "loadedSessionId": "612f307e-8b32-412e-bcec-831779bc07ae"
+                            "loadedSessionId": "612f307e-8b32-412e-bcec-831779bc07ae",
+                            "activeSessionId": "05b6f6af-c2f8-4761-beeb-6029590b8e8c"
                         }
                     }
                 },
@@ -147,8 +148,7 @@
                         "name": "defaultResult",
                         "value": {
                             "sessionId": "c0d012b4-0854-4bbc-82d5-ab52ac29dd94",
-                            "loadedSessionId": "612f307e-8b32-412e-bcec-831779bc07ae",
-                            "activeSessionId": "05b6f6af-c2f8-4761-beeb-6029590b8e8c"
+                            "loadedSessionId": "612f307e-8b32-412e-bcec-831779bc07ae"
                         }
                     }
                 }
