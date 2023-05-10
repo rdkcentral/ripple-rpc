@@ -31,7 +31,9 @@
             "tags": [
                 {
                     "name": "capabilities",
-                    "x-manages": ["xrn:firebolt:capability:lifecycle:state"]
+                    "x-manages": [
+                        "xrn:firebolt:capability:lifecycle:state"
+                    ]
                 }
             ],
             "result": {
@@ -68,26 +70,22 @@
                     "name": "session",
                     "required": true,
                     "schema": {
-                        "$ref": "#/components/schemas/AppSession"
+                        "$ref": "#/components/schemas/AppSessionRequest"
                     }
                 }
             ],
             "tags": [
                 {
                     "name": "capabilities",
-                    "x-manages": ["xrn:firebolt:capability:lifecycle:state"]
+                    "x-manages": [
+                        "xrn:firebolt:capability:lifecycle:state"
+                    ]
                 }
             ],
             "result": {
                 "name": "result",
                 "schema": {
-                    "type": "object",
-                    "required": ["sessionId"],
-                    "properties": {
-                        "sessionId" : {
-                            "type": "string"
-                        }
-                    }
+                    "$ref": "#/components/schemas/AppSession"
                 }
             },
             "examples": [
@@ -121,7 +119,36 @@
                     "result": {
                         "name": "defaultResult",
                         "value": {
-                            "sessionId": "c0d012b4-0854-4bbc-82d5-ab52ac29dd94"
+                            "sessionId": "c0d012b4-0854-4bbc-82d5-ab52ac29dd94",
+                            "loadedSessionId": "612f307e-8b32-412e-bcec-831779bc07ae"
+                        }
+                    }
+                },
+                {
+                    "name": "Starts an inactive app session",
+                    "params": [
+                        {
+                            "name": "session",
+                            "value": {
+                                "app": {
+                                    "id": "SomeApp",
+                                    "url": "https://some-app.firebolt.rdkcentral.com"
+                                },
+                                "runtime": {
+                                    "id": "WebBrowser-1"
+                                },
+                                "launch": {
+                                    "inactive": true
+                                }
+                            }
+                        }
+                    ],
+                    "result": {
+                        "name": "defaultResult",
+                        "value": {
+                            "sessionId": "c0d012b4-0854-4bbc-82d5-ab52ac29dd94",
+                            "loadedSessionId": "612f307e-8b32-412e-bcec-831779bc07ae",
+                            "activeSessionId": "05b6f6af-c2f8-4761-beeb-6029590b8e8c"
                         }
                     }
                 }
@@ -440,8 +467,8 @@
                     }
                 }
             },
-            "AppSession": {
-                "title": "AppSession",
+            "AppSessionRequest": {
+                "title": "AppSessionRequest",
                 "type": "object",
                 "required": [
                     "app"
@@ -475,8 +502,7 @@
                     "runtime": {
                         "description": "Information about the runtime that the application is running in",
                         "type": "object",
-                        "required": [
-                        ],
+                        "required": [],
                         "properties": {
                             "id": {
                                 "description": "The identifier for the runtime",
@@ -486,7 +512,8 @@
                                 "description": "The type of transport the application container will use to communicate to Firebolt",
                                 "type": "string",
                                 "enum": [
-                                    "bridge", "websocket"
+                                    "bridge",
+                                    "websocket"
                                 ]
                             }
                         }
@@ -502,8 +529,34 @@
                             "secondScreen": {
                                 "description": "Any information about the app being launched from a second screen",
                                 "$ref": "#/components/schemas/SecondScreenEvent"
+                            },
+                            "inactive": {
+                                "description": "Flag on whether or not the session is meant to remain in the inactive state for this session. This will instruct Firebolt on whether to start an activeSession. Default is false.",
+                                "type": "boolean"
                             }
                         }
+                    }
+                }
+            },
+            "AppSession": {
+                "title": "AppSession",
+                "type": "object",
+                "required": [
+                    "sessionId",
+                    "loadedSessionId"
+                ],
+                "properties": {
+                    "sessionId": {
+                        "description": "An id representing the the app's gateway access to Firebolt for this loaded session. This sessionId can be used by the application to connect via websocket to Firebolt.",
+                        "type": "string"
+                    },
+                    "loadedSessionId": {
+                        "description": "The sessionId scoped to the app loaded in any state. Firebolt should clear this sessionId whenever the app moves to unloading state.",
+                        "type": "string"
+                    },
+                    "activeSessionId": {
+                        "description": "The sessionId scoped to the current active session. Firebolt should clear this sessionId whenever the app moves to the inactive state. Firebolt should generate a new one anytime the app moves from inactive to active. This may be undefined for any inactive sessions.",
+                        "type": "string"
                     }
                 }
             },
