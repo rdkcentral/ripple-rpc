@@ -2,7 +2,7 @@
   "openrpc": "1.2.4",
   "info": {
     "title": "MetricsManagement",
-    "description": "Methods for sending managing the metrics integrations",
+    "description": "Methods for managing the metrics integrations",
     "version": "0.0.0"
   },
   "methods": [
