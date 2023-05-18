@@ -1,0 +1,122 @@
+{
+  "openrpc": "1.2.4",
+  "info": {
+    "title": "MetricsManagement",
+    "description": "Methods for managing the metrics integrations",
+    "version": "0.0.0"
+  },
+  "methods": [
+    {
+      "name": "addContext",
+      "tags": [
+        {
+          "name": "capabilities",
+          "x-manages": [
+            "xrn:firebolt:capability:metrics:context"
+          ]
+        }
+      ],
+      "summary": "Add context that can be applied to all metrics reporting",
+      "params": [
+        {
+          "name": "context",
+          "summary": "The context to add for metrics",
+          "schema": {
+            "$ref": "#/components/schemas/MetricsContext"
+          },
+          "required": true
+        }
+      ],
+      "result": {
+        "name": "results",
+        "schema": {
+          "type": "null"
+        }
+      },
+      "examples": [
+        {
+          "name": "Set the deviceSessionId",
+          "params": [
+            {
+              "name": "context",
+              "value": {
+                "deviceSessionId": "ccccc-cccc-cccc-cccc-cccccccc"
+              }
+            }
+          ],
+          "result": {
+            "name": "result",
+            "value": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "removeContext",
+      "tags": [
+        {
+          "name": "capabilities",
+          "x-manages": [
+            "xrn:firebolt:capability:metrics:context"
+          ]
+        }
+      ],
+      "summary": "Remove context that was previously added by Metrics.addContext",
+      "params": [
+        {
+          "name": "keys",
+          "summary": "The list of keys to clear context for",
+          "schema": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "deviceSessionId"
+              ]
+            }
+          },
+          "required": true
+        }
+      ],
+      "result": {
+        "name": "result",
+        "schema": {
+          "type": "null"
+        }
+      },
+      "examples": [
+        {
+          "name": "Remove the override for deviceSessionId",
+          "params": [
+            {
+              "name": "keys",
+              "value": [
+                "deviceSessionId"
+              ]
+            }
+          ],
+          "result": {
+            "name": "result",
+            "value": null
+          }
+        }
+      ]
+    }
+  ],
+  "components": {
+    "schemas": {
+      "MetricsContext": {
+        "title": "MetricsContext",
+        "description": "Context that is used when the platform sends any metrics",
+        "type": "object",
+        "properties": {
+          "deviceSessionId": {
+            "description": "A unique id that identifies a sessionId correlating to the scope of when the user has interacted with the device. This sessionId should be reset any time the device goes to the active power state",
+            "type": "string"
+          }
+        },
+        "required": []
+      }
+    }
+  }
+}
