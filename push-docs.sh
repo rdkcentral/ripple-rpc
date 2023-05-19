@@ -24,6 +24,8 @@ cp -r ./build/docs/wiki /tmp/firebolt-docs/build
 BRANCH="$(git branch --show-current)"
 # grab repo and reformat to git@github.comcast.com:<team>/<project>.wiki.git
 REPO="$(git config --get remote.origin.url | sed 's/https:\/\//git\@/' | sed 's/github\.com\//github\.com:/' | sed 's/.git$/.wiki.git/')"
+WIKI_REPO="${WIKI_REPO:-$REPO}"
+
 
 if [ $BRANCH = 'main' -o $BRANCH = 'master' ]
 then
