@@ -27,7 +27,7 @@ REPO="$(git config --get remote.origin.url | sed 's/https:\/\//git\@/' | sed 's/
 WIKI_REPO="${WIKI_REPO:-$REPO}"
 
 
-if [ $BRANCH = 'main' -o $BRANCH = 'master' ]
+if [ $BRANCH = 'main' -o $BRANCH = 'master' -o $BRANCH = 'test-doc-ci' ]
 then
     echo "Publishing docs to GitHub wiki..."
     echo " $WIKI_REPO "
