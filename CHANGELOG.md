@@ -1,3 +1,16 @@
+# [1.0.0-next.1](https://github.com/rdkcentral/ripple-rpc/compare/v0.1.0-next.3...v1.0.0-next.1) (2023-05-19)
+
+
+### Bug Fixes
+
+* Repo url ([05d6df9](https://github.com/rdkcentral/ripple-rpc/commit/05d6df92a459dc9678dbf5475ef67c640e21ddb8))
+
+
+### Features
+
+* Add metrics management ([#65](https://github.com/rdkcentral/ripple-rpc/issues/65)) ([d51bfa0](https://github.com/rdkcentral/ripple-rpc/commit/d51bfa02f3fb5d359c4470afb4768df545615091))
+* Generate different scoped sessionIds when starting an AppSession ([#64](https://github.com/rdkcentral/ripple-rpc/issues/64)) ([92b16dc](https://github.com/rdkcentral/ripple-rpc/commit/92b16dcdfd33b64a71fb839e891ad0e32c05654c))
+
 # [0.1.0-next.3](https://github.com/rdkcentral/firebolt-manage-sdk/compare/v0.1.0-next.2...v0.1.0-next.3) (2023-03-07)
 
 
