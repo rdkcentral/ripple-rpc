@@ -6,7 +6,7 @@
       "prerelease": true
     }
   ],
-  "dryRun": true,
+  "dryRun": false,
   "plugins": [
     [
       "@semantic-release/commit-analyzer",
@@ -24,7 +24,7 @@
     [
       "@semantic-release/npm",
       {
-        "npmPublish": true,
+        "npmPublish": false,
         "tarballDir": "./"
       }
     ],
@@ -32,7 +32,8 @@
       "@semantic-release/git"
     ],
     [
-      "@semantic-release/github", {
+      "@semantic-release/github",
+      {
         "assets": "./*.tgz"
       }
     ]
