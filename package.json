@@ -22,13 +22,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rdkcentral/ripple-rpc-sdk.git"
+    "url": "git+https://github.com/rdkcentral/ripple-rpc.git"
   },
   "author": "",
   "bugs": {
-    "url": "https://github.com/rdkcentral/ripple-rpc-sdk/issues"
+    "url": "https://github.com/rdkcentral/ripple-rpc/issues"
   },
-  "homepage": "https://github.com/rdkcentral/ripple-rpc-sdk#readme",
+  "homepage": "https://github.com/rdkcentral/ripple-rpc#readme",
   "devDependencies": {
     "@firebolt-js/openrpc": "^2.0.0",
     "@firebolt-js/schemas": "^0.9.0",
