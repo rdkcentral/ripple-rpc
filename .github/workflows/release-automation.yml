@@ -35,8 +35,8 @@ jobs:
         env:
           WIKI_REPO: https://x-access-token:${{ secrets.SEMANTIC_RELEASE_BOT_PAT }}@github.com/${{ github.repository }}.wiki.git
         run: |
-          git config user.name "GitHub Actions Bot"
-          git config user.email "<>"
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "<>"
           npm run docs
           npm run dist:copy:docs
           npm run publish:docs
