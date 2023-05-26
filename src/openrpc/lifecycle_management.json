@@ -94,8 +94,14 @@
                             "properties": {
                                 "state": {
                                     "const": "pending"
-                                }
-                            }
+                                },
+                                "sessionId": false,
+                                "loadedSessionId": false,
+                                "activeSessionId": false
+                            },
+                            "required": [
+                                "state"
+                            ]
                         }
                     ]
                 }
