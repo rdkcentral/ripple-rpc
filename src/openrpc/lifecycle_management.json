@@ -64,7 +64,7 @@
         },
         {
             "name": "session",
-            "summary": "Used by a Lifecycle provider to tell Firebolt that an app session has been started or updated. Firebolt can use this information to have context about the app when it makes API requests",
+            "summary": "Called before an app is launched in order to set up the lifecycle session. The session should be given an intent that will be passed to the application. This will behave differently depending on the current state of the application. If the application is already loaded but not active then a new active session is started. The intent is given to the application via the onNavigateTo event. If the app is not loaded, then it is considered a 'cold start'. A new loaded session will be created and the intent will be stored for the app to access via Parameters.initialization. Before a session is created for the application some checks may take place. For instance, if a user grant is required for the application then the user grant will be resolved before the session is created. In this case, this API will return immediately with a state='pending'. The created session will then be sent as an event in the LifecycleManagement.onSessionCreated event. If the pre-session checks fail, such as a user deferring a grant, then the LifecycleManagement.onSessionCanceled event will be emitted.",
             "params": [
                 {
                     "name": "session",
@@ -85,7 +85,19 @@
             "result": {
                 "name": "result",
                 "schema": {
-                    "$ref": "#/components/schemas/AppSession"
+                    "oneOf": [
+                        {
+                            "$ref": "#/components/schemas/AppSession"
+                        },
+                        {
+                            "type": "object",
+                            "properties": {
+                                "state": {
+                                    "const": "pending"
+                                }
+                            }
+                        }
+                    ]
                 }
             },
             "examples": [
@@ -119,9 +131,11 @@
                     "result": {
                         "name": "defaultResult",
                         "value": {
+                            "appId": "SomeAppId",
                             "sessionId": "c0d012b4-0854-4bbc-82d5-ab52ac29dd94",
                             "loadedSessionId": "612f307e-8b32-412e-bcec-831779bc07ae",
-                            "activeSessionId": "05b6f6af-c2f8-4761-beeb-6029590b8e8c"
+                            "activeSessionId": "05b6f6af-c2f8-4761-beeb-6029590b8e8c",
+                            "state": "created"
                         }
                     }
                 },
@@ -147,8 +161,36 @@
                     "result": {
                         "name": "defaultResult",
                         "value": {
+                            "appId": "SomeAppId",
                             "sessionId": "c0d012b4-0854-4bbc-82d5-ab52ac29dd94",
-                            "loadedSessionId": "612f307e-8b32-412e-bcec-831779bc07ae"
+                            "loadedSessionId": "612f307e-8b32-412e-bcec-831779bc07ae",
+                            "state": "created"
+                        }
+                    }
+                },
+                {
+                    "name": "Start a session that results in a pending session",
+                    "params": [
+                        {
+                            "name": "session",
+                            "value": {
+                                "app": {
+                                    "id": "SomeApp",
+                                    "url": "https://some-app.firebolt.rdkcentral.com"
+                                },
+                                "runtime": {
+                                    "id": "WebBrowser-1"
+                                },
+                                "launch": {
+                                    "inactive": false
+                                }
+                            }
+                        }
+                    ],
+                    "result": {
+                        "name": "pendingResult",
+                        "value": {
+                            "state": "pending"
                         }
                     }
                 }
@@ -333,6 +375,89 @@
                             "parameters": {
                                 "appId": "SomeAppId"
                             }
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "onSessionCreated",
+            "summary": "Emitted when an app session is created",
+            "params": [],
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-manages": [
+                        "xrn:firebolt:capability:lifecycle:state"
+                    ]
+                },
+                {
+                    "name": "event"
+                }
+            ],
+            "result": {
+                "name": "created",
+                "summary": "The event containing all the session information for the app",
+                "schema": {
+                    "$ref": "#/components/schemas/AppSession"
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": {
+                            "appId": "SomeAppId",
+                            "sessionId": "c0d012b4-0854-4bbc-82d5-ab52ac29dd94",
+                            "loadedSessionId": "612f307e-8b32-412e-bcec-831779bc07ae",
+                            "activeSessionId": "05b6f6af-c2f8-4761-beeb-6029590b8e8c",
+                            "state": "created"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "onSessionCanceled",
+            "summary": "Emitted when an app session is canceled",
+            "params": [],
+            "tags": [
+                {
+                    "name": "capabilities",
+                    "x-manages": [
+                        "xrn:firebolt:capability:lifecycle:state"
+                    ]
+                },
+                {
+                    "name": "event"
+                }
+            ],
+            "result": {
+                "name": "canceled",
+                "summary": "The event sent when the session is canceled",
+                "schema": {
+                    "type": "object",
+                    "properties": {
+                        "appId": {
+                            "description": "The id of the app that this session is for",
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "appId"
+                    ]
+                }
+            },
+            "examples": [
+                {
+                    "name": "Default Example",
+                    "params": [],
+                    "result": {
+                        "name": "Default Result",
+                        "value": {
+                            "appId": "SomeAppId"
                         }
                     }
                 }
@@ -542,10 +667,16 @@
                 "title": "AppSession",
                 "type": "object",
                 "required": [
+                    "appId",
                     "sessionId",
-                    "loadedSessionId"
+                    "loadedSessionId",
+                    "state"
                 ],
                 "properties": {
+                    "appId": {
+                        "description": "The id of the app that this session is for",
+                        "type": "string"
+                    },
                     "sessionId": {
                         "description": "An id representing the the app's gateway access to Firebolt for this loaded session. This sessionId can be used by the application to connect via websocket to Firebolt.",
                         "type": "string"
@@ -557,6 +688,9 @@
                     "activeSessionId": {
                         "description": "The sessionId scoped to the current active session. Firebolt should clear this sessionId whenever the app moves to the inactive state. Firebolt should generate a new one anytime the app moves from inactive to active. This may be undefined for any inactive sessions.",
                         "type": "string"
+                    },
+                    "state": {
+                        "const": "created"
                     }
                 }
             },
