@@ -1,3 +1,10 @@
+# [1.0.0-next.2](https://github.com/rdkcentral/ripple-rpc/compare/v1.0.0-next.1...v1.0.0-next.2) (2023-06-02)
+
+
+### Features
+
+* LifecycleManagement.session support async events when the session creation is deferred ([#69](https://github.com/rdkcentral/ripple-rpc/issues/69)) ([1bb7eb6](https://github.com/rdkcentral/ripple-rpc/commit/1bb7eb6fc446443e450ea3a8f67d899ecf69d250))
+
 # [1.0.0-next.1](https://github.com/rdkcentral/ripple-rpc/compare/v0.1.0-next.3...v1.0.0-next.1) (2023-05-19)
 
 
