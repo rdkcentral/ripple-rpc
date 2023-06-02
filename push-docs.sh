@@ -30,10 +30,10 @@ WIKI_REPO="${WIKI_REPO:-$REPO}"
 if [ $BRANCH = 'main' -o $BRANCH = 'master' ]
 then
     echo "Publishing docs to GitHub wiki..."
-    echo " $REPO "
+    echo " $WIKI_REPO "
 
     cd /tmp/firebolt-docs/wiki/
-    git clone $REPO .
+    git clone $WIKI_REPO .
     ls
     rm -r *
     cp -r ../build/wiki ./
