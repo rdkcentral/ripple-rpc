@@ -1,3 +1,11 @@
+# [1.1.0-next.1](https://github.com/rdkcentral/ripple-rpc/compare/v1.0.0...v1.1.0-next.1) (2023-06-27)
+
+
+### Features
+
+* LifecycleManagement.session support async events when the session creation is deferred ([#69](https://github.com/rdkcentral/ripple-rpc/issues/69)) ([1bb7eb6](https://github.com/rdkcentral/ripple-rpc/commit/1bb7eb6fc446443e450ea3a8f67d899ecf69d250))
+* Make async session statuses describe a session transition instead of a session ([#70](https://github.com/rdkcentral/ripple-rpc/issues/70)) ([b6b4874](https://github.com/rdkcentral/ripple-rpc/commit/b6b4874e0b6ff48f7e61ff42aeeb492ee06de5ef))
+
 # [1.1.0-next.1](https://github.com/rdkcentral/ripple-rpc/compare/v1.0.0...v1.1.0-next.1) (2023-06-02)
 
 
