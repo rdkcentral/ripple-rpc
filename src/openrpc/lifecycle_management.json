@@ -64,7 +64,7 @@
         },
         {
             "name": "session",
-            "summary": "Called before an app is launched in order to set up the lifecycle session. The session should be given an intent that will be passed to the application. This will behave differently depending on the current state of the application. If the application is already loaded but not active then a new active session is started. The intent is given to the application via the onNavigateTo event. If the app is not loaded, then it is considered a 'cold start'. A new loaded session will be created and the intent will be stored for the app to access via Parameters.initialization. Before a session is created for the application some checks may take place. For instance, if a user grant is required for the application then the user grant will be resolved before the session is created. In this case, this API will return immediately with a state='pending'. The created session will then be sent as an event in the LifecycleManagement.onSessionCreated event. If the pre-session checks fail, such as a user deferring a grant, then the LifecycleManagement.onSessionCanceled event will be emitted.",
+            "summary": "Called before an app is launched in order to set up the lifecycle session. The session should be given an intent that will be passed to the application. This will behave differently depending on the current state of the application. If the application is already loaded but not active then a new active session is started. The intent is given to the application via the onNavigateTo event. If the app is not loaded, then it is considered a 'cold start'. A new loaded session will be created and the intent will be stored for the app to access via Parameters.initialization. Before a session is created for the application some checks may take place. For instance, if a user grant is required for the application then the user grant will be resolved before the session is transitions to the active status. In this case, this API will return immediately with a transitionPending=true flag. The updated session will then be sent as an event in the LifecycleManagement.onSessionTransitionCompleted event. If the pre-session checks fail, such as a user deferring a grant, then the LifecycleManagement.onSessionTransitionCanceled event will be emitted.",
             "params": [
                 {
                     "name": "session",
@@ -85,25 +85,7 @@
             "result": {
                 "name": "result",
                 "schema": {
-                    "oneOf": [
-                        {
-                            "$ref": "#/components/schemas/AppSession"
-                        },
-                        {
-                            "type": "object",
-                            "properties": {
-                                "state": {
-                                    "const": "pending"
-                                },
-                                "sessionId": false,
-                                "loadedSessionId": false,
-                                "activeSessionId": false
-                            },
-                            "required": [
-                                "state"
-                            ]
-                        }
-                    ]
+                    "$ref": "#/components/schemas/AppSession"
                 }
             },
             "examples": [
@@ -137,11 +119,11 @@
                     "result": {
                         "name": "defaultResult",
                         "value": {
-                            "appId": "SomeAppId",
+                            "appId": "SomeApp",
                             "sessionId": "c0d012b4-0854-4bbc-82d5-ab52ac29dd94",
                             "loadedSessionId": "612f307e-8b32-412e-bcec-831779bc07ae",
                             "activeSessionId": "05b6f6af-c2f8-4761-beeb-6029590b8e8c",
-                            "state": "created"
+                            "transitionPending": false
                         }
                     }
                 },
@@ -167,10 +149,10 @@
                     "result": {
                         "name": "defaultResult",
                         "value": {
-                            "appId": "SomeAppId",
+                            "appId": "SomeApp",
                             "sessionId": "c0d012b4-0854-4bbc-82d5-ab52ac29dd94",
                             "loadedSessionId": "612f307e-8b32-412e-bcec-831779bc07ae",
-                            "state": "created"
+                            "transitionPending": false
                         }
                     }
                 },
@@ -196,7 +178,8 @@
                     "result": {
                         "name": "pendingResult",
                         "value": {
-                            "state": "pending"
+                            "appId": "SomeApp",
+                            "transitionPending": true
                         }
                     }
                 }
@@ -387,8 +370,8 @@
             ]
         },
         {
-            "name": "onSessionCreated",
-            "summary": "Emitted when an app session is created",
+            "name": "onSessionTransitionCompleted",
+            "summary": "Emitted when an app session completes a transition to a new status. When sessions are requested, they may result in a pending transition usually due to waiting for the user to respond to a grant.",
             "params": [],
             "tags": [
                 {
@@ -402,7 +385,7 @@
                 }
             ],
             "result": {
-                "name": "created",
+                "name": "completed",
                 "summary": "The event containing all the session information for the app",
                 "schema": {
                     "$ref": "#/components/schemas/AppSession"
@@ -419,15 +402,15 @@
                             "sessionId": "c0d012b4-0854-4bbc-82d5-ab52ac29dd94",
                             "loadedSessionId": "612f307e-8b32-412e-bcec-831779bc07ae",
                             "activeSessionId": "05b6f6af-c2f8-4761-beeb-6029590b8e8c",
-                            "state": "created"
+                            "transitionPending": false
                         }
                     }
                 }
             ]
         },
         {
-            "name": "onSessionCanceled",
-            "summary": "Emitted when an app session is canceled",
+            "name": "onSessionTransitionCanceled",
+            "summary": "Emitted when an app session has its transition to a new status canceled. This usually occurs when a session has a pending transition due to a user grant being evaluated and then the user defers that user grant.",
             "params": [],
             "tags": [
                 {
@@ -463,7 +446,7 @@
                     "result": {
                         "name": "Default Result",
                         "value": {
-                            "appId": "SomeAppId"
+                            "appId": "SomeApp"
                         }
                     }
                 }
@@ -674,9 +657,7 @@
                 "type": "object",
                 "required": [
                     "appId",
-                    "sessionId",
-                    "loadedSessionId",
-                    "state"
+                    "transitionPending"
                 ],
                 "properties": {
                     "appId": {
@@ -695,8 +676,9 @@
                         "description": "The sessionId scoped to the current active session. Firebolt should clear this sessionId whenever the app moves to the inactive state. Firebolt should generate a new one anytime the app moves from inactive to active. This may be undefined for any inactive sessions.",
                         "type": "string"
                     },
-                    "state": {
-                        "const": "created"
+                    "transitionPending": {
+                        "description": "Set to true if the session is currently pending a transition to a new status. A status can be before a session exists, an inactive session, or an active session. If this session is currently pending transition clients can subscribe to onSessionTransitionCompleted to know when the transition is complete. That event will give the new session ids that are associated with this session status. Clients should also subscribe to onSessionTransitionCanceled to know that the transition will never complete and was canceled.",
+                        "type": "boolean"
                     }
                 }
             },
