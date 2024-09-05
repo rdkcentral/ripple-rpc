@@ -9,7 +9,7 @@ jobs:
   # Check if next can merge into next-major
   perform_merge:
     name: Perform merge if "next" can merge into "next-major"
-    runs-on: comcast-ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -64,7 +64,7 @@ jobs:
   message_on_failure:
     name: Merge failure
     needs: perform_merge
-    runs-on: comcast-ubuntu-latest
+    runs-on: ubuntu-latest
     if: ${{ failure() }}
 
     steps:

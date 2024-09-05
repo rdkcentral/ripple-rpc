@@ -19,7 +19,7 @@ env:
 jobs:
   build:
 
-    runs-on: comcast-ubuntu-latest
+    runs-on: ubuntu-latest
 
     strategy:
       matrix:
