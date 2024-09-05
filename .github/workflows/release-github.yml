@@ -17,7 +17,7 @@ env:
 jobs:
   release:
     name: Release
-    runs-on: comcast-ubuntu-latest
+    runs-on: ubuntu-latest
     container:
       image: kevinshahfws/node-c:3.0
     steps:
