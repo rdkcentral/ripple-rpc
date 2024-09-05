@@ -30,13 +30,13 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "ssh://github.com/comcast-firebolt/ripple-rpc.git"
+		"url": "ssh://github.com/rdkcentral/ripple-rpc.git"
 	},
 	"author": "",
 	"bugs": {
-		"url": "https://github.com/comcast-firebolt/ripple-rpc/issues"
+		"url": "https://github.com/rdkcentral/ripple-rpc/issues"
 	},
-	"homepage": "https://github.com/comcast-firebolt/ripple-rpc#readme",
+	"homepage": "https://github.com/rdkcentral/ripple-rpc#readme",
 	"devDependencies": {
 		"jest": "^28.1.0",
 		"jest-environment-jsdom": "^28.1.3",
