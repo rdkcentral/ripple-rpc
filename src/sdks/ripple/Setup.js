@@ -1,11 +1,6 @@
-if (!window.__firebolt) {
-    window.__firebolt = {}
-}
+if (!window.__firebolt) window.__firebolt = {}
 
-// wires up the mock transport w/out waiting
 window.__firebolt.mockTransportLayer = true
-
-// sets a flag that mock defaults impls can use to speed things up, e.g. Lifecycle/defaults.js
 window.__firebolt.automation = true
 
 let sendListener
@@ -17,7 +12,6 @@ export const transport = {
         sendListener && sendListener(json)
     },
     receive: function(callback) {
-        // store the callback
         receiver = callback
     },
     onSend: function(listener) {
