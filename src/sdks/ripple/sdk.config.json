@@ -1,0 +1,20 @@
+{
+    "info": {
+        "title": "Firebolt Player Manager SDK",
+        "x-interface-names": {}
+    },
+    "methods": [
+        {
+            "module": "LifecycleManagement",
+            "use": [
+                "xrn:firebolt:capability:lifecycle:state"
+            ]
+        },
+        {
+            "module": "MetricsManagement",
+            "use": [
+                "xrn:firebolt:capability:metrics:context"
+            ]
+        }
+    ]
+}
