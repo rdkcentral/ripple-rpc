@@ -17,7 +17,7 @@ npm install @firebolt-extn-js/ripple-sdk
 To use the package, import one of it's modules, e.g.:
 
 ```js
-import { Player } from '@firebolt-extn-js/ripple-sdk'
+import { LifecycleManagement } from '@firebolt-extn-js/ripple-sdk'
 ```
 
 <!-- ## Contributing

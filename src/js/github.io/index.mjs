@@ -12,7 +12,7 @@ const defaultOpts = {
 const shortHands = {
     'o': '--output'
 }
-  
+
 // Last 2 arguments are the defaults.
 const parsedArgs = Object.assign(defaultOpts, nopt(knownOpts, shortHands, process.argv, 2))
 
@@ -62,9 +62,9 @@ const processFiles = (docs, base, dir, subdir, category, setType) => {
         else {
             docs[path.join(parsedArgs.output, dir, version, subdir, ref)] = data
         }
-    
+
 //        console.log(`Will copy ${path.join(base, source)} to ${path.join(parsedArgs.output, dir, version, subdir, ref)}`)
-    
+
         if (version === 'latest') {
             if (ref.endsWith('.md')) {
                 docs[path.join(parsedArgs.output, dir, packageJson.version, subdir, ref)] = frontmatter(data, packageJson.version, subdir, category, type)
@@ -73,7 +73,7 @@ const processFiles = (docs, base, dir, subdir, category, setType) => {
                 docs[path.join(parsedArgs.output, dir, packageJson.version, subdir, ref)] = data
             }
             console.log(`Will copy ${path.join(base, source)} to ${path.join(parsedArgs.output, dir, packageJson.version, subdir, ref)}`)
-        }    
+        }
     })
 }
 
@@ -94,7 +94,6 @@ packageJson.workspaces.forEach(async workspace => {
 
 const specification = await readJson(path.join('dist', 'firebolt-specification.json'))
 const openrpc = await readJson(path.join('dist', 'firebolt-open-rpc.json'))
-const providerrpc = await readJson(path.join('dist', 'firebolt-player-provider-open-rpc.json'))
 
 const capabilities = () => {
     const getOrCreateCapMethodList = (capabilities, c) => capabilities[c] = capabilities[c] || { uses: [], manages: [], provides: [] }
@@ -117,8 +116,8 @@ const capabilities = () => {
     })
 
     let manifest = '\n'
-    
-    const linkify = (method) => `[${method}](./${providerrpc.methods.find(m => m.name === method) ? 'player-provider' : 'player-manager'}/${method.split('.').shift()}/#${method.match(/\.on[A-Z]/) ? method.split('.').pop().charAt(2).toLowerCase() + method.split('.').pop().substring(3).toLowerCase() : method.split('.').pop().toLowerCase()})`
+
+    const linkify = (method) => `[${method}](./ripple/${method.split('.').shift()}/#${method.match(/\.on[A-Z]/) ? method.split('.').pop().charAt(2).toLowerCase() + method.split('.').pop().substring(3).toLowerCase() : method.split('.').pop().toLowerCase()})`
     Object.keys(capabilities).sort().forEach(c => {
         manifest += `### \`${c}\`\n`
 
