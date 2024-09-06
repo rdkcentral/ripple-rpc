@@ -1,5 +1,8 @@
 build/*
 dist/*
+src/sdks/ripple/dist/*
+src/sdks/ripple/build/*
+src/sdks/ripple/test/transpiled-suite
 node_modules/*
 test/transpiled-suite
 .DS_Store

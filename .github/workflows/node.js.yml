@@ -1,15 +1,20 @@
 # This workflow will do a clean install of node dependencies, cache/restore them, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Validate Node.js PR
+name: Node.js CI
 
 on:
+  workflow_dispatch:
   push:
     branches-ignore: [ main ]
   pull_request:
     types:
       - opened
     branches: [ main ]
+
+env:
+  HUSKY: 0
+  # Turns off installing commit hooks in CI environments
 
 jobs:
   build:
@@ -18,7 +23,9 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x, 18.x]
+        node-version: [lts/*]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
     steps:
     - uses: actions/checkout@v2
     - name: Use Node.js ${{ matrix.node-version }}
@@ -30,6 +37,7 @@ jobs:
     - run: npm run fs:setup
     - run: npm run validate:each
     - run: npm run compile
-    - run: |
-        npm run docs
-        npm run dist:copy:docs
+    - run: npm run slice
+    - run: npm run validate:compiled
+    - run: npm run sdks
+    - run: npm run test
