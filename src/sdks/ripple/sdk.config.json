@@ -7,11 +7,11 @@
         {
             "module": "LifecycleManagement",
             "manage": [
-                "xrn:firebolt:capability:lifecycle:state",
-                "xrn:firebolt:capability:lifecycle:launch"
+                "xrn:firebolt:capability:lifecycle:state"
             ],
             "provide": [
-                "xrn:firebolt:capability:lifecycle:state"
+                "xrn:firebolt:capability:lifecycle:state",
+                "xrn:firebolt:capability:lifecycle:launch"
             ]
         },
         {
