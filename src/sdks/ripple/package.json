@@ -4,9 +4,6 @@
 	"description": "The Ripple JS SDK",
 	"main": "./dist/lib/ripple.mjs",
 	"types": "./dist/lib/ripple.d.ts",
-	"exports": {
-		".": "./dist/lib/ripple.mjs"
-	},
 	"type": "module",
 	"scripts": {
 		"validate": "npx firebolt-openrpc validate --input ./dist/ripple-open-rpc.json",
