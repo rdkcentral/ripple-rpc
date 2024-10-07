@@ -92,7 +92,7 @@ jobs:
         with:
           script: |
             const fs = require('fs');
-            const path = './src/sdks/core//dist/lib/lifecycle-manager.mjs';
+            const path = './src/sdks/ripple/dist/lib/ripple.mjs';
             return fs.existsSync(path);
       - name: File Existence Output
         run: |
