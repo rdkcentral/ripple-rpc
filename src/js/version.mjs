@@ -81,7 +81,7 @@ else if (task === 'validate') {
     console.log('Finding the latest prerelease')
     const prerelease = process.argv.shift()
     console.log('prerelease : ' + prerelease)
-    exec("npm show @firebolt-extn-js/ripple-sdk versions --json", (error, result, errlog) => {
+    exec("npm show @firebolt-js/lifecycle-manager-sdk versions --json", (error, result, errlog) => {
         if (error) {
             console.error(`error: ${error.message}`);
             return;

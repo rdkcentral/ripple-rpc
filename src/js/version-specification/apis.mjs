@@ -159,9 +159,9 @@ const run = async (version, parsedArgs) => {
             const v = `${legacy}.x`
 
             // create a temporary npm package and install the version of Firebolt we want to grab
-            await exec(`cd build; mkdir temp${legacy}; cd temp${legacy}; npm init -y ; npm install --saveDev @firebolt-extn-js/ripple-sdk@${v}`)
+            await exec(`cd build; mkdir temp${legacy}; cd temp${legacy}; npm init -y ; npm install --saveDev @firebolt-js/lifecycle-manager-sdk@${v}`)
 
-            version.apis[`${legacy}`] = await loadJson(`./build/temp${legacy}/node_modules/@firebolt-extn-js/ripple-sdk/dist/firebolt-open-rpc.json`)
+            version.apis[`${legacy}`] = await loadJson(`./build/temp${legacy}/node_modules/@firebolt-js/lifecycle-manager-sdk/dist/firebolt-open-rpc.json`)
             await exec(`cd build; rm -r temp${legacy}`)
 
             logSuccess(`Added version ${v}`)
