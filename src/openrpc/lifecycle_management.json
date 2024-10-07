@@ -589,66 +589,13 @@
                 ],
                 "properties": {
                     "app": {
-                        "description": "Information about the application",
-                        "type": "object",
-                        "required": [
-                            "id"
-                        ],
-                        "properties": {
-                            "id": {
-                                "description": "The identifier for the app",
-                                "type": "string"
-                            },
-                            "url": {
-                                "description": "The url that the app will be launched with",
-                                "type": "string"
-                            },
-                            "title": {
-                                "description": "The display title of the app",
-                                "type": "string"
-                            },
-                            "catalog": {
-                                "description": "The catalog id that this app's content metadata comes from",
-                                "type": "string"
-                            }
-                        }
+                        "$ref": "#/components/schemas/AppDescription"
                     },
                     "runtime": {
-                        "description": "Information about the runtime that the application is running in",
-                        "type": "object",
-                        "required": [],
-                        "properties": {
-                            "id": {
-                                "description": "The identifier for the runtime",
-                                "type": "string"
-                            },
-                            "transport": {
-                                "description": "The type of transport the application container will use to communicate to Firebolt",
-                                "type": "string",
-                                "enum": [
-                                    "bridge",
-                                    "websocket"
-                                ]
-                            }
-                        }
+                        "$ref": "#/components/schemas/Runtime"
                     },
                     "launch": {
-                        "description": "Launch information for this app that will be loaded",
-                        "type": "object",
-                        "properties": {
-                            "intent": {
-                                "description": "The firebolt navigation intent that this app will be loaded with",
-                                "$ref": "https://meta.comcast.com/firebolt/intents#/definitions/NavigationIntent"
-                            },
-                            "secondScreen": {
-                                "description": "Any information about the app being launched from a second screen",
-                                "$ref": "#/components/schemas/SecondScreenEvent"
-                            },
-                            "inactive": {
-                                "description": "Flag on whether or not the session is meant to remain in the inactive state for this session. This will instruct Firebolt on whether to start an activeSession. Default is false.",
-                                "type": "boolean"
-                            }
-                        }
+                        "$ref": "#/components/schemas/AppLaunch"
                     }
                 }
             },
@@ -678,6 +625,69 @@
                     },
                     "transitionPending": {
                         "description": "Set to true if the session is currently pending a transition to a new status. A status can be before a session exists, an inactive session, or an active session. If this session is currently pending transition clients can subscribe to onSessionTransitionCompleted to know when the transition is complete. That event will give the new session ids that are associated with this session status. Clients should also subscribe to onSessionTransitionCanceled to know that the transition will never complete and was canceled.",
+                        "type": "boolean"
+                    }
+                }
+            },
+            "AppDescription": {
+                "title": "AppDescription",
+                "description": "Information about the application",
+                "type": "object",
+                "required": [
+                    "id"
+                ],
+                "properties": {
+                    "id": {
+                        "description": "The identifier for the app",
+                        "type": "string"
+                    },
+                    "url": {
+                        "description": "The url that the app will be launched with",
+                        "type": "string"
+                    },
+                    "title": {
+                        "description": "The display title of the app",
+                        "type": "string"
+                    },
+                    "catalog": {
+                        "description": "The catalog id that this app's content metadata comes from",
+                        "type": "string"
+                    }
+                }
+            },
+            "Runtime": {
+                "description": "Information about the runtime that the application is running in",
+                "type": "object",
+                "required": [],
+                "properties": {
+                    "id": {
+                        "description": "The identifier for the runtime",
+                        "type": "string"
+                    },
+                    "transport": {
+                        "description": "The type of transport the application container will use to communicate to Firebolt",
+                        "type": "string",
+                        "enum": [
+                            "bridge",
+                            "websocket"
+                        ]
+                    }
+                }
+            },
+            "AppLaunch": {
+                "description": "Launch information for this app that will be loaded",
+                "type": "object",
+                "properties": {
+                    "intent": {
+                        "description": "The firebolt navigation intent that this app will be loaded with",
+                        "$ref": "https://meta.comcast.com/firebolt/intents#/definitions/NavigationIntent"
+                    },
+                    "secondScreen": {
+                        "description": "Any information about the app being launched from a second screen",
+                        "$ref": "#/components/schemas/SecondScreenEvent"
+                    },
+                    "inactive": {
+                        "description": "Flag on whether or not the session is meant to remain in the inactive state for this session. This will instruct Firebolt on whether to start an activeSession. Default is false.",
                         "type": "boolean"
                     }
                 }

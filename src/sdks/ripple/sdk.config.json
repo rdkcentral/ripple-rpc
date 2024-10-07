@@ -6,13 +6,17 @@
     "methods": [
         {
             "module": "LifecycleManagement",
-            "use": [
+            "manage": [
                 "xrn:firebolt:capability:lifecycle:state"
+            ],
+            "provide": [
+                "xrn:firebolt:capability:lifecycle:state",
+                "xrn:firebolt:capability:lifecycle:launch"
             ]
         },
         {
             "module": "MetricsManagement",
-            "use": [
+            "manage": [
                 "xrn:firebolt:capability:metrics:context"
             ]
         }
