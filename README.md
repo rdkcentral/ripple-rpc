@@ -1,4 +1,4 @@
 ---
-title: Ripple RPC
+title: Lifecycle Manager
 ---
-Private Ripple RPC API for distributor integration.
+Private Lifecycle Manager API for distributor integration.

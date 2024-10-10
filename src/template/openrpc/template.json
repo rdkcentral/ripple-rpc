@@ -1,7 +1,7 @@
 {
     "openrpc": "1.2.4",
     "info": {
-        "title": "Ripple",
+        "title": "Lifecycle Manager",
         "version": "0.0.0"
     },
     "methods": [
