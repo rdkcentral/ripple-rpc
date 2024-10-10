@@ -117,7 +117,7 @@ const capabilities = () => {
 
     let manifest = '\n'
 
-    const linkify = (method) => `[${method}](./ripple/${method.split('.').shift()}/#${method.match(/\.on[A-Z]/) ? method.split('.').pop().charAt(2).toLowerCase() + method.split('.').pop().substring(3).toLowerCase() : method.split('.').pop().toLowerCase()})`
+    const linkify = (method) => `[${method}](./lifecycle-manager/${method.split('.').shift()}/#${method.match(/\.on[A-Z]/) ? method.split('.').pop().charAt(2).toLowerCase() + method.split('.').pop().substring(3).toLowerCase() : method.split('.').pop().toLowerCase()})`
     Object.keys(capabilities).sort().forEach(c => {
         manifest += `### \`${c}\`\n`
 

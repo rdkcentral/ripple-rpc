@@ -1,12 +1,12 @@
 {
   "name": "@firebolt-js/lifecycle-manager",
   "version": "1.1.0-next.1",
-  "description": "A Ripple specific RPC definition",
+  "description": "A lifecycle-manager specific RPC definition",
   "main": "./dist/lib/lifecycle-manager.mjs",
   "types": "./dist/lib/lifecycle-manager.d.ts",
   "type": "module",
   "workspaces": [
-    "src/sdks/ripple"
+    "src/sdks/lifecycle-manager"
   ],
   "scripts": {
     "fs:setup": "npm run clean && mkdir -p dist",
@@ -57,6 +57,7 @@
   },
   "keywords": [
     "firebolt",
+    "lifecycle-manager",
     "ripple"
   ],
   "license": "Apache-2.0"
