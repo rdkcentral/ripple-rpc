@@ -1,0 +1,37 @@
+[firebolt-players-sdk]
+Copyright 2021 Comcast Cable Communications Management, LLC
+
+Licensed under the Apache License, Version 2.0 (the "License");you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+SPDX-License-Identifier: Apache-2.0
+
+This product includes software developed at Comcast (http://www.comcast.com/).
+
+The component may include material which is licensed under other licenses / copyrights as
+listed below. Your use of this material within the component is also subject to the terms and
+conditions of these licenses. The LICENSE file contains the text of all the licenses which apply
+within this component..
+
+Material from husky is:
+Copyright (c) 2021 typicode
+Licensed under the MIT License
+
+Files in the special-images directory are NOT Apache-2.0 licensed.
+
+The npm logo in the special-images directory is used to link to the npm registry service. "npm" and the npm logos are trademarks owned by npm, Inc.
+npm is a registered trademark of npm, Inc.
+The npm logo is used with permission."
+
+The GitHub logo in the special-images directory is used to link to the GitHub hosting site, and is used with permission.
+GITHUB®, the GITHUB® logo design, the INVERTOCAT logo design, OCTOCAT®, and the OCTOCAT® logo design are trademarks of GitHub, Inc., registered in the United States and other countries.
+The OCTOCAT design is the exclusive property of GitHub, Inc and has been federally registered with the United States Copyright Office. All rights reserved.
+No adaptation or use of any kind of any of our registered trademarks or copyrights, is allowed without the express written permission of GitHub, Inc.
