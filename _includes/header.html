@@ -67,7 +67,7 @@
                     {%- assign depth = page_path | size -%}
                     <!-- Depth: {{ depth }} -->
                 
-                    {%- if depth == 2 -%}
+                    {%- if depth == 3 -%}
                         {%- if page_path[1] == 'apis' -%}
                   <li><b><a class="page-link" href="{{ my_page.url | relative_url }}/{{version}}">{{ my_page.title | escape }}</a></b>
                     {%- if path[1] == 'apis' -%}
