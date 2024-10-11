@@ -1,3 +1,15 @@
+# [1.1.0-next.2](https://github.com/rdkcentral/ripple-rpc/compare/v1.1.0-next.1...v1.1.0-next.2) (2024-10-11)
+
+
+### Bug Fixes
+
+* Roles in sdk config ([#73](https://github.com/rdkcentral/ripple-rpc/issues/73)) ([8d6b847](https://github.com/rdkcentral/ripple-rpc/commit/8d6b847adf9a3117d83cc566370e40013c30d608))
+
+
+### Features
+
+* Feature to perform npmjs release ([#74](https://github.com/rdkcentral/ripple-rpc/issues/74)) ([985abea](https://github.com/rdkcentral/ripple-rpc/commit/985abeaa60fe7927e4ccdd2ecfb52400a17ac8dc))
+
 # [1.1.0-next.1](https://github.com/rdkcentral/ripple-rpc/compare/v1.0.0...v1.1.0-next.1) (2023-06-27)
 
 
